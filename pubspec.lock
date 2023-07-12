@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  cupertino_rounded_corners:
+    dependency: "direct main"
+    description:
+      name: cupertino_rounded_corners
+      sha256: "265b7160573748ddd80e509658a58981564857864ea99052f876c2be235e066a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   fake_async:
     dependency: transitive
     description:
@@ -57,32 +65,24 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  figma_squircle:
+    dependency: "direct main"
+    description:
+      name: figma_squircle
+      sha256: "790b91a9505e90d246f6efe2fa065ff7fffe658c7b44fe9b5b20c7b0ad3818c0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.3"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      sha256: "2118df84ef0c3ca93f96123a616ae8540879991b8b57af2f81b76a7ada49b2a4"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  lints:
-    dependency: transitive
-    description:
-      name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   matcher:
     dependency: transitive
     description:
@@ -120,6 +120,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_corner:
+    dependency: "direct main"
+    description:
+      name: smooth_corner
+      sha256: "1e920cffd9644d6f51f9a99674652f8c00f2e9074b275f3edde0de1441ba78e9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_span:
     dependency: transitive
     description:
@@ -152,6 +160,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  superellipse_shape:
+    dependency: "direct main"
+    description:
+      name: superellipse_shape
+      sha256: "8475f974a35be6d299ddbbe5b6be26ff2bc5521752cc631ffa8349aeb420bb18"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0"
   term_glyph:
     dependency: transitive
     description:
@@ -185,4 +201,5 @@ packages:
     source: hosted
     version: "0.1.4-beta"
 sdks:
-  dart: ">=3.1.0-291.0.dev <4.0.0"
+  dart: ">=3.1.0-185.0.dev <4.0.0"
+  flutter: ">=3.10.0"
