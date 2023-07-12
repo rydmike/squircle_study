@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// Can be found here
+// https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a
 class SimonSquircleBorder extends ShapeBorder {
   final BorderSide side;
   final double superRadius;
