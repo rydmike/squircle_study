@@ -1,14 +1,8 @@
-import 'package:cupertino_rounded_corners/cupertino_rounded_corners.dart'
-    as cuper;
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_corner/smooth_corner.dart' as smooth;
-import 'package:superellipse_shape/superellipse_shape.dart';
 
-import 'squircle/SimonSquircle.dart';
-import 'squircle/flex_squircle.dart';
-import 'squircle/flex_stadium_squircle.dart';
+import 'squircle/flex_border.dart';
 import 'theme.dart';
+import 'ui_widgets/flex_border_popup_menu.dart';
 import 'ui_widgets/list_tile_reveal.dart';
 import 'ui_widgets/show_color_scheme_colors.dart';
 
@@ -30,21 +24,26 @@ class _HomePageState extends State<HomePage> {
   bool? isSelected1 = true;
   bool? isSelected2;
   double radius = 50;
+  double heightBig = 160;
+  double widthBig = 320;
+  double smoothness = 0.6;
+
+  FlexBorder bottomType = FlexBorder.figmaSquircle;
+  FlexBorder topType = FlexBorder.smoothCorner;
+
+  static const double height = 100;
+  static const double width = 210;
+  static const double lineWidth = 1;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    final Color shapeColor =
-        isLight ? theme.colorScheme.outlineVariant : theme.colorScheme.outline;
-    final Color lineColorError = theme.colorScheme.error;
-    final Color onShapeColor = theme.colorScheme.onSurface;
-
-    const double height = 80;
-    const double width = 190;
-    const double heightBig = 160;
-    const double widthBig = 320;
-    const double lineWidth = 1.5;
+    final Color shapeColor = isLight
+        ? theme.colorScheme.primaryContainer
+        : theme.colorScheme.primaryContainer;
+    final Color lineColor = theme.colorScheme.error;
+    final Color onShapeColor = theme.colorScheme.onPrimaryContainer;
 
     return ListView(
       children: <Widget>[
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         // ),
         const ListTileReveal(
           enabled: true,
-          title: Text('Components shape'),
+          title: Text('ShapeBorder'),
           subtitleDense: true,
           subtitle: Text(
             'By default Material UI widgets with ShapeBorder use circular '
@@ -66,9 +65,8 @@ class _HomePageState extends State<HomePage> {
             'called RoundedRectangleBorder and StadiumBorder. '
             'You can change the used ShapeBorder type.\n'
             '\n'
-            'FlexColorScheme supports using "Squircle" '
-            'shape, a type of super-ellipses corner shape used by '
-            'Apple on iOS. This is supported via custom SquircleBorder and '
+            'A "Squircle" shape, is a type of super-ellipses corner shape used '
+            'by Apple on iOS. This is supported via custom SquircleBorder and '
             'SquircleStadiumBorder implementations. If Flutter SDK at some '
             'point starts supporting a version of this shape, it will be '
             'supported as well. This custom implementation may then later be '
@@ -95,11 +93,9 @@ class _HomePageState extends State<HomePage> {
             runSpacing: 8,
             children: <Widget>[
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                ),
+                shape: FlexBorder.circular.shape(radius: radius),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -114,11 +110,77 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                shape: FlexBorder.continuousSquircle.shape(radius: radius),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'ContinuousRectangle\n'
+                      'Flutter SDK r=r*2.3529',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
                 ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: FlexBorder.squircle.shape(radius: radius),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'Squircle\n'
+                      'Rejected PR',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: FlexBorder.figmaSquircle.shape(radius: radius),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'Figma Squircle\n'
+                      'figma_squircle',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: FlexBorder.smoothCorner.shape(radius: radius),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'SmoothCorner\n'
+                      'smooth_corner',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: FlexBorder.continuous.shape(radius: radius),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -135,105 +197,7 @@ class _HomePageState extends State<HomePage> {
               Material(
                 clipBehavior: Clip.antiAlias,
                 color: shapeColor,
-                shape: ContinuousRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(radius * 2.3529)),
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'ContinuousRectangle\n'
-                      'Flutter SDK r=r*2.3529',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: SquircleBorder(cornerRadius: radius),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'Squircle\n'
-                      'Rejected PR',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: SmoothRectangleBorder(
-                  borderRadius: SmoothBorderRadius(
-                      cornerRadius: radius, cornerSmoothing: 0.6),
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'SmoothRectangleBorder\n'
-                      'figma_squircle',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: smooth.SmoothRectangleBorder(
-                  borderRadius: BorderRadius.circular(radius),
-                  smoothness: 0.6,
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'SmoothCorner\n'
-                      'smooth_corner',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: SimonSquircleBorder(
-                  superRadius: radius,
-                ),
-                child: SizedBox(
-                  height: height,
-                  width: width,
-                  child: Center(
-                    child: Text(
-                      'SimonSquircleBorder\n'
-                      'slightfoot gist',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: onShapeColor),
-                    ),
-                  ),
-                ),
-              ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: cuper.SquircleBorder(
-                  radius: BorderRadius.all(Radius.circular(radius)),
-                ),
+                shape: FlexBorder.cupertinoCorners.shape(radius: radius),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -248,11 +212,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: SuperellipseShape(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
-                ),
+                shape: FlexBorder.superEllipse.shape(radius: radius),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -267,9 +229,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: const StadiumBorder(),
+                shape: FlexBorder.stadium.shape(),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -286,7 +248,7 @@ class _HomePageState extends State<HomePage> {
               Material(
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: const SquircleStadiumBorder(),
+                shape: FlexBorder.squircleStadium.shape(),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -301,11 +263,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: shapeColor,
-                shape: BeveledRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(radius)),
+                shape: FlexBorder.simonSquircle.shape(radius: radius),
+                child: SizedBox(
+                  height: height,
+                  width: width,
+                  child: Center(
+                    child: Text(
+                      'SimonSquircleBorder\n'
+                      'slightfoot gist',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: onShapeColor),
+                    ),
+                  ),
                 ),
+              ),
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: FlexBorder.beveled.shape(radius: radius),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -324,7 +301,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const ListTileReveal(
           enabled: true,
-          title: Text('Components border radius'),
+          title: Text('Compare two ShapeBorders'),
           subtitleDense: true,
           subtitle: Text(
             'By default, the border radius on all Material '
@@ -353,12 +330,94 @@ class _HomePageState extends State<HomePage> {
             'radius override.',
           ),
         ),
+
+        FlexBorderPopupMenu(
+          title: const Text('Background ShapeBorder'),
+          type: bottomType,
+          onChanged: (FlexBorder type) {
+            setState(() {
+              bottomType = type;
+            });
+          },
+        ),
+
+        FlexBorderPopupMenu(
+          title: const Text('Foreground Outline ShapeBorder'),
+          type: topType,
+          onChanged: (FlexBorder type) {
+            setState(() {
+              topType = type;
+            });
+          },
+        ),
+        ListTile(
+          title: Slider(
+            min: 100,
+            max: 500,
+            // divisions: 100,
+            label: heightBig.toStringAsFixed(0),
+            value: heightBig,
+            onChanged: (double value) {
+              setState(() {
+                heightBig = value;
+              });
+            },
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'HEIGHT',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  heightBig.toStringAsFixed(0),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
         ListTile(
           enabled: true,
           title: Slider(
+            min: 100,
+            max: 500,
+            // divisions: 100,
+            label: widthBig.toStringAsFixed(0),
+            value: widthBig,
+            onChanged: (double value) {
+              setState(() {
+                widthBig = value;
+              });
+            },
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'WIDTH',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  widthBig.toStringAsFixed(0),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          title: Slider(
             min: 0,
-            max: 100,
-            divisions: 100,
+            max: 500,
+            // divisions: 100,
             label: radius.toStringAsFixed(0),
             value: radius,
             onChanged: (double value) {
@@ -385,117 +444,72 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Stack(
-            children: <Widget>[
-              // Material(
-              //   clipBehavior: Clip.antiAlias,
-              //   color: shapeColor,
-              //   shape: SquircleBorder(cornerRadius: radius),
-              //   child: SizedBox(
-              //     height: heightBig,
-              //     width: widthBig,
-              //     child: Center(
-              //       child: Text(
-              //         'Squircle background '
-              //         '(h=${heightBig.toStringAsFixed(0)})\n'
-              //         'ContinuousRectangleBorder red outline\n'
-              //         'using radius x 2.3529',
-              //         style: TextStyle(color: onShapeColor),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              Material(
-                clipBehavior: Clip.antiAlias,
-                color: shapeColor,
-                shape: SmoothRectangleBorder(
-                  borderRadius: SmoothBorderRadius(
-                      cornerRadius: radius, cornerSmoothing: 0.6),
+        ListTile(
+          title: Slider(
+            min: 0,
+            max: 1,
+            // divisions: 100,
+            label: smoothness.toStringAsFixed(2),
+            value: smoothness,
+            onChanged: (double value) {
+              setState(() {
+                smoothness = value;
+              });
+            },
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'SMOOTHNESS',
+                  style: theme.textTheme.bodySmall,
                 ),
+                Text(
+                  smoothness.toStringAsFixed(2),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: <Widget>[
+              Material(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: shapeColor,
+                shape: bottomType.shape(radius: radius),
                 child: SizedBox(
                   height: heightBig,
                   width: widthBig,
                   child: Center(
                     child: Text(
-                      'Figma Squircle background '
-                      '(h=${heightBig.toStringAsFixed(0)})\n'
-                      'ContinuousRectangleBorder red outline\n'
-                      'using radius x 2.3529',
+                      'Background: ${bottomType.type}\n'
+                      'Outline: ${topType.type}',
                       style: TextStyle(color: onShapeColor),
                     ),
                   ),
                 ),
               ),
-              // Material(
-              //   clipBehavior: Clip.antiAlias,
-              //   color: Colors.transparent,
-              //   shape: BeveledRectangleBorder(
-              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
-              //    side: BorderSide(width: lineWidth, color: lineColorPrimary),
-              //   ),
-              //   child: const SizedBox(
-              //     height: heightBig,
-              //     width: widthBig,
-              //   ),
-              // ),
-              // Material(
-              //   clipBehavior: Clip.antiAlias,
-              //   color: Colors.transparent,
-              //   shape: RoundedRectangleBorder(
-              //     borderRadius: BorderRadius.all(Radius.circular(radius)),
-              //   ide: BorderSide(width: lineWidth, color: lineColorOnSurface),
-              //   ),
-              //   child: const SizedBox(
-              //     height: heightBig,
-              //     width: widthBig,
-              //   ),
-              // ),
               Material(
-                clipBehavior: Clip.antiAlias,
+                clipBehavior: Clip.antiAliasWithSaveLayer,
                 color: Colors.transparent,
-                shape: ContinuousRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(radius * 2.3529)),
-                  side: BorderSide(width: lineWidth, color: lineColorError),
+                shape: topType.shape(
+                  radius: radius,
+                  lineWidth: lineWidth,
+                  lineColor: lineColor,
+                  smoothness: smoothness,
                 ),
-                child: const SizedBox(
+                child: SizedBox(
                   height: heightBig,
                   width: widthBig,
                 ),
               ),
-
-              //   Material(
-              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-              //     color: shapeColor,
-              //     shape: const StadiumBorder(),
-              //     child: SizedBox(
-              //       height: height,
-              //       width: width,
-              //       child: Center(
-              //         child: Text(
-              //           'Circular Stadium',
-              //           style: TextStyle(color: onShapeColor),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              //   Material(
-              //     clipBehavior: Clip.antiAliasWithSaveLayer,
-              //     color: shapeColor,
-              //     shape: const SquircleStadiumBorder(),
-              //     child: SizedBox(
-              //       height: height,
-              //       width: width,
-              //       child: Center(
-              //         child: Text(
-              //           'Squircle Stadium',
-              //           style: TextStyle(color: onShapeColor),
-              //         ),
-              //       ),
-              //     ),
-              //   ),
             ],
           ),
         ),

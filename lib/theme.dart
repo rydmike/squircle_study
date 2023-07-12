@@ -1,17 +1,20 @@
 // A seed color for the M3 ColorScheme.
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const Color seedColor = Color(0xFF2E747D); // Color(0xFF6750A4);
+const Color seedColor = Color(0xFF254783); // Color(0xFF6750A4);
 
-final ColorScheme colorSchemeLight = ColorScheme.fromSeed(
+final ColorScheme colorSchemeLight = SeedColorScheme.fromSeeds(
   brightness: Brightness.light,
-  seedColor: seedColor,
+  primaryKey: seedColor,
+  tones: FlexTones.candyPop(Brightness.light),
 );
 
-final ColorScheme colorSchemeDark = ColorScheme.fromSeed(
+final ColorScheme colorSchemeDark = SeedColorScheme.fromSeeds(
   brightness: Brightness.dark,
-  seedColor: seedColor,
+  primaryKey: seedColor,
+  tones: FlexTones.candyPop(Brightness.dark),
 );
 
 // Example theme

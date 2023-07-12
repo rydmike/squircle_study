@@ -1,10 +1,7 @@
 name: squircle_study
 description: Comparing different Squircle ShapeBorders
 publish_to: 'none'
-
-
 version: 1.0.0
-
 environment:
   sdk: '>=3.0.0 <4.0.0'
   flutter: '>=3.10.0'
@@ -15,11 +12,16 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # https://pub.dev/packages/cupertino_rounded_corners
-  # This one is just crap.
   cupertino_rounded_corners: ^2.1.1
 
   # https://pub.dev/packages/figma_squircle
   figma_squircle: ^0.5.3
+
+  # https://pub.dev/packages/flex_seed_scheme
+  flex_seed_scheme: ^1.4.0
+
+  flutter:
+    sdk: flutter
 
   # https://pub.dev/packages/smooth_corner
   smooth_corner: ^1.1.0
@@ -27,13 +29,9 @@ dependencies:
   # https://pub.dev/packages/superellipse_shape
   superellipse_shape: ^0.2.0
 
-  flutter:
-    sdk: flutter
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # The following section is specific to Flutter packages.
 flutter:

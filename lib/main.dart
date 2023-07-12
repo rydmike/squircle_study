@@ -55,9 +55,7 @@ class _SquircleDemoState extends State<SquircleDemo> {
       home: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: settings.useMaterial3
-              ? const Text('Squircle Study (M3)')
-              : const Text('Squircle Study (M2)'),
+          title: const Text('Squircle ShapeBorder Comparisons'),
           actions: <Widget>[
             IconButton(
               icon: settings.useMaterial3
