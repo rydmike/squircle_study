@@ -148,35 +148,44 @@ If **Figma Squircle** at smoothing **0.6** is a correct representation of the **
 
 A Flutter package implementation of Figma corner smoothing.
 
-This package is used and regarded by many as one of the best approximations of the iOS shape.
-To verify this it should be compared with actual iOS SwiftUI produced shapes.
+This package is used and regarded by many as one of the best approximations of the **iOS squircle shape**. It is an implementation of the **Figma Squircle** shape. It has a smoothness factor from 0.0 to 1.0, at value **0.6** the Figma shape **claims** to be **identical** to the **iOS squircle shape**. 
 
-In this study we use it as the reference to show how others deviate from it.
+At same smoothness, this `figma_squircle` package should also then be identical to the iOS squircle. To **verify** this, it should be compared to **actual** iOS SwiftUI produced shapes.
 
-
-
+In this study we use it as a reference to show how others deviate from it.
 
 * shortName: SmoothRectangleBorder
 * from: package figma_squircle
 * url: https://pub.dev/packages/figma_squircle
 * Shape can break down: **YES**
-> The shape breaks down with border radius exceeding the shapes used Stadium radius.
+> The shape breaks down with border radius exceeding the shape stadium radius.
 
 
 #### Findings
 The **Figma Squircle** breaks down when border radius exceeds its Stadium border.
 
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_breaks.png" alt="figma_squircle_breaks"/>
+
+For border radius > 0.5x and <= 1.0x of the shape's stadium radius, the **Figma Squircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius we can no lnoger observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_equal.png" alt="figma_squircle_equal"/>
+
 #### Conclusion
-If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then it is of course a good choice. However, its shape breaks down when radius exceeds the stadium a radius. A good shape algo should stay stadium shaped when stadium radius is exceeded. The performance impact of the **FigmaSquircle** has also been mentioned in issues. It should be studied further. 
+If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then this is of course a good choice for fidelity with iOS shapes. 
 
+However, **Figma Squircle** shape breaks down when radius exceeds the stadium a radius. A good shape algo should stay at its equivalent stadium shaped when the stadium radius is exceeded. 
 
+It has also been observed that for border radius > 0.5x and <= 1.0x of the shape's stadium radius, the
+However, **Figma Squircle** shape starts to take the shape of just an ordinary circular rounded rectangle border.
+
+The performance impact of the **FigmaSquircle** has also been mentioned in issues. It should be studied further. 
 
 
 ### SmoothCorner
 
 A rectangular border with variable smoothness imitated from Figma.
 
-This seems to be another implementation of the Figma squircle. It appears to be shape wise VERY
+This is **another** implementation of the **Figma squircle**. It appears to be shape wise VERY
 similar to above FigmaSquircle.
 
 * shortName: SmoothRectangleBorder
