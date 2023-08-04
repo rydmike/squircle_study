@@ -29,6 +29,10 @@ dependencies:
   # https://pub.dev/packages/superellipse_shape
   superellipse_shape: ^0.2.0
 
+  # Used for launching a WEB URL, by Google flutter.dev.
+  # https://pub.dev/packages/url_launcher
+  url_launcher: ^6.1.12
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

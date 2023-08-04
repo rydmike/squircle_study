@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:smooth_corner/smooth_corner.dart' as smooth;
 import 'package:superellipse_shape/superellipse_shape.dart';
 
-import 'flex_squircle.dart';
-import 'flex_stadium_squircle.dart';
 import 'simon_squircle.dart';
+import 'squircle_border.dart';
+import 'squircle_stadium_border.dart';
 
 enum FlexBorder {
   circular(
@@ -18,20 +18,30 @@ enum FlexBorder {
         'https://api.flutter.dev/flutter/painting/RoundedRectangleBorder-class.html',
     describe: 'The standard circular rounded rectangle border shape with an '
         'outline provided by Flutter.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.circle,
+  ),
+  continuous(
+    type: 'Continuous',
+    shortName: 'ContinuousRectangleBorder',
+    from: 'Flutter SDK',
+    url:
+        'https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html',
+    describe: 'The continuous rounded rounded rectangle border shape with an '
+        'outline provided by Flutter.',
+    icon: Icons.panorama_wide_angle,
   ),
   continuousSquircle(
-    type: 'ContinuousSquircle',
+    type: 'Continuous x 2.3529',
     shortName: 'ContinuousRectangleBorder x 2.3529',
     from: 'Flutter SDK x factor',
     url:
         'https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html',
     describe: 'The Flutter continuous rounded rounded rectangle border shape '
         'using radius multiplied with 2.3529.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.panorama_wide_angle,
   ),
-  squircle(
-    type: 'Squircle PR',
+  squircleBorder(
+    type: 'SquircleBorder PR',
     shortName: 'SquircleBorder',
     from: 'Flutter rejected PR',
     url:
@@ -39,7 +49,7 @@ enum FlexBorder {
     describe: 'A PR for a Squircle that was rejected in Flutter SDK. It was '
         'discussed here https://github.com/flutter/flutter/pull/27523. '
         'This is a RydMike code revival of the PR with some mods.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.crop_3_2_rounded,
   ),
   figmaSquircle(
     type: 'FigmaSquircle',
@@ -47,7 +57,7 @@ enum FlexBorder {
     from: 'package figma_squircle',
     url: 'https://pub.dev/packages/figma_squircle',
     describe: 'A Flutter package implementation of Figma corner smoothing.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.crop_landscape_rounded,
   ),
   smoothCorner(
     type: 'SmoothCorner',
@@ -58,28 +68,18 @@ enum FlexBorder {
         'from Figma.',
     icon: Icons.rectangle_rounded,
   ),
-  continuous(
-    type: 'Continuous',
-    shortName: 'ContinuousRectangleBorder',
-    from: 'Flutter SDK',
-    url:
-        'https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html',
-    describe: 'The continuous rounded rounded rectangle border shape with an '
-        'outline provided by Flutter.',
-    icon: Icons.rectangle_rounded,
-  ),
   cupertinoCorners(
-    type: 'Cupertino Corners',
+    type: 'CupertinoSquircleBorder',
     shortName: 'Cupertino SquircleBorder',
-    from: 'Package: cupertino_rounded_corners',
+    from: 'package cupertino_rounded_corners',
     url: 'https://pub.dev/packages/cupertino_rounded_corners',
     describe: 'A widget and border to make cupertino rounded corners also '
         'referred to as squircles using a bezier path and having the two '
         'points in the corners.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.panorama_wide_angle_select,
   ),
   superEllipse(
-    type: 'Super Ellipse',
+    type: 'SuperEllipse',
     shortName: 'SuperellipseShape',
     from: 'package superellipse_shape',
     url: 'https://pub.dev/packages/superellipse_shape',
@@ -96,10 +96,10 @@ enum FlexBorder {
     describe: 'The Flutter standard circular stadium border, it fits a '
         'stadium-shaped border, a box with semicircles on the ends, within '
         'the rectangle of the widget it is applied to.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.circle,
   ),
-  squircleStadium(
-    type: 'SquircleStadium',
+  squircleStadiumBorder(
+    type: 'SquircleStadiumBorder',
     shortName: 'SquircleStadiumBorder',
     from: 'Flutter rejected PR',
     url:
@@ -107,7 +107,7 @@ enum FlexBorder {
     describe: 'A PR for a Stadium Squircle that was rejected in Flutter SDK. '
         'It was discussed here https://github.com/flutter/flutter/pull/27523. '
         'This is a RydMike code revival of the PR with some mods.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.vignette_rounded,
   ),
   simonSquircle(
     type: 'SimonSquircle',
@@ -116,7 +116,7 @@ enum FlexBorder {
     url: 'https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a',
     describe: 'A squircle implementation by Simon Lightfoot provided in '
         'a Gist.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.join_inner,
   ),
   beveled(
     type: 'Beveled',
@@ -125,7 +125,7 @@ enum FlexBorder {
     url:
         'https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html',
     describe: 'A rectangular border with flattened or "beveled" corners.',
-    icon: Icons.rectangle_rounded,
+    icon: Icons.hexagon_rounded,
   ),
   ;
 
@@ -173,7 +173,7 @@ enum FlexBorder {
               ? BorderSide(width: lineWidth, color: lineColor)
               : BorderSide.none,
         );
-      case FlexBorder.squircle:
+      case FlexBorder.squircleBorder:
         return SquircleBorder(cornerRadius: radius);
       case FlexBorder.figmaSquircle:
         return SmoothRectangleBorder(
@@ -213,15 +213,11 @@ enum FlexBorder {
               ? BorderSide(width: lineWidth, color: lineColor)
               : BorderSide.none,
         );
-      case FlexBorder.squircleStadium:
-        return const SquircleStadiumBorder(
-            // side: lineWidth > 0
-            //     ? BorderSide(width: lineWidth, color: lineColor)
-            //     : BorderSide.none,
-            );
+      case FlexBorder.squircleStadiumBorder:
+        return const SquircleStadiumBorder();
       case FlexBorder.simonSquircle:
         return SimonSquircleBorder(
-          radius: radius, //.clamp(1.0, radius),
+          radius: radius,
           side: lineWidth > 0
               ? BorderSide(width: lineWidth, color: lineColor)
               : BorderSide.none,

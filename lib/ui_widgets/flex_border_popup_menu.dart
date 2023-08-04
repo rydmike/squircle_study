@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../squircle/flex_border.dart';
 import 'color_scheme_box.dart';
+import 'link_text_span.dart';
 import 'list_tile_reveal.dart';
 
 /// Widget used to select used AdaptiveTheme using a popup menu.
@@ -30,6 +31,11 @@ class FlexBorderPopupMenu extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme scheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
+
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
+        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+
     final bool enabled = onChanged != null;
     final String tileLabel =
         '${type.type} (${type.shortName} from ${type.from})';
@@ -48,7 +54,7 @@ class FlexBorderPopupMenu extends StatelessWidget {
       },
       enabled: enabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<FlexBorder>>[
-        for (int i = 0; i < FlexBorder.values.length - 1; i++)
+        for (int i = 0; i < FlexBorder.values.length; i++)
           PopupMenuItem<FlexBorder>(
             value: FlexBorder.values[i],
             child: ListTile(
@@ -92,6 +98,25 @@ class FlexBorderPopupMenu extends StatelessWidget {
           children: <Widget>[
             // if (subtitle != null) subtitle!,
             Text(styleDescribe),
+            RichText(
+              text: TextSpan(
+                children: <TextSpan>[
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: 'For more information see ',
+                  ),
+                  LinkTextSpan(
+                    style: linkStyle,
+                    uri: Uri.parse(type.url),
+                    text: 'link',
+                  ),
+                  TextSpan(
+                    style: spanTextStyle,
+                    text: '.',
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
         trailing: Padding(

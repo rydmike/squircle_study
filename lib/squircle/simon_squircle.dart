@@ -2,7 +2,7 @@ import 'dart:ui' as ui show lerpDouble;
 
 import 'package:flutter/material.dart';
 
-// Can be found here
+// Can be found here:
 // https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a
 class SimonSquircleBorder extends ShapeBorder {
   final double radius;
