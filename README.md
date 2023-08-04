@@ -43,13 +43,15 @@ When zoomed it is even more obvious that there is hardly any difference at 0.75 
 
 We will se this effect further when comparing with the circular stadium border. It looks like the **FigmaSquircle** does not implement any continuous border effect the closer we get to the stadium radius and none at all stadium radius. It is unknown if this is correct behavior when comparing to the desired actual **iOS Squircle** border.
 
+At a radius equal to or greater than the shape's stadium radius, the **RoundedRectangleBorder** produces a **StadiumBorder**
+
 ### Conclusion
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
 **Circular RoundedRectangleBorder** is **NOT** an acceptable compromise if high fidelity is desired at mid border radius. 
 
 For low fidelity it may be acceptable, but keen eyes will feel that something is off.
 
-We also have a first indication of that maybe the **FigmaSquircle** is not a correct representation of the **Swift-UI** squircle at border radius approaching or equal to stadium radius. 
+We also have a first indication of that maybe the **FigmaSquircle** is not a correct representation of the **Swift-UI** squircle at border radius approaching or equal to stadium radius, since it then becomes equal to a circular stadium border.
 
 
 ## ContinuousRectangleBorder
@@ -266,14 +268,28 @@ There is no reason to use **SuperEllipse** over the **ContinuousRectangleBorder*
 
 ### StadiumBorder
 
-The Flutter standard circular stadium border, it fits a stadium-shaped border, a box with 
+The Flutter standard circular stadium border. It fits a stadium-shaped border, a box with 
 semicircles on the ends, within the rectangle of the widget it is applied to.
 
 * shortName: StadiumBorder
 * from: Flutter SDK
 * url: https://api.flutter.dev/flutter/painting/StadiumBorder-class.html
 
-### SquircleStadiumBorder PR
+### Findings
+
+There is **NO** visible difference between a **FigmaSquircle** and standard Flutter SDK circular **StadiumBorder** when using a border radius that equals the shapes stadium radius.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/stadium.png" alt="stadium"/>
+
+The smoothness factor also has no impact on the **FigmaSquircle** when the border radius equals the stadium radius.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/stadium_figma.png" alt="stadium_figma"/>
+
+### Conclusion
+
+There is no point in using the **FigmaSquircle** for a stadium shape, it is identical to **StadiumBorder** at any radius that equals the shapes' stadium radius. Already at a radius of about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
+
+## SquircleStadiumBorder PR
 
 A PR for a Stadium Squircle that was rejected in Flutter SDK. It was discussed 
 here https://github.com/flutter/flutter/pull/27523. This is a RydMike code 
@@ -287,7 +303,7 @@ The implementation is not an `OutlinedBorder` so it has no outline capability. T
 * from: Flutter rejected PR
 * url: https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart',
 
-### SimonSquircle
+## SimonSquircle
 
 A squircle implementation by Simon Lightfoot provided in a Gist.
 
@@ -295,7 +311,9 @@ A squircle implementation by Simon Lightfoot provided in a Gist.
 * from: 'slightfoot gist',
 * url: 'https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a',
 
-### Beveled
+###
+
+## Beveled
 
 A rectangular border with flattened or "beveled" corners.
 
@@ -303,4 +321,4 @@ A rectangular border with flattened or "beveled" corners.
 * from: Flutter SDK
 * url: https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html'
 
-
+For obvious reason this shape is not compared, it is only included in the demo to show an alternative corner shape that exists but is rarely used in the Flutter SDK.
