@@ -14,7 +14,7 @@ The **Shape** options you can compare with this repo are:
 
 _Studied Squircle like BorderShapes_
 
-### Circular
+## Circular
 
 The standard circular rounded rectangle border shape with an outline provided by Flutter.
 
@@ -24,7 +24,7 @@ The standard circular rounded rectangle border shape with an outline provided by
 * Shape can break down: **NO**
 > Stays circular stadium when radius exceeds its stadium radius.
 
-#### Findings
+### Findings
 The difference between **Circular** and **Figma Squircle** are quite subtle, but still visible to a sharp and keen designer eye. At a border radius < 0.5 times (in the example 96 dp) of the stadium radius (stadium radius would be 200 in the example below), we can see a subtle bu clear difference:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_low.png" alt="circular low"/>
@@ -37,14 +37,13 @@ The difference between a standard circular border and the **Figma Squircle** get
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular.png" alt="circular"/>
 
-When zoomed it is even more obvious that ther is hardly any difference at 0.75 times what would be a stadium border.
+When zoomed it is even more obvious that there is hardly any difference at 0.75 times what would be a stadium border.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_zoom.png" alt="circular zoom"/>
 
 We will se this effect further when comparing with the circular stadium border. It looks like the **Figma Squircle** does not implement any continuous border effect the closer we get to the stadium radius and none at all stadium radius. It is unknown if this is correct behavior when comparing to the desired actual **iOS Squircle** border.
 
-
-#### Conclusion
+### Conclusion
 If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
 **Circular RoundedRectangleBorder** is **NOT** an acceptable compromise if high fidelity is desired at mid border radius. 
 
@@ -53,9 +52,9 @@ For low fidelity it may be acceptable, but keen eyes will feel that something is
 We also have a first indication of that maybe the **Figma Squircle** is not a correct representation of the **Swift-UI** squircle at border radius approaching or equal to stadium radius. 
 
 
-### ContinuousRectangleBorder
+## ContinuousRectangleBorder
 
-The continuous rounded rectangle border shape provided by Flutter SDK. This was supposed to bring the iOS squircle border to Flutter, but the implementation is very far from it.
+The continuous rounded rectangle border shape is provided by Flutter SDK. It was supposed to bring the iOS squircle border to Flutter, but the implementation is very far from it.
 
 * shortName: ContinuousRectangleBorder
 * from: Flutter SDK
@@ -63,16 +62,22 @@ The continuous rounded rectangle border shape provided by Flutter SDK. This was 
 * Shape can break down: **YES**
 > The source code mentions limit checks to prevent the `ContinuousRectangleBorder` to get what it calls a TIE-fighter shape. In this demo we can still observe the TIE-fighter shape with high border radius, so the attempt to prevent this shape is not completely successful. Consider raising an issue about it.
 * Other issues
-> Does not come with a Stadium option. 
+> It does not come with a Stadium border option. 
 
-#### Findings
+### Findings
 The difference between **ContinuousRectangleBorder** and **Figma Squircle** are very significant:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border.png" alt="continuous_rectangle_border"/>
+
+At high border radius the **ContinuousRectangleBorder** creates a TIE-fighter shapes, this is not desirable.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border_break.png" alt="continuous_rectangle_border_break"/>
 
 #### Conclusion
 If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **ContinuousRectangleBorder** is **NOT** at all an acceptable option.
 
-The performance impact of the **ContinuousRectangleBorder** over **RoundedRectangleBorder** has also been mentioned in issues and comments. Performance impacts should be studied further.
+The performance impact of the **ContinuousRectangleBorder** over **RoundedRectangleBorder** has also been mentioned as an issue. Performance impacts when using anything else than **RoundedRectangleBorder** should be studied further.
 
 
 ### ContinuousRectangleBorder x 2.3529
