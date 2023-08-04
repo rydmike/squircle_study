@@ -116,6 +116,8 @@ The performance impact of the **ContinuousRectangleBorder** over **RoundedRectan
 A Flutter continuous rounded rectangle border shape using radius multiplied with 2.3529.
 It is mentioned in a Flutter issue that a `ContinuousRectangleBorder` that has its border radius multiplied with 2.3529 becomes close to an iOS squircle. 
 
+> This is mentioned and claimed in [issue 91523](https://github.com/flutter/flutter/issues/91523) where it is said "Currently, `ContinuousRectangleBorder` requires a `borderRadius` of ~24 to resemble the `RoundedRectangle` with a `cornerRadius` of ~10.2". So basically 24/10.2 = 2.3529, as used here. 
+
 * shortName: ContinuousRectangleBorder x 2.3529
 * from: Flutter SDK x factor
 * url: 'https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html'
