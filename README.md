@@ -211,9 +211,7 @@ If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **i
 The performance of **SmoothCorner** has no known feedback as it is not used as much as **FigmaSquircle**. It performance impact should be studied as well.
 
 
-
-
-### Cupertino Corners
+## CupertinoCorners
 
 A widget and border to make cupertino rounded corners also referred to as squircles using a 
 bezier path and having the two points in the corners.
@@ -222,15 +220,49 @@ bezier path and having the two points in the corners.
 * from: package cupertino_rounded_corners
 * url: https://pub.dev/packages/cupertino_rounded_corners
 
- 
-### Super Ellipse
+### Findings
 
-A package for creating superellipse shapes in flutter. A superellipse is a shape constituting a transition '
-'between a rectangle and a circle.
+The **CupertinoCorners** appears to be visually pretty identical to **ContinuousRectangleBorder**.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/cupertino_corners.png" alt="cupertino_corners"/>
+
+
+It has the same TIE-fighter issue too:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/cupertino_corners_tie_fighter.png" alt="cupertino_corners_tie_fighter"/>
+
+At border radius > shortest side, the TIE-fighter shapes do diverge. The **ContinuousRectangleBorder** stops taking on increased TIE-fighter shape, but with the **CupertinoCorners** it becomes even more pronounced and doubled:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/cupertino_corners_tie_fighter_dual.png" alt="cupertino_corners_tie_fighter_dual"/>
+
+
+### Conclusion
+
+There is no reason to use **CupertinoCorners** over the **ContinuousRectangleBorder** that exists in the Flutter SDK. It also as a poor match for the **FigmaSquircle** and thus presumably **iOS squircle**, as the **ContinuousRectangleBorder**.
+
+ 
+### SuperEllipse
+
+The **SuperEllipse** is a package for creating superellipse shapes in flutter. A superellipse is a shape constituting a transition between a rectangle and a circle.
 
 * shortName: SuperellipseShape
 * from: package superellipse_shape,
 * url: https://pub.dev/packages/superellipse_shape
+
+### Findings
+
+The **SuperEllipse** appears to be visually pretty identical to **ContinuousRectangleBorder**.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/super_ellipse.png" alt="super_ellipse"/>
+
+It has the same TIE-fighter issue too, but unlike **CupertinoCorners** it is identical to **ContinuousRectangleBorder** at any given border radius, also **very** high ones.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/super_ellipse_tie_fighter.png" alt="super_ellipse_tie_fighter"/>
+
+
+### Conclusion
+
+There is no reason to use **SuperEllipse** over the **ContinuousRectangleBorder** that exists in the Flutter SDK. It also as a poor match for the **FigmaSquircle** and thus presumably **iOS squircle**, as the **ContinuousRectangleBorder**.
 
 ### StadiumBorder
 
