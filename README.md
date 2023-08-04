@@ -180,7 +180,7 @@ It has also been observed that for border radius of > 0.5x and <= 1.0x of the sh
 The performance impact of the **FigmaSquircle** has also been mentioned in issues. It should be studied further. 
 
 
-### SmoothCorner
+## SmoothCorner
 
 A rectangular border with variable smoothness imitated from Figma.
 
@@ -193,8 +193,8 @@ similar to above **FigmaSquircle**.
 * Shape can break down: **NO**
 > Stays correctly shaped when border radius exceeds its stadium radius.
 
-#### Findings
-The difference between **SmoothCorner** and **FigmaSquircle** appear to be negligible. Visually the results appear to be identical when using same smoothness factor that **SmoothCorner** also supports. 
+### Findings
+The difference between **SmoothCorner** and **FigmaSquircle** appear to be negligible. Visually the results appear to be identical when using same smoothness factor, that **SmoothCorner** also supports. 
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/smooth_corner.png" alt="smooth_corner"/>
 
@@ -202,11 +202,13 @@ The **SmoothCorner** does not not break down when border radius exceeds the shap
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/smooth_corner_no_break.png" alt="smooth_corner_no_break"/>
 
-
-#### Conclusion
+### Conclusion
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
-**SmoothCorner** is **correct** as well.
+**SmoothCorner** is **correct** as well. Since they are identical, **SmoothCorner** has the same questionable stadium shape as **FigmaSquircle**.
 
+**SmoothCorner** has one advantage over **FigmaSquircle** and that is that shape does not break down when the radius exceeds the shapes stadium radius. This is a nice and desired feature and matches how **RoundedRectangleBorder** behaves in relations ot its **StadiumBorder** shape, it stay at **stadium** shape when the stadium radius is exceeded.
+
+The performance of **SmoothCorner** has no known feedback as it is not used as much as **FigmaSquircle**. It performance impact should be studied as well.
 
 
 
