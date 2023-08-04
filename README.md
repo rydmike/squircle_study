@@ -12,7 +12,7 @@ The **Shape** options you can compare with this repo are:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/shapes.png" alt="shapes"/>
 
-_Studied Squircle like BorderShapes_
+_Studied Squircle like Flutter **ShapeBorder** implementations_
 
 ## Circular
 
@@ -308,10 +308,21 @@ revival of the PR with some mods.
 
 ### Findings
 
-The **SquircleStadiumBorder PR** appears to be the **stadium** shape that has a nice looking squircle shape. It may be more correct for an iOS stadium squircle shape them **FigmaSquircle** since it is identical to normal circular stadium border.
+The **SquircleStadiumBorder PR** looks better than **FigmaSquircle**:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_stadium_border.png" alt="squircle_stadium_border"/>
 
+There is a clear difference between **SquircleStadiumBorder PR** and **FigmaSquircle** when zoomed:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_stadium_border_zoom.png" alt="squircle_stadium_border_zoom"/>
+
+The **FigmaSquircle** at stadium border is just equalt to **StadiumBorder**. Comapring **SquircleStadiumBorder PR** to a **StadiumBorder** is thus the same as comparinf it to **FigmaSquircle**:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_stadium_border_stadium.png" alt="squircle_stadium_border_stadium"/>
+
+### Conclusion
+
+The **SquircleStadiumBorder PR** appears to be the **only stadium** shape that has a nice looking squircle shape. It **may be more correct** for an iOS stadium squircle shape, than the **FigmaSquircle**, since it is identical to normal circular stadium border, which a **iOS squircle** stadium shape is not.
 
 
 ## SimonSquircle
@@ -321,8 +332,40 @@ A squircle implementation by Simon Lightfoot provided in a Gist.
 * shortName: 'SimonSquircleBorder',
 * from: 'slightfoot gist',
 * url: 'https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a',
+* Shape can break down: **YES**
+> The shape cannot handle border radius from [0, 1.0[, it draws very odd shapes then.
 
-###
+### Findings
+
+Draws weird shapes for border radius from 0 to less than 1. The shape is **not** a squircle, it is something enititly different. Examples for different border radius hown below.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon0.png" alt="simon0"/>
+
+_**ShapeBorder** SimonSquircle at border radius 0.57_
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon1.png" alt="simon1"/>
+
+_**ShapeBorder** SimonSquircle at border radius 1.36_
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon2.png" alt="simon2"/>
+
+_**ShapeBorder** SimonSquircle at border radius 2.62_
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon3.png" alt="simon3"/>
+
+_**ShapeBorder** SimonSquircle at border radius 26_
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon4.png" alt="simon4"/>
+
+_**ShapeBorder** SimonSquircle at border radius 80_
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon5.png" alt="simon5"/>
+
+_**ShapeBorder** SimonSquircle at border radius 133_
+
+### Conclusion
+
+Don't use this for iOS squircle shapes.
 
 ## Beveled
 
