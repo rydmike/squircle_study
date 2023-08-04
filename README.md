@@ -25,15 +25,15 @@ The standard circular rounded rectangle border shape with an outline provided by
 > Stays circular stadium when radius exceeds its stadium radius.
 
 #### Findings
-The difference between **Circular** and **Figma Squircle** are quite subtle, but still visible to a sharp and keen designer eye.
+The difference between **Circular** and **Figma Squircle** are quite subtle, but still visible to a sharp and keen designer eye. At a border radius < 0.5 times (in the example 96 dp) of the stadium radius (stadium radius would be 200 in the example below), we can see a subtle bu clear difference:
 
-<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_low.png" alt="circular_low"/>
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_low.png" alt="circular low"/>
 
-It is more clearly seen when zoomed in:
+It is more obvious when zoomed in:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_low_zoom.png" alt="circular low zoom"/>
 
-The difference between a standard circular border and and the `figma_squircle` get lower as radius increase and we get closer to the stadium radius.
+The difference between a standard circular border and the **Figma Squircle** get lower as radius increase and we get closer to the stadium radius.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular.png" alt="circular"/>
 
@@ -41,23 +41,21 @@ When zoomed it is even more obvious that ther is hardly any difference at 0.75 t
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_zoom.png" alt="circular zoom"/>
 
-We will se this effect further when comparing with the circular stadium border. It appears like the `figma_squirle` does not implement any continuous border effect the closer we get to the stadium radius and none at stadium radius. It is unknown if this is correct behavior when comparing to the desired **iOS Squircle** border.
+We will se this effect further when comparing with the circular stadium border. It looks like the **Figma Squircle** does not implement any continuous border effect the closer we get to the stadium radius and none at all stadium radius. It is unknown if this is correct behavior when comparing to the desired actual **iOS Squircle** border.
 
 
 #### Conclusion
 If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
-**Circular RoundedRectangleBorder** is **NOT** an acceptable compromise if high fidelity is desired. 
+**Circular RoundedRectangleBorder** is **NOT** an acceptable compromise if high fidelity is desired at mid border radius. 
+
 For low fidelity it may be acceptable, but keen eyes will feel that something is off.
 
 We also have a first indication of that maybe the **Figma Squircle** is not a correct representation of the **Swift-UI** squircle at border radius approaching or equal to stadium radius. 
 
 
-
 ### ContinuousRectangleBorder
 
-The continuous rounded rounded rectangle border shape with an outline provided by Flutter SDK.
-
-This was supposed to brind the iOS squircle border to Flutter, but the implementation is very far from it.
+The continuous rounded rectangle border shape provided by Flutter SDK. This was supposed to bring the iOS squircle border to Flutter, but the implementation is very far from it.
 
 * shortName: ContinuousRectangleBorder
 * from: Flutter SDK
