@@ -2,11 +2,18 @@
 
 A Flutter study and comparison of different Squircle ShapeBorder options.
 
+>### TODOs
+>
+>1. Compare performance impact of the used and studied Squircle **ShapeBorder**'s versus vanilla `RoundedRectangleBorder` and `StadiumBorder`.
+>2. Compare the shapes that are claimed to be the best match to iOS Squircle below, to **actual** different Squircle shapes drawn by iOS Swift-UI.
+
 This demo allows you to visually compare the difference or similarity between different hyper ellipses, or so-called **Squircle** border rounding on rectangles.
 
-In this study, a package called `figma_squircle` is used as reference. This package is used and regarded by many as the **best Flutter approximation** of the **iOS Squircle** shape. To verify this, it should be compared with actual iOS SwiftUI produced shapes. In any case, it is used for comparisons in presented findings in this study. With the Flutter **squircle_study** app in this repo, you can cross compare any two selected shapes at different sizes and radius.
+In this study, a package called `figma_squircle` is used as reference. This package is used and regarded by many as the **best Flutter approximation** of the **iOS Squircle** shape. To verify this, it should be compared with actual iOS SwiftUI produced shapes. As a starting point, it is used for comparisons and findings presented in this study. 
 
-The performance impact of using **any** other shape than **RoundedRectangleBorder** has also been mentioned in issues and comments, even for just the SDK **ContinuousRectangleBorder**, but more so for the `figma_squircle`. The **performance impact** of the shapes should be studied further.
+With the Flutter **squircle_study** app in this repo, you can cross compare any two selected shapes at different sizes and radius.
+
+The performance impact of using **any** other shape than **RoundedRectangleBorder** has been mentioned in issues and Twitter comments, even for just the SDK **ContinuousRectangleBorder**, but even more so for the `figma_squircle`. The **performance impact** of the shapes should be studied further.
 
 The **Shape** options you can compare with this **squircle_study** app are:
 
