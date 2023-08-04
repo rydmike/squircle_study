@@ -25,7 +25,7 @@ The standard circular rounded rectangle border shape with an outline provided by
 > Stays circular stadium when radius exceeds its stadium radius.
 
 #### Findings
-The difference between **Circular** and **Figma Squircle** are quite subtle, but still visible to a sharp and keen designer eye:
+The difference between **Circular** and **Figma Squircle** are quite subtle, but still visible to a sharp and keen designer eye.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_low.png" alt="circular_low"/>
 
@@ -37,7 +37,7 @@ The difference between a standard circular border and and the `figma_squircle` g
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular.png" alt="circular"/>
 
-When zoomed it is even more obvious:
+When zoomed it is even more obvious that ther is hardly any difference at 0.75 times what would be a stadium border.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_zoom.png" alt="circular zoom"/>
 
