@@ -10,7 +10,9 @@ The performance impact of using *any** other shape than **RoundedRectangleBorder
 
 The **Shape** options you can compare with this repo are:
 
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/shapes.png" alt="shapes"/>
 
+_Studied Squirlce like BorderShapes_
 
 ### Circular
 
