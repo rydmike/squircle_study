@@ -43,7 +43,9 @@ When zoomed it is even more obvious that there is hardly any difference at 0.75 
 
 We will se this effect further when comparing with the circular stadium border. It looks like the **FigmaSquircle** does not implement any continuous border effect the closer we get to the stadium radius and none at all stadium radius. It is unknown if this is correct behavior when comparing to the desired actual **iOS Squircle** border.
 
-At a radius equal to or greater than the shape's stadium radius, the **RoundedRectangleBorder** produces a **StadiumBorder**
+At a radius equal to or greater than the shape's stadium radius, the **RoundedRectangleBorder** produces a **StadiumBorder**:
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular_stadium.png" alt="circular_stadium"/>
 
 ### Conclusion
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
@@ -287,7 +289,7 @@ The smoothness factor also has no impact on the **FigmaSquircle** when the borde
 
 ### Conclusion
 
-There is no point in using the **FigmaSquircle** for a stadium shape, it is identical to **StadiumBorder** at any radius that equals the shapes' stadium radius. Already at a radius of about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
+There is no point in using the **FigmaSquircle** for a **stadium** shape, it is identical to **StadiumBorder** at any radius that equals the shapes' stadium radius. Already at a radius about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
 
 ## SquircleStadiumBorder PR
 
@@ -295,13 +297,22 @@ A PR for a Stadium Squircle that was rejected in Flutter SDK. It was discussed
 here https://github.com/flutter/flutter/pull/27523. This is a RydMike code 
 revival of the PR with some mods.
 
-The shape shrinks its height when width approaches height, and wise versa, this is **NOT** desired behavior. 
-
-The implementation is not an `OutlinedBorder` so it has no outline capability. This needs to be added.
-
 * shortName: SquircleStadiumBorder
 * from: Flutter rejected PR
 * url: https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart',
+
+* Shape can break down: **YES**
+> The shape shrinks its height when width approaches height, and wise versa, this is **NOT** desired behavior.
+* Other issues
+> The implementation is not an `OutlinedBorder`, so it has no outline capability. This needs to be added.
+
+### Findings
+
+The **SquircleStadiumBorder PR** appears to be the **stadium** shape that has a nice looking squircle shape. It may be more correct for an iOS stadium squircle shape them **FigmaSquircle** since it is identical to normal circular stadium border.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_stadium_border.png" alt="squircle_stadium_border"/>
+
+
 
 ## SimonSquircle
 
