@@ -61,7 +61,8 @@ At a radius equal to or greater than the shape's stadium radius, the **RoundedRe
 _**ShapeBorder** RoundedRectangleBorder when radius equals stadium radius is same as a **StadiumBorder**_
 
 
-### Conclusion
+### Conclusion - Circular RoundedRectangleBorder
+
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
 **Circular RoundedRectangleBorder** is **NOT** an acceptable compromise if high fidelity is desired at mid border radius. 
 
@@ -95,7 +96,8 @@ At high border radius, shown below, the **ContinuousRectangleBorder** creates a 
 
 _**ShapeBorder** ContinuousRectangleBorder getting TIE-fighter shape_
 
-### Conclusion
+### Conclusion - ContinuousRectangleBorder
+
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **ContinuousRectangleBorder** is **NOT** at all an acceptable option.
 
@@ -138,7 +140,7 @@ At this border radius it might also be the **FigmaSquircle** that is the poorer 
 
 The TIE fighter effect when using **ContinuousRectangleBorder x 2.3529** starts already at 0.6 times the stadium radius.
 
-#### Conclusion
+#### Conclusion - ContinuousRectangleBorder x 2.3529
 
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **ContinuousRectangleBorder x 2.3529** is **NOT** at an exact match for it, but it is **not** a bad Squircle shape.
@@ -159,6 +161,7 @@ A PR for a Squircle that was rejected in Flutter SDK. It was discussed here http
 > The implementation is not an `OutlinedBorder`, so it has no outline capability. This needs to be added.
 
 ### Findings
+
 The difference between **SquircleBorder PR** and **FigmaSquircle** are none existing at border radius < 0.49 of the stadium radius, when using **FigmaSquircle** with smoothness 0.6.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_border_pr.png" alt="squircle_border_pr"/>
@@ -177,7 +180,7 @@ _**ShapeBorder** SquircleBorder PR at radius < 0.75x of its stadium radius_
 
 It could also be argued that the **SquircleBorder PR** refrains from drawing shapes for a radius for which it no longer produces a correct squircle result. Whereas, the **FigmaSquircle** then instead approaches a vanilla circular border, as the stadium radius is approached.
 
-### Conclusion
+### Conclusion - SquircleBorder PR
 
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **SquircleBorder PR** is an **acceptable** option at lower radius than **0.5x Stadium radius**. At higher border radius it visually stops changing it radius, since it cannot draw a squircle shape any higher radius than that.
@@ -201,6 +204,7 @@ In this study we use it as a reference to show how others deviate from it.
 
 
 ### Findings
+
 The **FigmaSquircle** breaks down when border radius exceeds its Stadium border.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_breaks.png" alt="figma_squircle_breaks"/>
@@ -214,7 +218,8 @@ For border radius > 0.5x and <= 1.0x of the shape's stadium radius, the **FigmaS
 _**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius 0.9x of its stadium radius_
 
 
-### Conclusion
+### Conclusion - FigmaSquircle
+
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then this is of course a good choice for fidelity with iOS shapes. 
 
 However, **FigmaSquircle** shape breaks down when radius exceeds the stadium a radius. A good shape algo should stay at its equivalent stadium shaped when the stadium radius is exceeded. 
@@ -238,6 +243,7 @@ similar to above **FigmaSquircle**.
 > Stays correctly shaped when border radius exceeds its stadium radius.
 
 ### Findings
+
 The difference between **SmoothCorner** and **FigmaSquircle** appear to be negligible. Visually the results appear to be identical when using same smoothness factor, that **SmoothCorner** also supports. 
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/smooth_corner.png" alt="smooth_corner"/>
@@ -250,7 +256,8 @@ The **SmoothCorner** does not not break down when border radius exceeds the shap
 
 _**ShapeBorder** SmoothCorner does not break down like FigmaSquircle at radius > stadium radius_
 
-### Conclusion
+### Conclusion - SmoothCorner
+
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **SmoothCorner** is **correct** as well. Since they are identical, **SmoothCorner** has the same questionable stadium shape as **FigmaSquircle**.
 
@@ -289,8 +296,7 @@ At border radius > shortest side, the TIE-fighter shapes do diverge. The **Conti
 
 _**ShapeBorder** CupertinoCorners has TIE-fighter that gets more aggressive than ContinuousRectangleBorder_
 
-
-### Conclusion
+### Conclusion - CupertinoCorners
 
 There is no reason to use **CupertinoCorners** over the **ContinuousRectangleBorder** that exists in the Flutter SDK. It is also as a poor match for the **FigmaSquircle** as the **ContinuousRectangleBorder**.
 
@@ -318,7 +324,7 @@ It has the same TIE-fighter issue too, but unlike **CupertinoCorners** it is ide
 
 _**ShapeBorder** CupertinoSuperEllipse has same TIE-fighter shape breakdown as ContinuousRectangleBorder_
 
-### Conclusion
+### Conclusion - SuperEllipse
 
 There is no reason to use **SuperEllipse** over the **ContinuousRectangleBorder** that exists in the Flutter SDK. It is also as a poor match for the **FigmaSquircle** as the **ContinuousRectangleBorder**.
 
@@ -345,7 +351,7 @@ The smoothness factor also has no impact on the **FigmaSquircle** when the borde
 
 _**ShapeBorder** StadiumBorder and FigmaSquircle are visually identical, also when taking a closer zoomed in look_
 
-### Conclusion
+### Conclusion - StadiumBorder
 
 There is no point in using the **FigmaSquircle** for a **stadium** shape, it is identical to **StadiumBorder** at any radius that equals the shapes' stadium radius. Already at a radius about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
 
@@ -393,7 +399,7 @@ The **SquircleStadiumBorder** behaves differently for the **StadiumBorder** when
 _**ShapeBorder** SquircleStadiumBorder vs StadiumBorder when edge length changes_
 
 
-### Conclusion
+### Conclusion - SquircleStadiumBorder PR
 
 The **SquircleStadiumBorder PR** appears to be the **only stadium** shape that has a nice looking squircle shape. It **may be more correct** for an iOS stadium squircle shape, than the **FigmaSquircle**. This is based on that the **FigmaSquircle** is just identical to a normal circular stadium border, which an **iOS squircle** stadium shape may not be.
 
@@ -436,7 +442,7 @@ _**ShapeBorder** SimonSquircle at border radius 80_
 
 _**ShapeBorder** SimonSquircle at border radius 133_
 
-### Conclusion
+### Conclusion - SimonSquircle
 
 Do not use this shape for iOS squircle shapes, it is **not** a match.
 
