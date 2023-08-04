@@ -12,7 +12,7 @@ The **Shape** options you can compare with this repo are:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/shapes.png" alt="shapes"/>
 
-_Studied Squirlce like BorderShapes_
+_Studied Squircle like BorderShapes_
 
 ### Circular
 
@@ -26,6 +26,8 @@ The standard circular rounded rectangle border shape with an outline provided by
 
 #### Findings
 It seems the difference between **Circular** and **Figma Squircle** are quite subtle, but visible to a sharp and keen designer eye.
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/circular.png" alt="circular"/>
 
 #### Conclusion
 If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then 
