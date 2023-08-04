@@ -69,7 +69,7 @@ The difference between **ContinuousRectangleBorder** and **Figma Squircle** are 
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border.png" alt="continuous_rectangle_border"/>
 
-At high border radius the **ContinuousRectangleBorder** creates a TIE-fighter shapes, this is not desirable.
+At high border radius, shown below, the **ContinuousRectangleBorder** creates a TIE-fighter shapes, this is not desirable.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border_break.png" alt="continuous_rectangle_border_break"/>
 
@@ -83,7 +83,7 @@ The performance impact of the **ContinuousRectangleBorder** over **RoundedRectan
 ### ContinuousRectangleBorder x 2.3529
 
 The Flutter continuous rounded rectangle border shape using radius multiplied with 2.3529.
-It is mentioned in a Flutter issue that a `ContinuousRectangleBorder` that has its border radius multiplied with 2.3529 becomes close to an iOS squircle. This shows that this is not exactly the case, but it does become a closer match.
+It is mentioned in a Flutter issue that a `ContinuousRectangleBorder` that has its border radius multiplied with 2.3529 becomes close to an iOS squircle. 
 
 * shortName: ContinuousRectangleBorder x 2.3529
 * from: Flutter SDK x factor
@@ -93,11 +93,19 @@ It is mentioned in a Flutter issue that a `ContinuousRectangleBorder` that has i
 
 
 #### Findings
-The difference between **ContinuousRectangleBorder x 2.3529** and **Figma Squircle** are very significant:
+The difference between **ContinuousRectangleBorder x 2.3529** and **Figma Squircle** are clear, but not so significant at border radius < 0.5 stadium border. 
+
+<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border_mult_low.png" alt="continuous_rectangle_border_break"/>
+
+
+This shows that this is not exactly the case, but it does become a close match for **Figma Squircle** at border radius < 0.5
+
+
+very significant at high
 
 #### Conclusion
 If **Figma Squircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
-**ContinuousRectangleBorder x 2.3529** is **NOT** at all an acceptable option.
+**ContinuousRectangleBorder x 2.3529** is **NOT** at all an exact match for it, but it is **not** a bad shape
 
 
 
