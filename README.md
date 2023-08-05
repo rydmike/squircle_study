@@ -10,7 +10,7 @@ In this study, a package called `figma_squircle` is used as reference. This pack
 
 With the Flutter **squircle_study** app in this repo used for this study, you can cross compare any two selected shapes at different sizes and curvature.
 
-In Flutter GitHub repo the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle.
+In the Flutter GitHub repo, the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle.
 
 ## Summary of Findings
 
@@ -22,7 +22,7 @@ There is a less known package called `smooth_corner`, that produces identical sh
 
 The performance impact of using **any** other shape than **RoundedRectangleBorder** has been mentioned, at least Tweet comments. They typically mention the **FigmaSquircle**, even for just the SDK **ContinuousRectangleBorder**, but even more so for the `figma_squircle`. The **performance impact** of the shapes should be studied further. See **Appendix A**, at the end of the study report for more info.
 
-All studied shapes do not have an outline border option. Some may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly.
+All studied shapes do not have an outline border option. Some may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly. The studied shapes that can draw an outline, all except **SquircleBorder PR** and **SquircleStadiumBorder PR** that never had any border option, seem to produce varying results concerning how thick the border visually appears to be at same thickness values. Might be an idea to look into why. The key part is of course that an official Squricle should use same principle as current Flutter `OutlinedBorder` shapes. 
 
 ### TODOs
 
@@ -44,11 +44,11 @@ The **Shape** options you can compare with this **squircle_study** app are:
 * **CupertinoSquircleBorder** aka **CupertinoCorners** from package [cupertino_rounded_corners](https://pub.dev/packages/cupertino_rounded_corners)
 * **SuperellipseShape** from package [superellipse_shape](https://pub.dev/packages/superellipse_shape)
 * **StadiumBorder** from: [Flutter SDK](https://api.flutter.dev/flutter/painting/StadiumBorder-class.html)
-* **SquircleStadiumBorder** from [Flutter rejected PR](https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart)
+* **SquircleStadiumBorder PR** from [Flutter rejected PR](https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart)
 * **SimonSquircleBorder** from [Slightfoot gist](https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a)
 * **BeveledRectangleBorder** from [Flutter SDK](https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html)
 
-All are obviosuly not hyper ellipses or squircles, but included for comparsion reasons.
+All are obviously not hyper ellipses or squircles, but included for comparison reasons.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/shapes.png" alt="shapes"/>
 
