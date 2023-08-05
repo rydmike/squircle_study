@@ -22,7 +22,7 @@ There is a less known package called `smooth_corner`, that produces identical sh
 
 The performance impact of using **any** other shape than **RoundedRectangleBorder** has been mentioned, at least Tweet comments. They typically mention the **FigmaSquircle**, even for just the SDK **ContinuousRectangleBorder**, but even more so for the `figma_squircle`. The **performance impact** of the shapes should be studied further. See **Appendix A**, at the end of the study report for more info.
 
-All studied shapes do not have an outline border option. Some may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`s, like most Flutter SDK `ShapeBorder`'s do. A proper Flutter iOS squircle shape should do all these things correctly. 
+All studied shapes do not have an outline border option. Some may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly.
 
 ### TODOs
 
