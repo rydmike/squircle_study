@@ -463,3 +463,16 @@ A rectangular border with flattened or "beveled" corners.
 * url: https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html'
 
 For obvious reason this shape is not compared, it is only included in the demo to show an alternative corner shape that exists, but is rarely used in the Flutter SDK.
+
+## Tweets About Performance Issues
+
+Some links to mentioned performance issue Tweets about using Figma Squircle and ContinuousRectangleBorder.
+
+### Figma Squircle 
+* https://twitter.com/lets4r/status/1630843536739295232?s=20
+* https://twitter.com/lets4r/status/1668240937225539586?s=20
+
+### Continuous Rectangle Border
+* https://twitter.com/andrewpmoore/status/1668223930878836738?s=20
+* https://twitter.com/andrewpmoore/status/1668243655314882567?s=20
+* https://twitter.com/RydMike/status/1668275006919278592?s=20
