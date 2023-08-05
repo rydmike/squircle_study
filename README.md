@@ -149,7 +149,7 @@ At this border radius, it might also be the **FigmaSquircle** that is the **poor
 
 The TIE fighter effect when using **ContinuousRectangleBorder x 2.3529** starts already at 0.6 times the stadium radius.
 
-#### Conclusion - ContinuousRectangleBorder x 2.3529
+### Conclusion - ContinuousRectangleBorder x 2.3529
 
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **ContinuousRectangleBorder x 2.3529** is **NOT** at an exact match for it, but it is **not** a bad Squircle shape.
