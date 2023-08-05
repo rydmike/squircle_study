@@ -244,7 +244,7 @@ The **FigmaSquircle** breaks down when set border radius exceeds its Stadium rad
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_breaks.png" alt="figma_squircle_breaks"/>
 
-_**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius > than its stadium radius_
+_**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius > than its stadium radius, shape breaks down_
 
 For border radius > 0.5x and <= 1.0x of the shape's stadium radius, the **FigmaSquircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius, we can no longer observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
 
