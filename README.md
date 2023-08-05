@@ -10,6 +10,8 @@ In this study, a package called `figma_squircle` is used as reference. This pack
 
 With the Flutter **squircle_study** app in this repo used for this study, you can cross compare any two selected shapes at different sizes and curvature.
 
+In Flutter GitHub repo the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle.
+
 ## Summary of Findings
 
 The `ContinuousRectangleBorder` in Flutter SDK is a super ellipses shape, but it is not a match for the one used in iOS UI elements. 
