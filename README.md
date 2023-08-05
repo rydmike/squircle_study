@@ -250,7 +250,7 @@ For border radius > 0.5x and <= 1.0x of the shape's stadium radius, the **FigmaS
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_equal.png" alt="figma_squircle_equal"/>
 
-_**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius 0.9x of its stadium radius_
+_**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius 0.9x of its stadium radius, pretty identical to circular **RoundedRectangleBorder**_
 
 
 ### Conclusion - FigmaSquircle
