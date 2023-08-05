@@ -206,9 +206,9 @@ The difference between **SquircleBorder PR** and **FigmaSquircle** is none exist
 
 _**ShapeBorder** SquircleBorder PR at radius < 0.5x of its stadium radius_
 
-The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.5x the stadium radius and can **not** be used for Squircle shapes where the radius if from 0.5x to 1x of the stadium radius. 
+The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.5x the stadium radius and can **not** be used for Squircle shapes where the radius is from 0.5x to 1x of the stadium radius.  Up and until that radius, it works very well and matches the **FigmaSquircle**.
 
-Up and until that radius, it works very well and matches the **FigmaSquircle**. On the other hand, it has also been shown that for a radius range that exceeded 0.5x stadium radius, that the **FigmaSquircle** gets closer and closer to the plain circular border represented by the **RoundedRectangleBorder**. 
+On the other hand, it has also been shown that for a radius range that exceeded 0.5x stadium radius, that the **FigmaSquircle** gets closer and closer to the plain circular border represented by the **RoundedRectangleBorder**. 
 
 
 
