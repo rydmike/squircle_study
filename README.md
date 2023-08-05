@@ -214,7 +214,7 @@ In this study, we use it as a reference to show how others deviate from it.
 
 ### Findings
 
-The **FigmaSquircle** breaks down when border radius exceeds its Stadium border.
+The **FigmaSquircle** breaks down when set border radius exceeds its Stadium radius.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_breaks.png" alt="figma_squircle_breaks"/>
 
