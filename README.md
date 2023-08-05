@@ -210,8 +210,6 @@ The **SquircleBorder PR** stops responding to border radius increases when the r
 
 On the other hand, it has also been shown that for a radius range that exceeded 0.5x stadium radius, that the **FigmaSquircle** gets closer and closer to the plain circular border represented by the **RoundedRectangleBorder**. 
 
-
-
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_border_pr_break.png" alt="squircle_border_pr_break"/>
 
 _**ShapeBorder** SquircleBorder PR at radius < 0.75x of its stadium radius_
