@@ -4,6 +4,7 @@
 
 import 'dart:math' as math;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 // ignore_for_file: comment_references
@@ -83,19 +84,11 @@ class SquircleStadiumBorder extends ShapeBorder {
   Path _getPath(final Rect rectangle) {
     // The two 180º arcs will always be positioned on the shorter side of the
     // rectangle like with the traditional stadium border shape.
-    final double sideWidth = side.width;
-
-    Rect rect = rectangle;
 
     // The side width that is capped by the smallest dimension of the rectangle.
     // It represents the side width value used to render the stroke.
     final double actualSideWidth =
-        math.min(side.width, math.min(rect.width, rect.height) / 2.0);
-
-    // We need to change the dimensions of the rect in the event that the
-    // shape has a side width as the stroke is drawn centered on the border of
-    // the shape instead of inside as with the rounded rect and stadium.
-    if (sideWidth > 0.0) rect = rect.deflate(actualSideWidth / 2.0);
+        math.min(side.width, math.min(rectangle.width, rectangle.height) / 2.0);
 
     // The ratio of the declared corner radius to the total affected pixels
     // along each axis to render the corner. For example if the declared radius
@@ -123,12 +116,11 @@ class SquircleStadiumBorder extends ShapeBorder {
         1.0 / minimalUnclippedSideToCornerRadiusRatio;
 
     // The maximum aspect ratio of the width and height of the given rect before
-    // clamping on one dimension will occur. Roughly 0.68.
-    const double maxEdgeLengthAspectRatio =
-        1.0 - minimalEdgeLengthSideToCornerRadiusRatio;
+    // clamping on one dimension will occur. Roughly 0.79.
+    const double maxEdgeLengthAspectRatio = 0.79;
 
-    final double rectWidth = rect.width;
-    final double rectHeight = rect.height;
+    final double rectWidth = rectangle.width;
+    final double rectHeight = rectangle.height;
     final bool widthLessThanHeight = rectWidth < rectHeight;
     final double width = widthLessThanHeight
         ? rectWidth.clamp(
@@ -143,8 +135,8 @@ class SquircleStadiumBorder extends ShapeBorder {
             maxEdgeLengthAspectRatio * (rectWidth + actualSideWidth) -
                 actualSideWidth);
 
-    final double centerX = rect.center.dx;
-    final double centerY = rect.center.dy;
+    final double centerX = rectangle.center.dx;
+    final double centerY = rectangle.center.dy;
     final double originX = centerX - width / 2.0;
     final double originY = centerY - height / 2.0;
     final double minDimension = math.min(width, height);
@@ -289,12 +281,9 @@ class SquircleStadiumBorder extends ShapeBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        final double width = side.width;
-        if (width != 0.0) {
+        if (side.width != 0.0) {
           final Path path = getOuterPath(rect, textDirection: textDirection);
           final Paint paint = side.toPaint();
-          paint.strokeWidth =
-              math.min(width, math.min(rect.width, rect.height) / 2);
           paint.strokeJoin = StrokeJoin.round;
           canvas.drawPath(path, paint);
         }
@@ -308,7 +297,7 @@ class SquircleStadiumBorder extends ShapeBorder {
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(rect);
+    return _getPath(rect.inflate(side.strokeOffset / 2));
   }
 
   @override
@@ -352,6 +341,6 @@ class SquircleStadiumBorder extends ShapeBorder {
 
   @override
   String toString() {
-    return 'SquircleStadiumBorder($side)';
+    return '${objectRuntimeType(this, 'SquircleBorder')}($side)';
   }
 }

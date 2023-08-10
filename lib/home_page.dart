@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'squircle/flex_border.dart';
@@ -28,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   double widthBig = 600;
   double smoothness = 0.6;
   double lineWidth = 1.0;
+  double strokeAlign = -1; // -1=Inside, 0=Center, 1=Outside
 
   FlexBorder bottomType = FlexBorder.squircleBorder;
   FlexBorder topType = FlexBorder.smoothCorner;
@@ -47,6 +50,9 @@ class _HomePageState extends State<HomePage> {
     final Color bottomShapeColor = theme.colorScheme.primaryContainer;
     final Color bottomOnShapeColor = theme.colorScheme.onPrimaryContainer;
     final Color lineColor = theme.colorScheme.onSurface;
+    // Add a translucent fill color the shape on top that has the outlined
+    // border.
+    final Color fillColor = theme.colorScheme.tertiary.withOpacity(0.15);
 
     return ListView(
       children: <Widget>[
@@ -170,7 +176,8 @@ class _HomePageState extends State<HomePage> {
               ),
               Material(
                 color: demoShapeColor,
-                shape: FlexBorder.cupertinoCorners.shape(radius: radius),
+                shape: FlexBorder.cupertinoCorners
+                    .shape(radius: math.min(radius, 150)),
                 child: SizedBox(
                   height: height,
                   width: width,
@@ -367,6 +374,7 @@ class _HomePageState extends State<HomePage> {
           title: Slider(
             min: 0,
             max: 800,
+            divisions: 800,
             label: radius.toStringAsFixed(0),
             value: radius,
             onChanged: (double value) {
@@ -385,7 +393,7 @@ class _HomePageState extends State<HomePage> {
                   style: theme.textTheme.bodySmall,
                 ),
                 Text(
-                  radius.toStringAsFixed(2),
+                  radius.toStringAsFixed(0),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
@@ -418,13 +426,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Material(
-                clipBehavior: Clip.hardEdge,
-                color: Colors.transparent,
+                color: fillColor,
                 shape: topType.shape(
                   radius: radius,
                   lineWidth: lineWidth,
                   lineColor: lineColor,
                   smoothness: smoothness,
+                  strokeAlign: strokeAlign,
                 ),
                 child: SizedBox(
                   height: heightBig,
@@ -436,9 +444,9 @@ class _HomePageState extends State<HomePage> {
         ),
         ListTile(
           title: Slider(
-            min: 0.5,
-            max: 5,
-            divisions: 18,
+            min: 0,
+            max: 10,
+            divisions: 40,
             label: lineWidth.toStringAsFixed(2),
             value: lineWidth,
             onChanged: (double value) {
@@ -458,6 +466,42 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   lineWidth.toStringAsFixed(2),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ),
+        //
+        // Adjust stroke alignment
+        //
+        ListTile(
+          title: const Text('Border stroke align\n'
+              '-1 = Inside, 0 = Center, 1 = Outside'),
+          subtitle: Slider(
+            min: -1,
+            max: 1,
+            divisions: 2,
+            label: strokeAlign.toStringAsFixed(2),
+            value: strokeAlign,
+            onChanged: (double value) {
+              setState(() {
+                strokeAlign = value;
+              });
+            },
+          ),
+          trailing: Padding(
+            padding: const EdgeInsetsDirectional.only(end: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  'STROKE ALIGN',
+                  style: theme.textTheme.bodySmall,
+                ),
+                Text(
+                  strokeAlign.toStringAsFixed(2),
                   style: theme.textTheme.bodySmall!
                       .copyWith(fontWeight: FontWeight.bold),
                 ),

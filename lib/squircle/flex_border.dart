@@ -99,7 +99,7 @@ enum FlexBorder {
     icon: Icons.circle,
   ),
   squircleStadiumBorder(
-    type: 'SquircleStadiumBorder',
+    type: 'SquircleStadiumBorder PR',
     shortName: 'SquircleStadiumBorder',
     from: 'Flutter rejected PR',
     url:
@@ -150,31 +150,41 @@ enum FlexBorder {
     double lineWidth = 0,
     Color lineColor = const Color(0xFFF44336),
     double smoothness = 0.6,
+    double strokeAlign = -1,
   }) {
     switch (this) {
       case FlexBorder.circular:
         return RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.continuous:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.continuousSquircle:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius * 2.3529)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.squircleBorder:
-        return SquircleBorder(cornerRadius: radius);
+        return SquircleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          side: lineWidth > 0
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
+        );
       case FlexBorder.figmaSquircle:
         return SmoothRectangleBorder(
           borderRadius: SmoothBorderRadius(
@@ -182,7 +192,8 @@ enum FlexBorder {
             cornerSmoothing: smoothness,
           ),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.smoothCorner:
@@ -190,43 +201,54 @@ enum FlexBorder {
           smoothness: smoothness,
           borderRadius: BorderRadius.circular(radius),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.cupertinoCorners:
         return cuper.SquircleBorder(
           radius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.superEllipse:
         return SuperellipseShape(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.stadium:
         return StadiumBorder(
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.squircleStadiumBorder:
-        return const SquircleStadiumBorder();
+        return SquircleStadiumBorder(
+          side: lineWidth > 0
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
+        );
       case FlexBorder.simonSquircle:
         return SimonSquircleBorder(
           radius: radius,
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
       case FlexBorder.beveled:
         return BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
-              ? BorderSide(width: lineWidth, color: lineColor)
+              ? BorderSide(
+                  width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
     }

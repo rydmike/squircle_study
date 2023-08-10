@@ -2,6 +2,25 @@
 
 A study and comparison of different Squircle ShapeBorder options in **Flutter**, using a Flutter app to compare available Squircle shapes visually.
 
+## Version history
+
+### 1.0.0 / August 5, 2023
+
+* The first version communicated and [tweeted](https://twitter.com/RydMike/status/1687813486963724288).
+
+### 1.1.0 / August 10, 2023
+
+* Added a feature to vary the `strokeAlign` on used `BorderSide` on the shape drawn with an outline.
+* Added a semitransparent fill also to the shape drawn on top, that has the outline.
+* Changed **SquircleBorder PR** the `SquircleBorder` to extend `OutlinedBorder`. Added `BorderSide` outline border, it also supports usage of `strokeAlign` on the border.
+* Changed **SquircleBorder PR** the `SquircleBorder`, property `radius` that was `double` border radius to use `borderRadius` of type `BorderRadiusGeometry`. It still only supports symmetric corners, despite now using `BorderRadiusGeometry` for the `borderRadius`. The plan is to look into unsymmetrical corner radius support. 
+* Tuned the max curvature limit the `SquircleBorder` can use, it now supports up to 0.65 of the stadium border ratio.
+* Modified outline border on **SquircleStadiumBorder PR** the `SquircleStadiumBorder`, it now supports usage of `strokeAlign` on the border.
+* Conclusions and findings have not been updated, the changes did not impact them.
+* **FOUND ISSUE**: Noticed that of all the shapes, prior to above fixes, only Flutter SDK `RoundedRectangleBorder`, `StadiumBorder` and `BeveledRectangleBorder` correctly support usage of `strokeAlign` on the used `BorderSide`. Even the Flutter SDK `ContinuousRectangleBorder` does not handle `strokeAlign` on the used `BorderSide` correctly. This should be raised as an issue in the SDK. 
+
+
+
 ## Overview
 
 There currently is no known rounded rectangle in **Flutter** that would be verified to be an exact match for the rounded rectangle shape created e.g. in Swift-UI with `RoundedRectangle(cornerRadius: myRadius, style: .continuous)` that would also be without issues in Flutter. This type of rounded rectangle with a continuous curvature is also known as a super ellipses shape or squircle.
@@ -22,7 +41,10 @@ There is a less known package called `smooth_corner`, that produces identical sh
 
 The performance impact of using **any** other shape than **RoundedRectangleBorder** has been mentioned, at least Tweet comments. They typically mention the **FigmaSquircle**, even for just the SDK **ContinuousRectangleBorder**, but even more so for the `figma_squircle`. The **performance impact** of the shapes should be studied further. See **Appendix A**, at the end of the study report for more info.
 
-All studied shapes do not have an outline border option. Some may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly. The studied shapes that can draw an outline, all except **SquircleBorder PR** and **SquircleStadiumBorder PR** that never had any border option, seem to produce varying results concerning how thick the border visually appears to be at same thickness values. Might be an idea to look into why. The key part is of course that an official Squricle should use same principle as current Flutter `OutlinedBorder` shapes. 
+Some shapes may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly. 
+
+Currently only shapes `RoundedRectangleBorder`, `StadiumBorder`, `BeveledRectangleBorder` and the updated `SquircleBorder` and `SquircleStadiumBorder` appears to handle `strokeAlign` on the used `BorderSide` correctly.
+
 
 ### TODOs
 
@@ -189,7 +211,7 @@ At border radius of < 0.5 times the stadium radius, and using smoothness 1.0 for
 
 ### SquircleBorder PR
 
-A PR for a Squircle that was rejected in Flutter SDK. It was discussed here https://github.com/flutter/flutter/pull/27523. This is a RydMike code revival of the PR with some minor mods.
+A PR for a Squircle that was rejected in Flutter SDK. It was discussed here https://github.com/flutter/flutter/pull/27523. This is a RydMike code revival of the PR with some minor mods. Changes includes adding `BorderSide` support and supporting slightly higher relative radius, in relation to the stadium radius. 
 
 * Name: **SquircleBorder PR**
 * From [Flutter rejected PR code](https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_rectangle_border.dart)
@@ -206,7 +228,7 @@ The difference between **SquircleBorder PR** and **FigmaSquircle** is none exist
 
 _**ShapeBorder** SquircleBorder PR at radius < 0.5x of its stadium radius_
 
-The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.5x the stadium radius and can **not** be used for Squircle shapes where the radius is from 0.5x to 1x of the stadium radius.  Up and until that radius, it works very well and matches the **FigmaSquircle**.
+The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.65x the stadium radius and can **not** be used for Squircle shapes where the radius is from 0.65x to 1x of the stadium radius. Up and until that radius, it works very well and matches the **FigmaSquircle**.
 
 On the other hand, it has also been shown that for a radius range that exceeded 0.5x stadium radius, that the **FigmaSquircle** gets closer and closer to the plain circular border represented by the **RoundedRectangleBorder**. 
 
@@ -219,7 +241,7 @@ It could also be argued that the **SquircleBorder PR** refrains from drawing sha
 ### Conclusion - SquircleBorder PR
 
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
-**SquircleBorder PR** is an **acceptable** option at lower radius than **0.5x Stadium radius**. At higher border radius it visually stops changing it radius, since it cannot draw a squircle shape any higher radius than that.
+**SquircleBorder PR** is an **acceptable** option at lower radius than **0.65x Stadium radius**. At higher border radius it visually stops changing it radius, since it cannot draw a squircle shape any higher radius than that.
 
 
 ## FigmaSquircle
@@ -246,7 +268,7 @@ The **FigmaSquircle** breaks down when set border radius exceeds its Stadium rad
 
 _**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius > than its stadium radius, shape breaks down_
 
-For border radius > 0.5x and <= 1.0x of the shape's stadium radius, the **FigmaSquircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius, we can no longer observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
+For border radius > 0.6x and <= 1.0x of the shape's stadium radius, the **FigmaSquircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius, we can no longer observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_equal.png" alt="figma_squircle_equal"/>
 

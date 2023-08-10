@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 import 'dart:math' as math;
-import 'dart:ui' as ui;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
 // ignore_for_file: comment_references
@@ -79,31 +79,113 @@ import 'package:flutter/rendering.dart';
 ///   continuous transition into its two 180º curves.
 /// * [StadiumBorder], which is a rectangle with semi-circles on two parallel
 ///   edges.
-class SquircleBorder extends ShapeBorder {
+class SquircleBorder extends OutlinedBorder {
   /// Creates a continuous cornered rectangle border.
   ///
   /// The [cornerRadius] argument must not be null.
   const SquircleBorder({
-    this.cornerRadius = 0.0,
+    super.side,
+    this.borderRadius = BorderRadius.zero,
   });
 
   /// The radius for each corner.
   ///
-  /// The radius will be clamped to 0 if a value less than 0 is entered as the
-  /// radius. By default the radius is 0. This value must not be null.
+  /// Negative radius values are clamped to 0.0 by [getInnerPath] and
+  /// [getOuterPath].
   ///
-  /// Unlike [RoundedRectangleBorder], there is only a single radius value used
-  /// to describe the radius for every corner.
-  final double cornerRadius;
+  /// While a [BorderRadiusGeometry] is accepted as input, this version of
+  /// the [SquircleBorder] still draws symmetrical corners using the largest
+  /// provided corner radius as its symmetrical radius, and if a corners was
+  /// elliptical, the shorter radius is used to determine the radius for the
+  /// symmetrical Squircle.
+  ///
+  /// A later update may add support for asymmetric corners. In this version
+  /// using any other type than:
+  ///
+  /// `BorderRadius.all(Radius.circular(radius))` does not produce any
+  /// useful different results.
+  final BorderRadiusGeometry borderRadius;
 
-  Path _getPath(Rect rect) {
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
+
+  @override
+  ShapeBorder scale(double t) {
+    return SquircleBorder(
+      side: side.scale(t),
+      borderRadius: borderRadius * t,
+    );
+  }
+
+  @override
+  ShapeBorder? lerpFrom(ShapeBorder? a, double t) {
+    if (a is SquircleBorder) {
+      return SquircleBorder(
+        side: BorderSide.lerp(a.side, side, t),
+        borderRadius:
+            BorderRadiusGeometry.lerp(a.borderRadius, borderRadius, t)!,
+      );
+    }
+    return super.lerpFrom(a, t);
+  }
+
+  @override
+  ShapeBorder? lerpTo(ShapeBorder? b, double t) {
+    if (b is SquircleBorder) {
+      return SquircleBorder(
+        side: BorderSide.lerp(side, b.side, t),
+        borderRadius:
+            BorderRadiusGeometry.lerp(borderRadius, b.borderRadius, t)!,
+      );
+    }
+    return super.lerpTo(b, t);
+  }
+
+  double _clampToShortest(RRect rrect, double value) {
+    return value > rrect.shortestSide / 2 ? rrect.shortestSide / 2 : value;
+  }
+
+  Path _getPath(RRect rrect) {
     late double limitedRadius;
-    final double width = rect.width;
-    final double height = rect.height;
-    final double centerX = rect.center.dx;
-    final double centerY = rect.center.dy;
-    final double radius = math.max(0.0, cornerRadius);
-    final double minSideLength = math.min(rect.width, rect.height);
+    final double width = rrect.width;
+    final double height = rrect.height;
+    final double centerX = rrect.center.dx;
+    final double centerY = rrect.center.dy;
+
+    // Radius is clamped to shortest side divided with 2, meaning radius is
+    // clamped to stadium radius.
+    //
+    // If the rounded rect is elliptical we only use the shorter radius,
+    // this version does not handle elliptical shapes.
+    final double tlRadiusX =
+        math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusX));
+    final double tlRadiusY =
+        math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusY));
+    final double tlRadius = math.min(tlRadiusX, tlRadiusY);
+    //
+    final double trRadiusX =
+        math.max(0.0, _clampToShortest(rrect, rrect.trRadiusX));
+    final double trRadiusY =
+        math.max(0.0, _clampToShortest(rrect, rrect.trRadiusY));
+    final double trRadius = math.min(trRadiusX, trRadiusY);
+    //
+    final double blRadiusX =
+        math.max(0.0, _clampToShortest(rrect, rrect.blRadiusX));
+    final double blRadiusY =
+        math.max(0.0, _clampToShortest(rrect, rrect.blRadiusY));
+    final double blRadius = math.min(blRadiusX, blRadiusY);
+    //
+    final double brRadiusX =
+        math.max(0.0, _clampToShortest(rrect, rrect.brRadiusX));
+    final double brRadiusY =
+        math.max(0.0, _clampToShortest(rrect, rrect.brRadiusY));
+    final double brRadius = math.min(brRadiusX, brRadiusY);
+
+    final double minSideLength = math.min(rrect.width, rrect.height);
+
+    double largestRadius = math.max(tlRadius, trRadius);
+    largestRadius = math.max(largestRadius, blRadius);
+    largestRadius = math.max(largestRadius, brRadius);
 
     // These equations give the x and y values for each of the 8 mid and corner
     // points on a rectangle.
@@ -127,7 +209,7 @@ class SquircleBorder extends ShapeBorder {
       return centerY - y * limitedRadius + height / 2;
     }
 
-    // Renders the default superelliptical rounded rect shape where there are
+    // Renders the default super elliptical rounded rect shape where there are
     // 4 straight edges and 4 90º corners. Approximately renders a superellipse
     // with an n value of 5.
     //
@@ -174,121 +256,72 @@ class SquircleBorder extends ShapeBorder {
         ..close();
     }
 
-    // The ratio of the declared corner radius to the total affected pixels
-    // along each axis to render the corner. For example if the declared radius
-    // were 25px then totalAffectedCornerPixelRatio * 25 (~38) pixels would be
-    // affected along each axis.
-    //
-    // It is also the multiplier where the resulting shape will be convex with
-    // a height and width of any value. Below this value, noticeable clipping
-    // will be seen at large rectangle dimensions.
-    //
-    // If the shortest side length to radius ratio drops below this value, the
-    // radius must be lessened to avoid clipping (ie. concavity) of the shape.
-    //
-    // This value comes from the website where the other equations and curves
-    // were found
-    // (https://www.paintcodeapp.com/news/code-for-ios-7-rounded-rectangles).
-    const double totalAffectedCornerPixelRatio = 1.52865;
+    // The ratio of of stadium circular border, at which this algorithm break
+    // down and clips to strange TIE-fighter shapes. At this ratio the
+    // borer radius is clamped.
+    const double maxStadiumRatio = 0.65;
 
-    // The ratio of the radius to the magnitude of pixels on a given side that
-    // will be used to construct the two corners.
-    const double minimalUnclippedSideToCornerRadiusRatio =
-        2.0 * totalAffectedCornerPixelRatio;
-
-    // The multiplier of the radius in comparison to the smallest edge length
-    // used to describe the minimum radius for this shape.
-    //
-    // This is multiplier used in the case of an extreme aspect ratio and a
-    // small extent value. It can be less than
-    // 'minimalUnclippedSideToCornerRadiusRatio' because there
-    // are not enough pixels to render the clipping of the shape at this size so
-    // it appears to still be concave (whereas mathematically it's convex).
-    //
-    // This value was determined by an eyeball comparison with the the native
-    // iOS search bar.
-    const double minimalEdgeLengthSideToCornerRadiusRatio = 2.0;
-
-    // The minimum edge length at which the corner radius multiplier must be at
-    // its maximum so as to maintain the appearance of a concave shape with
-    // continuous tangents around its perimeter.
-    //
-    // If the smallest edge length is less than this value, the dynamic radius
-    // value can be made smaller than the 'maxMultiplier' while the rendered
-    // shape still does not visually clip.
-    //
-    // This value was determined by an eyeball approximation.
-    const double minRadiusEdgeLength = 200.0;
-
-    // As the minimum side edge length (where the round is occurring)
-    // approaches 0, the limitedRadius approaches 2 so as to maximize
-    // roundness (to make the shape with the largest radius that doesn't clip).
-    // As the edge length approaches 200, the limitedRadius approaches ~3 –- the
-    // multiplier of the radius value where the resulting shape is concave (ie.
-    // does not visually clip) at any dimension.
-    final double multiplier = ui.lerpDouble(
-      minimalEdgeLengthSideToCornerRadiusRatio,
-      minimalUnclippedSideToCornerRadiusRatio,
-      minSideLength / minRadiusEdgeLength,
-    )!;
-    limitedRadius = math.min(radius, minSideLength / multiplier);
+    limitedRadius =
+        math.min(largestRadius, minSideLength / 2 * maxStadiumRatio);
     return bezierRoundedRect();
   }
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(rect);
+    return _getPath(
+        borderRadius.resolve(textDirection).toRRect(rect).deflate(side.width));
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(rect);
+    return _getPath(borderRadius
+        .resolve(textDirection)
+        .toRRect(rect)
+        .inflate(side.strokeOffset / 2));
   }
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.zero;
-
-  @override
-  ShapeBorder scale(double t) {
+  SquircleBorder copyWith({
+    BorderSide? side,
+    BorderRadiusGeometry? borderRadius,
+  }) {
     return SquircleBorder(
-      cornerRadius: cornerRadius * t,
+      side: side ?? this.side,
+      borderRadius: borderRadius ?? this.borderRadius,
     );
   }
 
   @override
-  ShapeBorder? lerpFrom(ShapeBorder? a, double t) {
-    if (a is SquircleBorder) {
-      return SquircleBorder(
-        cornerRadius: ui.lerpDouble(a.cornerRadius, cornerRadius, t)!,
-      );
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
+    if (rect.isEmpty) {
+      return;
     }
-    return super.lerpFrom(a, t);
-  }
-
-  @override
-  ShapeBorder? lerpTo(ShapeBorder? b, double t) {
-    if (b is SquircleBorder) {
-      return SquircleBorder(
-        cornerRadius: ui.lerpDouble(cornerRadius, b.cornerRadius, t)!,
-      );
+    switch (side.style) {
+      case BorderStyle.none:
+        break;
+      case BorderStyle.solid:
+        if (side.width != 0.0) {
+          canvas.drawPath(
+            getOuterPath(rect, textDirection: textDirection),
+            side.toPaint(),
+          );
+        }
     }
-    return super.lerpTo(b, t);
   }
 
   @override
   bool operator ==(dynamic other) {
     if (runtimeType != other.runtimeType) return false;
-    return other is SquircleBorder && other.cornerRadius == cornerRadius;
+    return other is SquircleBorder &&
+        other.side == side &&
+        other.borderRadius == borderRadius;
   }
 
   @override
-  int get hashCode => cornerRadius.hashCode;
+  int get hashCode => Object.hash(side, borderRadius);
 
   @override
   String toString() {
-    return 'SquircleBorder($cornerRadius)';
+    return '${objectRuntimeType(this, 'SquircleBorder')}($side, $borderRadius)';
   }
 }
