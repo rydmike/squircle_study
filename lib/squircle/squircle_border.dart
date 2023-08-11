@@ -107,9 +107,6 @@ class SquircleBorder extends OutlinedBorder {
   final BorderRadiusGeometry borderRadius;
 
   @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
-
-  @override
   ShapeBorder scale(double t) {
     return SquircleBorder(
       side: side.scale(t),
@@ -268,27 +265,15 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(
-        borderRadius.resolve(textDirection).toRRect(rect).deflate(side.width));
+    return _getPath(borderRadius
+        .resolve(textDirection)
+        .toRRect(rect)
+        .deflate(side.strokeInset));
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(borderRadius
-        .resolve(textDirection)
-        .toRRect(rect)
-        .inflate(side.strokeOffset / 2));
-  }
-
-  @override
-  SquircleBorder copyWith({
-    BorderSide? side,
-    BorderRadiusGeometry? borderRadius,
-  }) {
-    return SquircleBorder(
-      side: side ?? this.side,
-      borderRadius: borderRadius ?? this.borderRadius,
-    );
+    return _getPath(borderRadius.resolve(textDirection).toRRect(rect));
   }
 
   @override
@@ -301,12 +286,24 @@ class SquircleBorder extends OutlinedBorder {
         break;
       case BorderStyle.solid:
         if (side.width != 0.0) {
-          canvas.drawPath(
-            getOuterPath(rect, textDirection: textDirection),
-            side.toPaint(),
-          );
+          final RRect borderRect =
+              borderRadius.resolve(textDirection).toRRect(rect);
+          final RRect adjustedRect = borderRect.inflate(side.strokeOffset / 2);
+          final Path path = _getPath(adjustedRect);
+          canvas.drawPath(path, side.toPaint());
         }
     }
+  }
+
+  @override
+  SquircleBorder copyWith({
+    BorderSide? side,
+    BorderRadiusGeometry? borderRadius,
+  }) {
+    return SquircleBorder(
+      side: side ?? this.side,
+      borderRadius: borderRadius ?? this.borderRadius,
+    );
   }
 
   @override

@@ -25,15 +25,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool? isSelected1 = true;
   bool? isSelected2;
+
   double radius = 50;
   double heightBig = 400;
   double widthBig = 600;
   double smoothness = 0.6;
   double lineWidth = 1.0;
   double strokeAlign = -1; // -1=Inside, 0=Center, 1=Outside
+  bool clipMaterial = false;
+  bool fillOutline = true;
 
-  FlexBorder bottomType = FlexBorder.squircleBorder;
-  FlexBorder topType = FlexBorder.smoothCorner;
+  FlexBorder filledShape = FlexBorder.squircleBorder;
+  FlexBorder outlinedShape = FlexBorder.smoothCorner;
 
   static const double height = 120;
   static const double width = 210;
@@ -284,19 +287,19 @@ class _HomePageState extends State<HomePage> {
         ),
         FlexBorderPopupMenu(
           title: const Text('FILLED'),
-          type: bottomType,
+          type: filledShape,
           onChanged: (FlexBorder type) {
             setState(() {
-              bottomType = type;
+              filledShape = type;
             });
           },
         ),
         FlexBorderPopupMenu(
           title: const Text('OUTLINED'),
-          type: topType,
+          type: outlinedShape,
           onChanged: (FlexBorder type) {
             setState(() {
-              topType = type;
+              outlinedShape = type;
             });
           },
         ),
@@ -412,22 +415,20 @@ class _HomePageState extends State<HomePage> {
               Material(
                 clipBehavior: Clip.hardEdge,
                 color: bottomShapeColor,
-                shape: bottomType.shape(radius: radius, smoothness: smoothness),
+                shape: filledShape.shape(
+                  radius: radius,
+                  smoothness: smoothness,
+                ),
                 child: SizedBox(
                   height: heightBig,
                   width: widthBig,
-                  child: Center(
-                    child: Text(
-                      'FILLED: ${bottomType.type}\n\n'
-                      'OUTLINED: ${topType.type}',
-                      style: TextStyle(color: bottomOnShapeColor),
-                    ),
-                  ),
                 ),
               ),
               Material(
-                color: fillColor,
-                shape: topType.shape(
+                clipBehavior:
+                    clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
+                color: fillOutline ? fillColor : Colors.transparent,
+                shape: outlinedShape.shape(
                   radius: radius,
                   lineWidth: lineWidth,
                   lineColor: lineColor,
@@ -437,16 +438,37 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: heightBig,
                   width: widthBig,
+                  child: Center(
+                    child: Text(
+                      'FILLED: ${filledShape.type}\n\n'
+                      'OUTLINED: ${outlinedShape.type}',
+                      style: TextStyle(color: bottomOnShapeColor),
+                    ),
+                  ),
                 ),
               ),
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 40),
+          child: SizedBox(
+            height: 60,
+            child: Center(
+              child: Material(
+                  color: lineColor,
+                  child: SizedBox(
+                    height: lineWidth,
+                    width: double.infinity,
+                  )),
+            ),
+          ),
+        ),
         ListTile(
           title: Slider(
             min: 0,
-            max: 10,
-            divisions: 40,
+            max: 20,
+            divisions: 80,
             label: lineWidth.toStringAsFixed(2),
             value: lineWidth,
             onChanged: (double value) {
@@ -508,6 +530,25 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+        ),
+        SwitchListTile(
+          title: const Text("Outlined shape's Material is filled with "
+              'transparent color'),
+          value: fillOutline,
+          onChanged: (bool value) {
+            setState(() {
+              fillOutline = value;
+            });
+          },
+        ),
+        SwitchListTile(
+          title: const Text("Outlined shape's Material is clipped"),
+          value: clipMaterial,
+          onChanged: (bool value) {
+            setState(() {
+              clipMaterial = value;
+            });
+          },
         ),
         //
         // Adjust smoothness

@@ -149,8 +149,8 @@ enum FlexBorder {
     double radius = 0,
     double lineWidth = 0,
     Color lineColor = const Color(0xFFF44336),
-    double smoothness = 0.6,
     double strokeAlign = -1,
+    double smoothness = 0.6,
   }) {
     switch (this) {
       case FlexBorder.circular:

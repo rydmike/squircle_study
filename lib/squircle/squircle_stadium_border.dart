@@ -275,6 +275,16 @@ class SquircleStadiumBorder extends ShapeBorder {
   }
 
   @override
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
+    return _getPath(rect.deflate(side.strokeInset));
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    return _getPath(rect);
+  }
+
+  @override
   void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {
     if (rect.isEmpty) return;
     switch (side.style) {
@@ -282,7 +292,8 @@ class SquircleStadiumBorder extends ShapeBorder {
         break;
       case BorderStyle.solid:
         if (side.width != 0.0) {
-          final Path path = getOuterPath(rect, textDirection: textDirection);
+          final Rect adjustedRect = rect.inflate(side.strokeOffset / 2);
+          final Path path = _getPath(adjustedRect);
           final Paint paint = side.toPaint();
           paint.strokeJoin = StrokeJoin.round;
           canvas.drawPath(path, paint);
@@ -291,17 +302,8 @@ class SquircleStadiumBorder extends ShapeBorder {
   }
 
   @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(rect.deflate(side.width));
-  }
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(rect.inflate(side.strokeOffset / 2));
-  }
-
-  @override
-  EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
+  EdgeInsetsGeometry get dimensions =>
+      EdgeInsets.all(math.max(side.strokeInset, 0));
 
   @override
   ShapeBorder scale(double t) {

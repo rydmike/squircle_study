@@ -1,14 +1,14 @@
-# Flutter Squricle Study
+# Flutter Squricle Study (v1.2.0)
 
 A study and comparison of different Squircle ShapeBorder options in **Flutter**, using a Flutter app to compare available Squircle shapes visually.
 
 ## Version history
 
-### 1.0.0 / August 5, 2023
+### 1.0.0 - August 5, 2023
 
 * The first version communicated and [tweeted](https://twitter.com/RydMike/status/1687813486963724288).
 
-### 1.1.0 / August 10, 2023
+### 1.1.0 - August 10, 2023
 
 * Added a feature to vary the `strokeAlign` on used `BorderSide` on the shape drawn with an outline.
 * Added a semitransparent fill also to the shape drawn on top, that has the outline.
@@ -17,9 +17,18 @@ A study and comparison of different Squircle ShapeBorder options in **Flutter**,
 * Tuned the max curvature limit the `SquircleBorder` can use, it now supports up to 0.65 of the stadium border ratio.
 * Modified outline border on **SquircleStadiumBorder PR** the `SquircleStadiumBorder`, it now supports usage of `strokeAlign` on the border.
 * Conclusions and findings have not been updated, the changes did not impact them.
-* **FOUND ISSUE**: Noticed that of all the shapes, prior to above fixes, only Flutter SDK `RoundedRectangleBorder`, `StadiumBorder` and `BeveledRectangleBorder` correctly support usage of `strokeAlign` on the used `BorderSide`. Even the Flutter SDK `ContinuousRectangleBorder` does not handle `strokeAlign` on the used `BorderSide` correctly. This should be raised as an issue in the SDK. 
+* **FOUND ISSUE**: Noticed that of all the shapes, prior to above fixes, only Flutter SDK `RoundedRectangleBorder` and `StadiumBorder` correctly support usage of `strokeAlign` on the used `BorderSide`. The Flutter SDK `ContinuousRectangleBorder` does not handle `strokeAlign` on the used `BorderSide` correctly, it does not even try to. The `BeveledRectangleBorder` tries, but fails. The error causes it to draw a border that is much thicker than the one in its specified `borderSide`. These issues should be raised as bugs in the Flutter SDK. 
 
+### 1.2.0 - August 11, 2023
 
+* Study:
+  * Added info about if `strokeAlign` works or not for each studied shape.
+  * Added info about if shape lerp animation (radius and outline) works or not for each studied shape.
+* Fixed `strokeAlign` on `SquircleBorder` and `SquircleStadiumBorder` so that the clipping of the border when used on `Material`, works as it does in Flutter SDK when using `RoundedRectangleBorder` and `StadiumBorder`.
+* Features:
+  * Added display of the used outlined border width. Displayed, so one can visually see what a line of selected width looks like. It can be used to verify that the outline on the shape is correct.
+  * Added clipping of the outlined shaped `Material`. Can be used to see how `strokeAlign` works, when the shape is used by `Material` and it is clipped. 
+  * Added removal of the fill from the outlined shaped `Material`. So we can still also get same look as in version 1.0.0.
 
 ## Overview
 
@@ -85,8 +94,10 @@ The standard circular rounded rectangle border shape with an outline, provided b
 
 * Name: **RoundedRectangleBorder**
 * From [Flutter SDK](https://api.flutter.dev/flutter/painting/RoundedRectangleBorder-class.html)
+* Outline border stroke align correct: **YES**
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **NO**
-> Stays at circular stadium shape when radius exceeds its stadium radius.
+    * Correctly stays at circular stadium shape when radius exceeds its stadium radius.
 
 ### Findings
 The difference between **Circular** and **FigmaSquircle** is subtle, but still visible to a sharp and keen designer eye. At a border radius < 0.5 times (in the example 96 dp) of the stadium radius (stadium radius would be 200 in the example below), we can see a subtle but clear difference:
@@ -139,10 +150,15 @@ The continuous rounded rectangle border shape is provided by Flutter SDK. It was
 
 * Name: **ContinuousRectangleBorder**
 * From [Flutter SDK](https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html)
+* Outline border stroke align correct: **NO** 
+    * **ISSUE**: Does center regardless of what BorderSide uses, that actually defaults to inside.  
+    * **TODO**: Raise Flutter SDK issue.
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **YES**
-> The source code mentions limit checks to prevent the `ContinuousRectangleBorder` to get what it calls a "TIE-fighter" shape. In this demo, we can still observe the TIE-fighter shape at higher border radius. The attempt to prevent this shape is thus not completely successful. **TODO(rydmike)**: Consider raising an issue about it.
+    * **ISSUE**: The source code mentions limit checks to prevent the `ContinuousRectangleBorder` to get what it calls a "TIE-fighter" shape. In this demo, we can still observe the TIE-fighter shape at higher border radius. The attempt to prevent this shape is thus not completely successful.
+    * **TODO**: Raise Flutter SDK issue.
 * Other issues
-> It does not come with a Stadium border option. 
+    * It does not have a Stadium border option. 
 
 ### Findings
 The difference between **ContinuousRectangleBorder** and **FigmaSquircle** is very significant:
@@ -173,8 +189,17 @@ A Flutter continuous rounded rectangle border shape using radius multiplied with
 
 * Name: **ContinuousRectangleBorder x 2.3529**
 * From [Flutter SDK x factor]('https://api.flutter.dev/flutter/painting/ContinuousRectangleBorder-class.html)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does center regardless of what BorderSide uses, that actually defaults to inside.
+    * **TODO**: Raise Flutter SDK issue.
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **YES**
-> The TIE fighter shape issue applies here too. It occurs earlier since the radius is multiplied by 2.3529.
+    * **ISSUE**: The source code mentions limit checks to prevent the `ContinuousRectangleBorder` to get what it calls a "TIE-fighter" shape. In this demo, we can still observe the TIE-fighter shape at higher border radius. The attempt to prevent this shape is thus not completely successful. The TIE fighter shape issue occurs earlier since the radius `ContinuousRectangleBorder` is multiplied by 2.3529.
+    * **TODO**: Raise Flutter SDK issue.
+* Other issues
+    * It does not have a Stadium border option.
+* Shape can break down: **YES**
+> 
 
 
 ### Findings
@@ -206,19 +231,19 @@ The TIE fighter effect when using **ContinuousRectangleBorder x 2.3529** starts 
 If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **iOS Swift-UI** Squircle, then
 **ContinuousRectangleBorder x 2.3529** is **NOT** at an exact match for it, but it is **not** a bad Squircle shape.
 
-At border radius of < 0.5 times the stadium radius, and using smoothness 1.0 for the **FigmaSquircle**, the **ContinuousRectangleBorder x 2.3529** is for practical visual comparisons a good fit.
+At border radius of < 0.5 times the shape's stadium radius, and when using smoothness 1.0 for the **FigmaSquircle**, the **ContinuousRectangleBorder x 2.3529** is for practical visual comparisons a fairly good fit.
 
 
 ### SquircleBorder PR
 
-A PR for a Squircle that was rejected in Flutter SDK. It was discussed here https://github.com/flutter/flutter/pull/27523. This is a RydMike code revival of the PR with some minor mods. Changes includes adding `BorderSide` support and supporting slightly higher relative radius, in relation to the stadium radius. 
+This shape is based on a PR for a Squircle that was rejected in Flutter SDK. It was discussed here https://github.com/flutter/flutter/pull/27523. This is a @rydmike code revival of the PR with some minor modifications. Changes include adding `BorderSide` support, with `strokeAlign` and supporting slightly higher relative radius in relation to the shape's stadium radius, updated lerp overrides and migration to null-safe code.
 
 * Name: **SquircleBorder PR**
 * From [Flutter rejected PR code](https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_rectangle_border.dart)
+* Outline border stroke align correct: **YES** (in @rydmike version)
+* Shape lerp animates correctly: **YES** (in @rydmike version)
 * Shape can break down: **YES**
-> The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius.
-* Other issues
-> The implementation is not an `OutlinedBorder`, so it has no outline capability. This needs to be added.
+    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Now on purpose limited to 0.65x of the shape's stadium radius, since it breaks down after that. One solution might be to switch a circular border radius like **Figma Squricle** and **Smooth Corner** do-  
 
 ### Findings
 
@@ -256,8 +281,11 @@ In this study, we use it as a reference to show how others deviate from it.
 
 * Name: **FigmaSquircle**
 * From package [figma_squircle](https://pub.dev/packages/figma_squircle)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does center regardless of what BorderSide uses, that actually defaults to inside.
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **YES**
-> The shape breaks down with border radius exceeding the shape stadium radius.
+    * The shape breaks down with border radius exceeding the shape stadium radius. It should implement a limiter like e.g. **Smooth Corner** does.
 
 
 ### Findings
@@ -294,8 +322,12 @@ This is **another** implementation of the **Figma squircle**. It appears to be s
 
 * Name: **SmoothCorner**
 * From package [smooth_corner](https://pub.dev/packages/smooth_corner)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does inside regardless of what BorderSide uses, that actually defaults to inside.
+* Shape lerp animates correctly: **NO**
+    * **ISSUE**: The shape and border changes instantly, it appears it does not provide lerp overrides.
 * Shape can break down: **NO**
-> Stays correctly shaped when border radius exceeds its stadium radius.
+    * Stays correctly shaped when border radius exceeds its stadium radius.
 
 ### Findings
 
@@ -327,6 +359,13 @@ A widget and border used to make cupertino rounded corners also referred to as s
 
 * Name: **CupertinoSquircleBorder**
 * From package [cupertino_rounded_corners](https://pub.dev/packages/cupertino_rounded_corners)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does inside regardless of what BorderSide uses, that actually defaults to inside.
+* Shape lerp animates correctly: **NO**
+    * **ISSUE**: The shape and border changes instantly, it appears it does not provide lerp overrides.
+* Shape can break down: **YES**
+    * **ISSUE**: Gets same "TIE-fighter" shape as the `ContinuousRectangleBorder`. It gets even more pronounced at very large border radius. It lacks the attempt of a limiter that the `ContinuousRectangleBorder` has. 
+
 
 ### Findings
 
@@ -360,6 +399,12 @@ The **SuperEllipse** is a package for creating superellipse shapes in flutter. A
 
 * Name: **SuperellipseShape**
 * From package [superellipse_shape](https://pub.dev/packages/superellipse_shape)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does center regardless of what BorderSide uses, that defaults to inside.
+* Shape lerp animates correctly: **NO**
+    * **ISSUE**: The shape and border changes instantly, it appears it does not provide lerp overrides.
+* Shape can break down: **YES**
+    * **ISSUE**: Gets same "TIE-fighter" shape as the `ContinuousRectangleBorder`.
 
 ### Findings
 
@@ -387,6 +432,8 @@ semicircles on the ends, within the rectangle of the widget it is applied to.
 
 * Name: **StadiumBorder**
 * From [Flutter SDK](https://api.flutter.dev/flutter/painting/StadiumBorder-class.html)
+* Outline border stroke align correct: **YES**
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **NO**
 
 ### Findings
@@ -405,25 +452,24 @@ _**ShapeBorder** StadiumBorder and FigmaSquircle are visually identical, also wh
 
 ### Conclusion - StadiumBorder
 
-There is no point in using the **FigmaSquircle** for a **stadium** shape, it is identical to **StadiumBorder** at any radius that equals the shapes' stadium radius. Already at a radius about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
+There is no point in using the **FigmaSquircle** for a **stadium** shape, it is identical to **StadiumBorder** at any radius that equals the shape's stadium radius. Already at a radius about 0.6x of the stadium radius, we are beginning to look at negligible visual differences between **FigmaSquircle** and circular **RoundedRectangleBorder**. 
 
 ## SquircleStadiumBorder PR
 
 A PR for a Stadium Squircle that was rejected in Flutter SDK. It was discussed 
-here https://github.com/flutter/flutter/pull/27523. This is a RydMike code 
-revival of the PR with some mods.
+here https://github.com/flutter/flutter/pull/27523. This is a @rydmike code 
+revival of the PR with some modifications. Changes include correct `strokeAlign` implementation, updated lerp overrides and migration to null-safe code.
 
 * Name: **SquircleStadiumBorder**
 * From [Flutter rejected PR](https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart)
-
+* Outline border stroke align correct: **YES** (in @rydmike version)
+* Shape lerp animates correctly: **YES** (in @rydmike version)
 * Shape can break down: **YES**
-> The shape shrinks its height when width approaches height, and wise versa. This is **NOT** a desired behavior.
-* Other issues
-> The implementation is not an `OutlinedBorder`, so it has no outline capability. This needs to be added.
+    * The shape shrinks its height when width approaches height, and wise versa. This is **NOT** a desired behavior. An attempt to increase the short/long side ratio at which this starts to happen is made in this modified version, we can go to aspect ratio 0.79. It is not ideal. While we can now approach less rectangular squircle stadium shapes, meaning approach a circular shape, it slightly breaks down and gets a bit skewed at higher aspect ratio. One solution could be to switch to use a circular stadium border at close to equal height and width values. A circle is a continuous curvature, and we are approaching that, which is why the squircle shaped one breaks down. It needs to transition to circular.
 
 ### Findings
 
-The **SquircleStadiumBorder PR** looks better than **FigmaSquircle**:
+The **SquircleStadiumBorder PR** looks better than **FigmaSquircle**, when width / height is 1.5 or more.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/squircle_stadium_border.png" alt="squircle_stadium_border"/>
 
@@ -461,8 +507,11 @@ A squircle implementation by Simon Lightfoot provided in a Gist.
 
 * Name: **SimonSquircleBorder**
 * From [Slightfoot gist](https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Does center regardless of what BorderSide uses, that defaults to inside.
+* Shape lerp animates correctly: **YES**
 * Shape can break down: **YES**
-> The shape cannot handle border radius from 0 to less than 1.0, it draws very odd shapes then.
+    * **ISSUE**: The shape cannot handle border radius from 0 to less than 1.0, it draws very odd shapes then.
 
 ### Findings
 
@@ -502,6 +551,11 @@ A rectangular border with flattened or "beveled" corners.
 
 * Name: **BeveledRectangleBorder**
 * From [Flutter SDK](https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html)
+* Outline border stroke align correct: **NO**
+    * **ISSUE**: Tries to compensate and adjust for used `strokeAlign` but fails. It draws two joined outlined borders, and the border becomes too thick. End result is that it draws an incorrect border in relation to what is asked in its `borderSide`.
+    * **TODO**: Raise Flutter SDK issue.
+* Shape lerp animates correctly: **YES**
+* Shape can break down: **NO**
 
 For obvious reasons, this shape is not compared. It is only included in the study app to show an alternative corner shape that exists, but is rarely used in the Flutter SDK.
 
