@@ -17,6 +17,11 @@ dependencies:
   # https://pub.dev/packages/figma_squircle
   figma_squircle: ^0.5.3
 
+  # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
+  # Used for color selection in the app.
+  # https://pub.dev/packages/flex_color_picker
+  flex_color_picker: ^3.3.0
+
   # https://pub.dev/packages/flex_seed_scheme
   flex_seed_scheme: ^1.4.0
 

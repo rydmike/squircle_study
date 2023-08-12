@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../core/views/app/link_text_span.dart';
+import '../core/views/universal/color_scheme_box.dart';
+import '../core/views/universal/list_tile_reveal.dart';
 import '../squircle/flex_border.dart';
-import 'color_scheme_box.dart';
-import 'link_text_span.dart';
-import 'list_tile_reveal.dart';
 
 /// Widget used to select used AdaptiveTheme using a popup menu.
 ///

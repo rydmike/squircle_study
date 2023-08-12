@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'core/views/universal/list_tile_reveal.dart';
 import 'squircle/flex_border.dart';
 import 'theme.dart';
 import 'ui_widgets/flex_border_popup_menu.dart';
-import 'ui_widgets/list_tile_reveal.dart';
 import 'ui_widgets/shapes_presentation.dart';
 import 'ui_widgets/show_color_scheme_colors.dart';
 

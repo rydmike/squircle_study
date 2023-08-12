@@ -21,6 +21,8 @@
 // SOFTWARE.
 import 'package:flutter/material.dart';
 
+import 'core/constants/app_data.dart';
+import 'core/views/about/about.dart';
 import 'home_page.dart';
 import 'theme.dart';
 
@@ -45,6 +47,7 @@ class _SquircleDemoState extends State<SquircleDemo> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: AppData.appName,
       debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       theme: theme(Brightness.light, settings),
@@ -52,8 +55,9 @@ class _SquircleDemoState extends State<SquircleDemo> {
       home: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
-          title: const Text('Squircle ShapeBorder Comparisons'),
+          title: const Text(AppData.appName),
           actions: <Widget>[
+            const AboutIconButton(),
             IconButton(
               icon: settings.useMaterial3
                   ? const Icon(Icons.filter_3)
