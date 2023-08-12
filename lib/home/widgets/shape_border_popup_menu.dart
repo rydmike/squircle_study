@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../core/views/app/link_text_span.dart';
-import '../core/views/universal/color_scheme_box.dart';
-import '../core/views/universal/list_tile_reveal.dart';
-import '../squircle/flex_border.dart';
+import '../../app/models/shape_borders.dart';
+import '../../app/widgets/app/link_text_span.dart';
+import '../../app/widgets/universal/color_scheme_box.dart';
+import '../../app/widgets/universal/list_tile_reveal.dart';
 
 /// Widget used to select used AdaptiveTheme using a popup menu.
 ///
-/// Uses index out out of range of [FlexBorder] to represent
-/// and select no selection of [FlexBorder] which sets its
+/// Uses index out out of range of [ShapeBorders] to represent
+/// and select no selection of [ShapeBorders] which sets its
 /// value to null in parent, so we can use a selectable item as null input,
 /// to represent default value via no value definition.
-class FlexBorderPopupMenu extends StatelessWidget {
-  const FlexBorderPopupMenu({
+class ShapeBorderPopupMenu extends StatelessWidget {
+  const ShapeBorderPopupMenu({
     super.key,
     required this.type,
     this.onChanged,
@@ -20,8 +20,8 @@ class FlexBorderPopupMenu extends StatelessWidget {
     this.subtitle,
     this.contentPadding,
   });
-  final FlexBorder type;
-  final ValueChanged<FlexBorder>? onChanged;
+  final ShapeBorders type;
+  final ValueChanged<ShapeBorders>? onChanged;
   final Widget? title;
   final Widget? subtitle;
   final EdgeInsetsGeometry? contentPadding;
@@ -45,22 +45,22 @@ class FlexBorderPopupMenu extends StatelessWidget {
     final IconThemeData unSelectedIconTheme =
         theme.iconTheme.copyWith(color: scheme.primary);
 
-    return PopupMenuButton<FlexBorder>(
+    return PopupMenuButton<ShapeBorders>(
       initialValue: type,
       tooltip: '',
       padding: EdgeInsets.zero,
-      onSelected: (FlexBorder selected) {
+      onSelected: (ShapeBorders selected) {
         onChanged?.call(selected);
       },
       enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<FlexBorder>>[
-        for (int i = 0; i < FlexBorder.values.length; i++)
-          PopupMenuItem<FlexBorder>(
-            value: FlexBorder.values[i],
+      itemBuilder: (BuildContext context) => <PopupMenuItem<ShapeBorders>>[
+        for (int i = 0; i < ShapeBorders.values.length; i++)
+          PopupMenuItem<ShapeBorders>(
+            value: ShapeBorders.values[i],
             child: ListTile(
               dense: true,
               contentPadding: EdgeInsets.zero,
-              leading: type == FlexBorder.values[i]
+              leading: type == ShapeBorders.values[i]
                   ? IconTheme(
                       data: selectedIconTheme,
                       child: ColorSchemeBox(
@@ -77,7 +77,7 @@ class FlexBorderPopupMenu extends StatelessWidget {
                         child: _TooltipIcon(index: i),
                       ),
                     ),
-              title: Text(FlexBorder.values[i].type, style: txtStyle),
+              title: Text(ShapeBorders.values[i].type, style: txtStyle),
             ),
           )
       ],
@@ -103,16 +103,16 @@ class FlexBorderPopupMenu extends StatelessWidget {
                 children: <TextSpan>[
                   TextSpan(
                     style: spanTextStyle,
-                    text: 'For more information see ',
+                    text: 'See ',
                   ),
                   LinkTextSpan(
                     style: linkStyle,
                     uri: Uri.parse(type.url),
-                    text: 'link',
+                    text: 'here',
                   ),
                   TextSpan(
                     style: spanTextStyle,
-                    text: '.',
+                    text: ' for more information.',
                   ),
                 ],
               ),
@@ -141,8 +141,8 @@ class _TooltipIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String message = FlexBorder.values[index].type;
-    final IconData icon = FlexBorder.values[index].icon;
+    final String message = ShapeBorders.values[index].type;
+    final IconData icon = ShapeBorders.values[index].icon;
     return Tooltip(
       message: message,
       child: Icon(icon),

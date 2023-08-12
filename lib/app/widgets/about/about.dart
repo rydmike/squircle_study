@@ -57,7 +57,7 @@ void showAppAboutDialog(BuildContext context) {
                 style: footerStyle,
                 text: 'Built with Flutter ${AppData.flutterVersion}.\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
-                    'h:${height.toStringAsFixed(0)})\n\n',
+                    'h:${height.toStringAsFixed(0)})\n',
               ),
             ],
           ),

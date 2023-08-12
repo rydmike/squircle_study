@@ -21,10 +21,10 @@
 // SOFTWARE.
 import 'package:flutter/material.dart';
 
-import 'core/constants/app_data.dart';
-import 'core/views/about/about.dart';
-import 'home_page.dart';
-import 'theme.dart';
+import 'app/constants/app_data.dart';
+import 'app/theme/theme.dart';
+import 'app/widgets/about/about.dart';
+import 'home/home_page.dart';
 
 void main() {
   runApp(const SquircleDemo());
@@ -87,14 +87,7 @@ class _SquircleDemoState extends State<SquircleDemo> {
             ),
           ],
         ),
-        body: HomePage(
-          settings: settings,
-          onSettings: (ThemeSettings value) {
-            setState(() {
-              settings = value;
-            });
-          },
-        ),
+        body: const HomePage(),
       ),
     );
   }

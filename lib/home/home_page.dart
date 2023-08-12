@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'core/views/universal/list_tile_reveal.dart';
-import 'squircle/flex_border.dart';
-import 'theme.dart';
-import 'ui_widgets/flex_border_popup_menu.dart';
-import 'ui_widgets/shapes_presentation.dart';
-import 'ui_widgets/show_color_scheme_colors.dart';
+import '../app/models/shape_borders.dart';
+import '../app/widgets/universal/list_tile_reveal.dart';
+import 'widgets/shape_border_popup_menu.dart';
+import 'widgets/shapes_presentation.dart';
+import 'widgets/show_color_scheme_colors.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
-    required this.settings,
-    required this.onSettings,
   });
-
-  final ThemeSettings settings;
-  final ValueChanged<ThemeSettings> onSettings;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -32,10 +26,10 @@ class _HomePageState extends State<HomePage> {
   double lineWidth = 1.0;
   double strokeAlign = -1; // -1=Inside, 0=Center, 1=Outside
   bool clipMaterial = false;
-  bool fillOutline = true;
+  bool fillOutlined = true;
 
-  FlexBorder filledShape = FlexBorder.circular;
-  FlexBorder outlinedShape = FlexBorder.squircleBorder;
+  ShapeBorders filledShape = ShapeBorders.circular;
+  ShapeBorders outlinedShape = ShapeBorders.squircleBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(height: 8),
         const ListTileReveal(
           enabled: true,
-          title: Text('ShapeBorder'),
+          title: Text('Studied and compared ShapeBorders'),
           subtitleDense: true,
           subtitle: Text(
             'By default Material UI widgets with ShapeBorder use circular '
@@ -76,22 +70,22 @@ class _HomePageState extends State<HomePage> {
           title: Text('Compare two ShapeBorders'),
           subtitleDense: true,
           subtitle: Text('Select one filled and one outlined '
-              'shaped to compare their shape.\n '
+              'shaped to compare their shape.\n'
               'You can adjust their size and border radius.\n'),
         ),
-        FlexBorderPopupMenu(
+        ShapeBorderPopupMenu(
           title: const Text('FILLED'),
           type: filledShape,
-          onChanged: (FlexBorder type) {
+          onChanged: (ShapeBorders type) {
             setState(() {
               filledShape = type;
             });
           },
         ),
-        FlexBorderPopupMenu(
+        ShapeBorderPopupMenu(
           title: const Text('OUTLINED'),
           type: outlinedShape,
-          onChanged: (FlexBorder type) {
+          onChanged: (ShapeBorders type) {
             setState(() {
               outlinedShape = type;
             });
@@ -221,7 +215,7 @@ class _HomePageState extends State<HomePage> {
               Material(
                 clipBehavior:
                     clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
-                color: fillOutline ? topShapeFillColor : Colors.transparent,
+                color: fillOutlined ? topShapeFillColor : Colors.transparent,
                 shape: outlinedShape.shape(
                   radius: radius,
                   lineWidth: lineWidth,
@@ -244,20 +238,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 40),
-          child: SizedBox(
-            height: 60,
-            child: Center(
-              child: Material(
-                  color: lineColor,
-                  child: SizedBox(
-                    height: lineWidth,
-                    width: double.infinity,
-                  )),
-            ),
-          ),
-        ),
+        const SizedBox(height: 32),
         ListTile(
           title: Slider(
             min: 0,
@@ -289,23 +270,43 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        // Make a line that is lineWidth thick
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 40),
+          child: SizedBox(
+            height: 55,
+            child: Center(
+              child: Material(
+                  color: lineColor,
+                  child: SizedBox(
+                    height: lineWidth,
+                    width: double.infinity,
+                  )),
+            ),
+          ),
+        ),
         //
         // Adjust stroke alignment
         //
         ListTile(
-          title: const Text('Border stroke align\n'
-              '-1 = Inside, 0 = Center, 1 = Outside'),
-          subtitle: Slider(
-            min: -1,
-            max: 1,
-            divisions: 2,
-            label: strokeAlign.toStringAsFixed(2),
-            value: strokeAlign,
-            onChanged: (double value) {
-              setState(() {
-                strokeAlign = value;
-              });
-            },
+          title: const Text('Border stroke align'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text('-1 = Inside    0 = Center    1 = Outside'),
+              Slider(
+                min: -1,
+                max: 1,
+                divisions: 2,
+                label: strokeAlign.toStringAsFixed(2),
+                value: strokeAlign,
+                onChanged: (double value) {
+                  setState(() {
+                    strokeAlign = value;
+                  });
+                },
+              ),
+            ],
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 5),
@@ -328,10 +329,10 @@ class _HomePageState extends State<HomePage> {
         SwitchListTile(
           title: const Text("Outlined shape's Material is filled with "
               'transparent color'),
-          value: fillOutline,
+          value: fillOutlined,
           onChanged: (bool value) {
             setState(() {
-              fillOutline = value;
+              fillOutlined = value;
             });
           },
         ),
@@ -344,23 +345,30 @@ class _HomePageState extends State<HomePage> {
             });
           },
         ),
+        const Divider(),
         //
         // Adjust smoothness
         //
         ListTile(
-          title: const Text('Smoothness\nOnly applies to FigmaSquircle and '
-              'Figma SmoothCorner\n(Figma claims 0.6 = iOS)'),
-          subtitle: Slider(
-            min: 0,
-            max: 1,
-            divisions: 100,
-            label: smoothness.toStringAsFixed(2),
-            value: smoothness,
-            onChanged: (double value) {
-              setState(() {
-                smoothness = value;
-              });
-            },
+          title: const Text('Smoothness'),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text('Only applies to FigmaSquircle and '
+                  'Figma SmoothCorner (Figma claims 0.6 = iOS shape)'),
+              Slider(
+                min: 0,
+                max: 1,
+                divisions: 100,
+                label: smoothness.toStringAsFixed(2),
+                value: smoothness,
+                onChanged: (double value) {
+                  setState(() {
+                    smoothness = value;
+                  });
+                },
+              ),
+            ],
           ),
           trailing: Padding(
             padding: const EdgeInsetsDirectional.only(end: 5),
@@ -381,11 +389,11 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         const Divider(),
-        const SizedBox(height: 16),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ShowColorSchemeColors(),
         ),
+        const SizedBox(height: 16),
       ],
     );
   }

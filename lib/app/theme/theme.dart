@@ -17,7 +17,7 @@ final ColorScheme colorSchemeDark = SeedColorScheme.fromSeeds(
   tones: FlexTones.candyPop(Brightness.dark),
 );
 
-// Example theme
+/// No need for a fancy theme for this app, M3 looks good out of the box.
 ThemeData theme(Brightness brightness, ThemeSettings settings) {
   return ThemeData(
     colorScheme:
@@ -27,8 +27,11 @@ ThemeData theme(Brightness brightness, ThemeSettings settings) {
   );
 }
 
-/// A Theme Settings class to bundle properties we want to modify on our
+/// A Theme Settings class to bundle properties we want to modify in our
 /// theme interactively.
+///
+/// Not really used for anything except the M2/M3 toggle in this app so far,
+/// plus a stub for an additional setting.
 @immutable
 class ThemeSettings with Diagnosticable {
   final bool useMaterial3;

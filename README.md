@@ -1,4 +1,4 @@
-# Flutter Squricle Study (v1.2.1)
+# Flutter Squricle Study (v1.3.0)
 
 A study and comparison of different Squircle `ShapeBorder` options in **Flutter**, using a Flutter app to compare available Squircle shapes visually.
 

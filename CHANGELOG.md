@@ -34,3 +34,8 @@ All notable changes to this squircle study and repo are recorded here.
 * Moved version history to this CHANGELOG.md file.
 * Minor language tweaks and clarifications added to the report.
 
+### 1.3.0 - August 12, 2023
+
+* Add about box, in preparation for a WEB build version
+* Refactor app and rename classes.
+

@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:smooth_corner/smooth_corner.dart' as smooth;
 import 'package:superellipse_shape/superellipse_shape.dart';
 
-import 'simon_squircle.dart';
-import 'squircle_border.dart';
-import 'squircle_stadium_border.dart';
+import '../../squircle/simon_squircle.dart';
+import '../../squircle/squircle_border.dart';
+import '../../squircle/squircle_stadium_border.dart';
 
-enum FlexBorder {
+/// An enhanced enum that can describe used [ShapeBorder] and return different
+/// shapes based on enum value.
+enum ShapeBorders {
   circular(
     type: 'Circular',
     shortName: 'RoundedRectangleBorder',
@@ -129,7 +131,7 @@ enum FlexBorder {
   ),
   ;
 
-  const FlexBorder({
+  const ShapeBorders({
     required this.type,
     required this.shortName,
     required this.from,
@@ -145,6 +147,7 @@ enum FlexBorder {
   final String describe;
   final IconData icon;
 
+  /// Returns the [ShapeBorder] defined be the enum value.
   ShapeBorder shape({
     double radius = 0,
     double lineWidth = 0,
@@ -153,7 +156,7 @@ enum FlexBorder {
     double smoothness = 0.6,
   }) {
     switch (this) {
-      case FlexBorder.circular:
+      case ShapeBorders.circular:
         return RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
@@ -161,7 +164,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.continuous:
+      case ShapeBorders.continuous:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
@@ -169,7 +172,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.continuousSquircle:
+      case ShapeBorders.continuousSquircle:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius * 2.3529)),
           side: lineWidth > 0
@@ -177,7 +180,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.squircleBorder:
+      case ShapeBorders.squircleBorder:
         return SquircleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
@@ -185,7 +188,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.figmaSquircle:
+      case ShapeBorders.figmaSquircle:
         return SmoothRectangleBorder(
           borderRadius: SmoothBorderRadius(
             cornerRadius: radius,
@@ -196,7 +199,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.smoothCorner:
+      case ShapeBorders.smoothCorner:
         return smooth.SmoothRectangleBorder(
           smoothness: smoothness,
           borderRadius: BorderRadius.circular(radius),
@@ -205,7 +208,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.cupertinoCorners:
+      case ShapeBorders.cupertinoCorners:
         return cuper.SquircleBorder(
           radius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
@@ -213,7 +216,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.superEllipse:
+      case ShapeBorders.superEllipse:
         return SuperellipseShape(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
@@ -221,21 +224,21 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.stadium:
+      case ShapeBorders.stadium:
         return StadiumBorder(
           side: lineWidth > 0
               ? BorderSide(
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.squircleStadiumBorder:
+      case ShapeBorders.squircleStadiumBorder:
         return SquircleStadiumBorder(
           side: lineWidth > 0
               ? BorderSide(
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.simonSquircle:
+      case ShapeBorders.simonSquircle:
         return SimonSquircleBorder(
           radius: radius,
           side: lineWidth > 0
@@ -243,7 +246,7 @@ enum FlexBorder {
                   width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
               : BorderSide.none,
         );
-      case FlexBorder.beveled:
+      case ShapeBorders.beveled:
         return BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side: lineWidth > 0
