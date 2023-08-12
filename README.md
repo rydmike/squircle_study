@@ -14,7 +14,7 @@ In this study, a package called `figma_squircle` is used as reference. This pack
 
 With the Flutter **squircle_study** app in this repo used for this study, you can cross compare any two selected shapes at different sizes and curvature, with or without border.
 
-In the Flutter GitHub repo, the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle.
+In the Flutter GitHub repo, the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle. It is also stated in Flutter [issue #13914](https://github.com/flutter/flutter/issues/13914) from January 5, 2018, that Flutter Cupertino button should use squricle as its shape and not a circular rounded rectangle.
 
 ## Summary of Findings
 
