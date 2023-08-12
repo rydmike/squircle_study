@@ -35,6 +35,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     // TODO(rydmike): Consider adding color selection to UI of compared shapes.
+    //  Prep for this feature made by adding FlexColorPicker.
+
     // Colors for the compared shapes and lines.
     final Color bottomShapeColor = theme.colorScheme.primaryContainer;
     final Color bottomOnShapeColor = theme.colorScheme.onPrimaryContainer;

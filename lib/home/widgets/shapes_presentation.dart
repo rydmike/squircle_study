@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../app/models/shape_borders.dart';
@@ -41,7 +43,8 @@ class ShapesPresentation extends StatelessWidget {
           ),
           _DrawShapeBorder(
             label: 'CupertinoSquircleBorder\ncupertino_rounded_corners',
-            shape: ShapeBorders.cupertinoCorners.shape(radius: radius),
+            shape: ShapeBorders.cupertinoCorners
+                .shape(radius: math.min(radius, 150)),
           ),
           _DrawShapeBorder(
             label: 'SuperEllipseShape\nsuperellipse_shape',
