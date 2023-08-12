@@ -1,0 +1,43 @@
+# This GitHub action is configured to run "on" push to "master".
+# Currently, using the "validate" workflow instead, this is an older test CI/CD.
+# This workflow:
+#  - Installs dart and flutter
+#  - Uses flutter stable channel.
+#  - Enables flutter web
+#  - Gets package dependencies
+#  - Runs dart analyze.
+#  - Show outdated packages, just added for info.
+#  - Verify that dart format is used by all committed code, fails if not.
+name: Test
+on:
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - "**.md"
+  push:
+    branches: [none]
+    paths-ignore:
+      - "**.md"
+jobs:
+  flutter_test:
+    name: "Analyze and test package"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: "Install Flutter and Dart SDK"
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: "Show Dart SDK version"
+        run: dart --version
+      - name: "Show Flutter SDK version"
+        run: flutter --version
+      - name: "Get Flutter package dependencies"
+        run: flutter pub get
+      - name: "Analyze Dart source"
+        run: dart analyze
+      - name: "Show outdated packages"
+        run: flutter pub outdated
+      - name: "Verify that Dart formatting is used, fail if not"
+        run: dart format --output=none --set-exit-if-changed .
+
