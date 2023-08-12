@@ -52,16 +52,16 @@ jobs:
         run: dart format --output=none --set-exit-if-changed .
 
       # Web - Build and deploy
-      - name: "EXAMPLE START BUILD - Flutter clean before build"
+      - name: "START BUILD - Flutter clean before build"
         run: flutter clean
-      - name: "EXAMPLE WEB release build"
+      - name: "WEB release build"
         run: flutter build web --web-renderer canvaskit --base-href "/squircle/latest/" --release -t lib/main.dart
-      - name: "EXAMPLE DEPLOY to GitHub Pages repository, published on commit."
+      - name: "DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source_file: '/build/web/.'
+          source_file: 'build/web/.'
           destination_folder: 'squircle/latest'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
