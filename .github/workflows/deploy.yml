@@ -56,7 +56,7 @@ jobs:
         run: flutter clean
       - name: "WEB release build"
         run: flutter build web --web-renderer canvaskit --base-href "/squircle/latest/" --release -t lib/main.dart
-      - name: "DEPLOY to GitHub Pages repository, published on commit."
+      - name: "DEPLOY to GitHub Pages repository and published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
