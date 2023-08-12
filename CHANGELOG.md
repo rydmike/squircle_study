@@ -36,6 +36,6 @@ All notable changes to this squircle study and repo are recorded here.
 
 ### 1.3.0 - August 12, 2023
 
-* Add about box, in preparation for a WEB build version
+* Add about box
 * Refactor app and rename classes.
-
+* Releases a web build of the Squricle Study app https://rydmike.com/squircle/latest

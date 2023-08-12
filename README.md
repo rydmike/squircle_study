@@ -2,9 +2,11 @@
 
 A study and comparison of different Squircle `ShapeBorder` options in **Flutter**, using a Flutter app to compare available Squircle shapes visually.
 
-## Version history
+## Version history and web build
 
 See [CHANGELOG](https://github.com/rydmike/squircle_study/blob/master/CHANGELOG.md) for a list of updates to this study and Flutter squricle demo app.
+
+A web version of the latest Squircle Study companion app can be found here https://rydmike.com/squircle/latest.  
 
 ## Overview
 
