@@ -11,6 +11,21 @@ import 'package:flutter/rendering.dart';
 
 /// A stadium border with continuous corners.
 ///
+/// The code for this SquircleStadium implementation is from this unmerged PR
+/// https://github.com/flutter/flutter/pull/27523 which in the comment
+/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
+/// praised for its iOS like fidelity.
+///
+/// The original code can be found here:
+/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart
+///
+/// This code has been migrated to null safety and changed to implement support
+/// for [BorderSide.strokeAlign] by @rydmike.
+///
+/// The original doc comment below needs updates.
+///
+/// ----
+///
 /// A shape similar to a stadium, but with a smoother transition from
 /// each linear edge to its 180º curves. Each 180º curve is approximately half
 /// an ellipse.
@@ -43,14 +58,6 @@ import 'package:flutter/rendering.dart';
 /// }
 /// ```
 /// {@end-tool}
-///
-/// The code for this SquircleStadium implementation is from this unmerged PR
-/// https://github.com/flutter/flutter/pull/27523 which in the comment
-/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
-/// praised for its iOS like fidelity.
-///
-/// The original code can be found here:
-/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_stadium_border.dart
 ///
 /// See also:
 ///

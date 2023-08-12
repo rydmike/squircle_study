@@ -10,6 +10,23 @@ import 'package:flutter/rendering.dart';
 
 /// A rectangle border with continuous corners.
 ///
+/// The source code for this Squircle implementation is from this never merged
+/// PR https://github.com/flutter/flutter/pull/27523 which in the comment
+/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
+/// praised for its iOS like fidelity.
+///
+/// This code has been migrated to null safety and changed to implement support
+/// for [BorderSide.strokeAlign], it has also been changed to extend
+/// [OutlinedBorder] by @rydmike. Asymmetric border support has not yet been
+/// added, but should be considered.
+///
+/// The original code can be found here:
+/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_rectangle_border.dart
+///
+/// The original doc comment below needs updates.
+///
+/// ---
+///
 /// A shape similar to a rounded rectangle, but with a smoother transition from
 /// the sides to the rounded corners.
 ///
@@ -57,19 +74,6 @@ import 'package:flutter/rendering.dart';
 /// }
 /// ```
 /// {@end-tool}
-///
-/// The source code for this Squircle implementation is from this never merged
-/// PR https://github.com/flutter/flutter/pull/27523 which in the comment
-/// https://github.com/flutter/flutter/pull/27523#issuecomment-597373748 was
-/// praised for its iOS like fidelity.
-///
-/// The original code can be found here:
-/// https://github.com/jslavitz/flutter/blob/4b2d32f9ebb1192bce695927cc3cab13e94cce39/packages/flutter/lib/src/painting/continuous_rectangle_border.dart
-///
-/// In this issue https://github.com/flutter/flutter/issues/91523 it is
-/// claimed here that [ContinuousRectangleBorder] requires a borderRadius
-/// of ~24 to resemble the iOS RoundedRectangle with a cornerRadius of ~10.2,
-/// a factor of 2.3529x
 ///
 /// See also:
 ///

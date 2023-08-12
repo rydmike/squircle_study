@@ -3,7 +3,7 @@ import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-const Color seedColor = Color(0xFF254783); // Color(0xFF6750A4);
+const Color seedColor = Color(0xFF254783);
 
 final ColorScheme colorSchemeLight = SeedColorScheme.fromSeeds(
   brightness: Brightness.light,
@@ -32,17 +32,11 @@ ThemeData theme(Brightness brightness, ThemeSettings settings) {
 @immutable
 class ThemeSettings with Diagnosticable {
   final bool useMaterial3;
-  final bool customCheck;
-  final bool tintedInteraction;
-  final bool tintedDisable;
-  final bool coloredUnselected;
+  final bool customSetting;
 
   const ThemeSettings({
     required this.useMaterial3,
-    required this.customCheck,
-    required this.tintedInteraction,
-    required this.tintedDisable,
-    required this.coloredUnselected,
+    required this.customSetting,
   });
 
   /// Flutter debug properties override, includes toString.
@@ -50,28 +44,17 @@ class ThemeSettings with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
-    properties.add(DiagnosticsProperty<bool>('customCheckTheme', customCheck));
-    properties
-        .add(DiagnosticsProperty<bool>('tintedInteraction', tintedInteraction));
-    properties.add(DiagnosticsProperty<bool>('tintedDisable', tintedDisable));
-    properties.add(
-        DiagnosticsProperty<bool>('customCheckUnselected', coloredUnselected));
+    properties.add(DiagnosticsProperty<bool>('customSetting', customSetting));
   }
 
   /// Copy the object with one or more provided properties changed.
   ThemeSettings copyWith({
     bool? useMaterial3,
-    bool? customCheck,
-    bool? tintedInteraction,
-    bool? tintedDisable,
-    bool? coloredUnselected,
+    bool? customSetting,
   }) {
     return ThemeSettings(
       useMaterial3: useMaterial3 ?? this.useMaterial3,
-      customCheck: customCheck ?? this.customCheck,
-      tintedInteraction: tintedInteraction ?? this.tintedInteraction,
-      tintedDisable: tintedDisable ?? this.tintedDisable,
-      coloredUnselected: coloredUnselected ?? this.coloredUnselected,
+      customSetting: customSetting ?? this.customSetting,
     );
   }
 
@@ -82,19 +65,13 @@ class ThemeSettings with Diagnosticable {
     if (other.runtimeType != runtimeType) return false;
     return other is ThemeSettings &&
         other.useMaterial3 == useMaterial3 &&
-        other.customCheck == customCheck &&
-        other.tintedInteraction == tintedInteraction &&
-        other.tintedDisable == tintedDisable &&
-        other.coloredUnselected == coloredUnselected;
+        other.customSetting == customSetting;
   }
 
-  /// Override for hashcode, dart.ui Jenkins based.
+  /// Override for hashcode.
   @override
   int get hashCode => Object.hashAll(<Object?>[
         useMaterial3.hashCode,
-        customCheck.hashCode,
-        tintedInteraction.hashCode,
-        tintedDisable.hashCode,
-        coloredUnselected.hashCode,
+        customSetting.hashCode,
       ]);
 }

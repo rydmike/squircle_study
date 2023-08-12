@@ -39,10 +39,7 @@ class _SquircleDemoState extends State<SquircleDemo> {
   ThemeMode themeMode = ThemeMode.light;
   ThemeSettings settings = const ThemeSettings(
     useMaterial3: true,
-    customCheck: false,
-    tintedDisable: false,
-    tintedInteraction: false,
-    coloredUnselected: false,
+    customSetting: false,
   );
 
   @override
