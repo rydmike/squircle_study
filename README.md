@@ -221,7 +221,7 @@ This shape is based on a PR for a Squircle that was rejected in Flutter SDK. It 
 * Outline border stroke align correct: **YES** (in @rydmike version)
 * Shape lerp animates correctly: **YES** (in @rydmike version)
 * Shape can break down: **YES**
-    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Now on purpose limited to 0.65x of the shape's stadium radius, since it breaks down after that. One solution might be to switch a circular border radius like **Figma Squricle** and **Smooth Corner** do-  
+    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Thus on purpose limited to 0.65x of the shape's stadium radius in this version, since it breaks down after that. One solution might be to switch to a circular border radius like **Figma Squricle** and **Smooth Corner** both do at higher relative border radius.
 
 ### Findings
 
