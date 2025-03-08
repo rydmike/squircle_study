@@ -27,8 +27,8 @@ abstract final class AppData {
       '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.10.6 (canvaskit)';
-  static const String copyright = '© 2023';
+  static const String flutterVersion = '3.29.1 (canvaskit)';
+  static const String copyright = '© 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'MIT License';
 
