@@ -270,8 +270,8 @@ In this study, we use it as a reference to show how others deviate from it.
 * Outline border stroke align correct: **NO**
     * **ISSUE**: Does center regardless of what BorderSide uses, that actually defaults to inside.
 * Shape lerp animates correctly: **YES**
-* Shape can break down: **YES**
-    * The shape breaks down with border radius exceeding the shape stadium radius. It should implement a limiter like e.g. **Smooth Corner** does.
+* Shape can break down: **NO**
+    * The shape used to break down with border radius exceeding the shape stadium radius. But it no longer does, in at least version 0.6.3 and later.
 
 
 ### Findings
