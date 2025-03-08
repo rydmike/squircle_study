@@ -8,13 +8,13 @@ const Color seedColor = Color(0xFF254783);
 final ColorScheme colorSchemeLight = SeedColorScheme.fromSeeds(
   brightness: Brightness.light,
   primaryKey: seedColor,
-  tones: FlexTones.oneHue(Brightness.light),
+  tones: FlexTones.candyPop(Brightness.light),
 );
 
 final ColorScheme colorSchemeDark = SeedColorScheme.fromSeeds(
   brightness: Brightness.dark,
   primaryKey: seedColor,
-  tones: FlexTones.oneHue(Brightness.dark),
+  tones: FlexTones.candyPop(Brightness.dark),
 );
 
 /// No need for a fancy theme for this app, M3 looks good out of the box.

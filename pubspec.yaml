@@ -15,11 +15,7 @@ dependencies:
   cupertino_rounded_corners: ^2.1.1
 
   # https://pub.dev/packages/figma_squircle
-  # figma_squircle: ^0.5.3
-  figma_squircle: # It was on 0.5.3 before being broken by Flutter 3.27.0 and later.
-    git:
-      url: https://github.com/Ax0elz/figma_squircle
-      ref: 5f1ad5aaccdf31fc398fc141979ea845a0f45383 # The ref that fixes the issue
+  figma_squircle: ^0.6.3
 
   # Color picker package, by Mike Rydstrom, rydmike.com (@rydmike).
   # Used for color selection in the app.

@@ -55,7 +55,7 @@ jobs:
       - name: "START BUILD - Flutter clean before build"
         run: flutter clean
       - name: "WEB release build"
-        run: flutter build web --web-renderer canvaskit --base-href "/squircle/latest/" --release -t lib/main.dart
+        run: flutter build web --base-href "/squircle/latest/" --release -t lib/main.dart
       - name: "DEPLOY to GitHub Pages repository and published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
