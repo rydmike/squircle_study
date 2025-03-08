@@ -1,4 +1,4 @@
-# Flutter Squricle Study (v1.3.0)
+# Flutter Squricle Study (v1.3.2)
 
 A study and comparison of different Squircle `ShapeBorder` options in **Flutter**, using a Flutter app to compare available Squircle shapes visually.
 
@@ -10,27 +10,35 @@ A web version of the latest Squircle Study companion app can be found here https
 
 ## Overview
 
-There currently is no known rounded rectangle in **Flutter** that would be verified to be an exact match for the rounded rectangle shape created e.g. in Swift-UI with `RoundedRectangle(cornerRadius: myRadius, style: .continuous)` that would also be without issues in Flutter. This type of rounded rectangle with a continuous curvature is also known as a super ellipses shape or squircle.
+There currently is no known rounded rectangle in **Flutter** that would be verified to be an exact match for the rounded rectangle shape created e.g., in Swift-UI with `RoundedRectangle(cornerRadius: myRadius, style: .continuous)` that would also be without issues in Flutter. This type of rounded rectangle with continuous curvature is also known as a super ellipses shape or squircle.
 
 In this study, a package called `figma_squircle` is used as reference. This package is used and regarded by many as the **best Flutter approximation** of the **iOS Squircle** shape. To verify this, it should be compared with actual iOS SwiftUI produced shapes. As a starting point, it is used for comparisons and for findings presented in this study.
 
-With the Flutter **squircle_study** app in this repo used for this study, you can cross compare any two selected shapes at different sizes and curvature, with or without border.
+With the Flutter **squircle_study** app in this repo used for this study, you can cross-compare any two selected shapes at different sizes and curvature, with or without border.
+
+### Flutter Squircle Status (March 8, 2025)
 
 In the Flutter GitHub repo, the [issue #91523](https://github.com/flutter/flutter/issues/91523) is used to track the implementation of an iOS matching continuously rounded rectangle. It is also stated in Flutter [issue #13914](https://github.com/flutter/flutter/issues/13914) from January 5, 2018, that Flutter Cupertino button should use squricle as its shape and not a circular rounded rectangle.
+
+In a recent PR, a **squircle** shape has landed in the Flutter engine, called "**RoundSuperellipse**" https://github.com/flutter/flutter/pull/164755. For now, it is only used on clipping a Cupertino Dialog, by adding a clipper to Flutter and using it on the alert dialog https://github.com/flutter/flutter/pull/161111. There is no paint path or `ShapeBorder` added yet, see https://github.com/flutter/flutter/pull/164755#issuecomment-2706985535. When a **ShapeBorder** is added I will add it to this study. We can then compare it to the other shapes in this study.
+
+It will be interesting to see how this new shape behaves when the short/long side aspect ratio of the shape is > 0.5 and <= 1.0. As well as how it behaves when the short/long ratios < 0.5, and the radius gets closer to the stadium radius for the shape, which is short side/2. As shown in this study, the **FigmaSquircle** shape starts to approach a circular border when the radius exceeds half of the shape's stadium radius.
+
+Additionally, only the **SquircleStadiumBorder** shape in this study can handle drawing a continuous Stadium (pill) shape. All other shapes fail totally at this. It will be interesting to see if the new Flutter "**RoundSuperellipse**" will be able to handle this. The **SquircleStadiumBorder** can actually only handle this when the short/long side aspect ratio is < 0.5.
 
 ## Summary of Findings
 
 The `ContinuousRectangleBorder` in Flutter SDK is a super ellipses shape, but it is not a match for the one used in iOS on UI elements. 
 
-The package `figma_squircle` is an implementation of the squircle used in **Figma**. The Figma Squircle claims to be a match for the iOS shape when used with smoothing factor **0.6**. It may be a good match when used border radius is lower than half of the shape's stadium radius, this should still be verified. At a higher radius than 0.5x of the shape's stadium radius, the shape starts to approach a standard circular border curvature. At stadium (also sometimes referred to as capsule or pill) radius, it is identical to a circular stadium shape. Which is not a continuously rounded stadium shape. The shape also **breaks down** at border radius higher than the shape's stadium radius.
+The package `figma_squircle` is an implementation of the squircle used in **Figma**. The Figma Squircle claims to be a match for the iOS shape when used with smoothing factor **0.6**. It may be a good match when used border radius is lower than half of the shape's stadium radius, this should still be verified. At a higher radius than 0.5x of the shape's stadium radius, the shape starts to approach standard circular border curvature. At stadium (also sometimes referred to as capsule or pill) radius, it is identical to a circular stadium shape. Which is not a continuously rounded stadium shape. The shape also **breaks down** at border radius higher than the shape's stadium radius.
 
 There is a less known package called `smooth_corner`, that produces identical shapes to `figma_squircle`. It does **not** break down at border radius higher than the shape's stadium radius. However, it does not lerp animate radius and border width changes.
 
 The performance impact of using **any** other shape than **RoundedRectangleBorder** has been mentioned, at least in X/Twitter posts and comments. They typically mention the **FigmaSquircle**, but also the SDK `ContinuousRectangleBorder`, but more often the `figma_squircle` package. The **performance impact** of the shapes should be studied further. See **Appendix A** at the end of the study report for more info about reported performance issue.
 
-Some shapes may not implement linear interpolation correctly, and probably none of them implement shape transform from one `ShapeBorder` to another Flutter SDK `ShapeBorder`, like most Flutter SDK `ShapeBorder`s do. A proper Flutter iOS squircle shape should do all of these things correctly. 
-
 Currently only shapes `RoundedRectangleBorder`, `StadiumBorder`, `BeveledRectangleBorder` and the updated `SquircleBorder` and `SquircleStadiumBorder` appears to handle `strokeAlign` on the used `BorderSide` correctly.
+
+Some shapes may not implement linear interpolation correctly, and none of them implement shape transform from one `ShapeBorder` to other Flutter SDK `ShapeBorder`s, like most Flutter SDK `ShapeBorder`s do. **A proper Flutter iOS squircle shape should do all of these things correctly**. 
 
 
 ### TODOs
@@ -57,7 +65,7 @@ The **Shape** options you can compare with this **squircle_study** app are:
 * **SimonSquircleBorder** from [Slightfoot gist](https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a)
 * **BeveledRectangleBorder** from [Flutter SDK](https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html)
 
-All are obviously not hyper ellipses or squircles, but included for comparison reasons.
+All are not hyper ellipses or squircles, but included for comparison reasons.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/shapes.png" alt="shapes"/>
 
@@ -194,7 +202,7 @@ Especially not if we change the smoothness of the **FigmaSquircle** from **0.6**
 
 _**ShapeBorder** ContinuousRectangleBorder x 2.3529 vs. FigmaSquircle at smoothing 1.0_
 
-At higher border radius, e.g. at 0.75x of stadium radius, the gap in visuals becomes more significant and the smoothing factor on **FigmaSquircle** does not really matter anymore:
+At higher border radius, e.g., at 0.75x of stadium radius, the gap in visuals becomes more significant and the smoothing factor on **FigmaSquircle** does not really matter anymore:
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/continuous_rectangle_border_mult.png" alt="continuous_rectangle_border_mult"/>
 
@@ -212,7 +220,7 @@ If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **i
 At border radius of < 0.5 times the shape's stadium radius, and when using smoothness 1.0 for the **FigmaSquircle**, the **ContinuousRectangleBorder x 2.3529** is for practical visual comparisons a fairly good fit.
 
 
-### SquircleBorder PR
+### SquircleBorder (old PR)
 
 This shape is based on a PR for a Squircle that was rejected in Flutter SDK. It was discussed here https://github.com/flutter/flutter/pull/27523. This is a @rydmike code revival of the PR with some minor modifications. Changes include adding `BorderSide` support, with `strokeAlign` and supporting slightly higher relative radius in relation to the shape's stadium radius, updated lerp overrides and migration to null-safe code.
 
@@ -221,7 +229,7 @@ This shape is based on a PR for a Squircle that was rejected in Flutter SDK. It 
 * Outline border stroke align correct: **YES** (in @rydmike version)
 * Shape lerp animates correctly: **YES** (in @rydmike version)
 * Shape can break down: **YES**
-    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Thus on purpose limited to 0.65x of the shape's stadium radius in this version, since it breaks down after that. One solution might be to switch to a circular border radius like **Figma Squricle** and **Smooth Corner** both do at higher relative border radius.
+    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Thus, it is on purpose limited to 0.65x of the shape's stadium radius (shorter side/2) in this version, since it breaks down after that. One solution might be to switch to a circular border radius like **Figma Squricle** and **Smooth Corner** both do at higher relative border radius.
 
 ### Findings
 
@@ -231,7 +239,7 @@ The difference between **SquircleBorder PR** and **FigmaSquircle** is none exist
 
 _**ShapeBorder** SquircleBorder PR at radius < 0.5x of its stadium radius_
 
-The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.65x the stadium radius and can **not** be used for Squircle shapes where the radius is from 0.65x to 1x of the stadium radius. Up and until that radius, it works very well and matches the **FigmaSquircle**.
+The **SquircleBorder PR** stops responding to border radius increases when the radius is >= 0.65x the stadium radius (shorter side/2) and can **not** be used for Squircle shapes where the radius is from 0.65x to 1x of the stadium radius. Up and until that radius, it works very well and matches the **FigmaSquircle**.
 
 On the other hand, it has also been shown that for a radius range that exceeded 0.5x stadium radius, that the **FigmaSquircle** gets closer and closer to the plain circular border represented by the **RoundedRectangleBorder**. 
 
@@ -274,7 +282,7 @@ The **FigmaSquircle** breaks down when set border radius exceeds its Stadium rad
 
 _**ShapeBorder** FigmaSquircle (SmoothRectangleBorder) at radius > than its stadium radius, shape breaks down_
 
-For border radius > 0.6x and <= 1.0x of the shape's stadium radius, the **FigmaSquircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius, we can no longer observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
+For border radius > 0.6x and <= 1.0x of the shape's stadium radius (shorter side/2), the **FigmaSquircle** gets closer to an ordinary circular rounded rectangle border. At a border radius of > 0.9x and <= 1.0x of the shape's stadium radius, we can no longer observe any practical difference from a normal circular border made with **RoundedRectangleBorder**: 
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/figma_squircle_equal.png" alt="figma_squircle_equal"/>
 
@@ -287,7 +295,7 @@ If **FigmaSquircle** at smoothing **0.6** is a correct representation of the **i
 
 However, **FigmaSquircle** shape breaks down when the radius exceeds the shape's stadium radius. A good shape algorithm should stay at its equivalent stadium shaped when the stadium radius is exceeded. 
 
-It has also been observed that for border radius of > 0.5x and <= 1.0x of the shape's stadium radius, that the **FigmaSquircle** shape starts to take the shape of just an ordinary circular rounded rectangle border. It is at this stage unknown if this is correct compared to how actual **iOS** stadium shapes look. Based on a quick look, it probably is not. **This needs to be verified**.
+It has also been observed that for border radius of > 0.5x and <= 1.0x of the shape's stadium radius (shorter side/2), that the **FigmaSquircle** shape starts to take the shape of just an ordinary circular rounded rectangle border. It is at this stage unknown if this is correct compared to how actual **iOS** stadium shapes look. Based on a quick look, it probably is not. **This needs to be verified**.
 
 The performance impact of the **FigmaSquircle** has also been mentioned in issues. It should be studied further. 
 
@@ -342,7 +350,7 @@ A widget and border used to make cupertino rounded corners also referred to as s
 * Shape lerp animates correctly: **NO**
     * **ISSUE**: The shape and border changes instantly, it appears it does not provide lerp overrides.
 * Shape can break down: **YES**
-    * **ISSUE**: Gets same "TIE-fighter" shape as the `ContinuousRectangleBorder`. It gets even more pronounced at very large border radius. It lacks the attempt of a limiter that the `ContinuousRectangleBorder` has. 
+    * **ISSUE**: Gets same "TIE-fighter" shape as the `ContinuousRectangleBorder`. It gets even more pronounced at large border radius. It lacks the attempt of a limiter that the `ContinuousRectangleBorder` has. 
 
 
 ### Findings
@@ -426,7 +434,7 @@ The smoothness factor also has no impact on the **FigmaSquircle** when the borde
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/stadium_figma.png" alt="stadium_figma"/>
 
-_**ShapeBorder** StadiumBorder and FigmaSquircle are visually identical, also when taking a closer zoomed in look_
+_**ShapeBorder** StadiumBorder and FigmaSquircle are visually identical, also when taking a zoomed in look_
 
 ### Conclusion - StadiumBorder
 
@@ -493,7 +501,7 @@ A squircle implementation by Simon Lightfoot provided in a Gist.
 
 ### Findings
 
-Draws weird shapes for border radius from 0 to less than 1. The shape is **not** an iOS squircle, it is something entirely different. Examples of produced shapes at different border radius are shown below.
+Draws strange shapes for border radius from 0 to less than 1. The shape is **not** an iOS squircle, it is entirely different. Examples of produced shapes at different border radius are shown below.
 
 <img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/simon0.png" alt="simon0"/>
 
@@ -530,8 +538,8 @@ A rectangular border with flattened or "beveled" corners.
 * Name: **BeveledRectangleBorder**
 * From [Flutter SDK](https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html)
 * Outline border stroke align correct: **NO**
-    * **ISSUE**: Tries to compensate and adjust for used `strokeAlign` but fails. It draws two joined outlined borders, and the border becomes too thick. End result is that it draws an incorrect border in relation to what is asked in its `borderSide`.
-    * **TODO**: Raise Flutter SDK issue.
+    * **ISSUE**: Tries to compensate and adjust for used `strokeAlign` but fails. It draws two joined outlined borders, and the border becomes too thick. The result is that it draws an incorrect border in relation to what is asked in its `borderSide`.
+    * **TODO**: **Raise a Flutter SDK issue!**.
 * Shape lerp animates correctly: **YES**
 * Shape can break down: **NO**
 
