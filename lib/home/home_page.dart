@@ -7,9 +7,7 @@ import 'widgets/shapes_presentation.dart';
 import 'widgets/show_color_scheme_colors.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    super.key,
-  });
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -42,8 +40,7 @@ class _HomePageState extends State<HomePage> {
     final Color bottomOnShapeColor = theme.colorScheme.onPrimaryContainer;
     final Color lineColor = theme.colorScheme.onSurface;
     // Optional translucent fill on the shape that has the outlined border.
-    final Color topShapeFillColor =
-        theme.colorScheme.tertiary.withOpacity(0.15);
+    final Color topShapeFillColor = theme.colorScheme.tertiary.withValues(alpha: 0.15);
 
     return ListView(
       children: <Widget>[
@@ -71,9 +68,11 @@ class _HomePageState extends State<HomePage> {
           enabled: true,
           title: Text('Compare two ShapeBorders'),
           subtitleDense: true,
-          subtitle: Text('Select one filled and one outlined '
-              'shaped to compare their shape.\n'
-              'You can adjust their size and border radius.\n'),
+          subtitle: Text(
+            'Select one filled and one outlined '
+            'shaped to compare their shape.\n'
+            'You can adjust their size and border radius.\n',
+          ),
         ),
         ShapeBorderPopupMenu(
           title: const Text('FILLED'),
@@ -113,14 +112,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'HEIGHT',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('HEIGHT', style: theme.textTheme.bodySmall),
                 Text(
                   heightBig.toStringAsFixed(0),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -147,14 +142,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('WIDTH', style: theme.textTheme.bodySmall),
                 Text(
                   widthBig.toStringAsFixed(0),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -181,14 +172,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'RADIUS',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('RADIUS', style: theme.textTheme.bodySmall),
                 Text(
                   radius.toStringAsFixed(0),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -205,18 +192,11 @@ class _HomePageState extends State<HomePage> {
               Material(
                 clipBehavior: Clip.hardEdge,
                 color: bottomShapeColor,
-                shape: filledShape.shape(
-                  radius: radius,
-                  smoothness: smoothness,
-                ),
-                child: SizedBox(
-                  height: heightBig,
-                  width: widthBig,
-                ),
+                shape: filledShape.shape(radius: radius, smoothness: smoothness),
+                child: SizedBox(height: heightBig, width: widthBig),
               ),
               Material(
-                clipBehavior:
-                    clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
+                clipBehavior: clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
                 color: fillOutlined ? topShapeFillColor : Colors.transparent,
                 shape: outlinedShape.shape(
                   radius: radius,
@@ -259,14 +239,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'LINE WIDTH',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('LINE WIDTH', style: theme.textTheme.bodySmall),
                 Text(
                   lineWidth.toStringAsFixed(2),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -279,11 +255,9 @@ class _HomePageState extends State<HomePage> {
             height: 55,
             child: Center(
               child: Material(
-                  color: lineColor,
-                  child: SizedBox(
-                    height: lineWidth,
-                    width: double.infinity,
-                  )),
+                color: lineColor,
+                child: SizedBox(height: lineWidth, width: double.infinity),
+              ),
             ),
           ),
         ),
@@ -315,22 +289,20 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'STROKE ALIGN',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('STROKE ALIGN', style: theme.textTheme.bodySmall),
                 Text(
                   strokeAlign.toStringAsFixed(2),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
         ),
         SwitchListTile(
-          title: const Text("Outlined shape's Material is filled with "
-              'transparent color'),
+          title: const Text(
+            "Outlined shape's Material is filled with "
+            'transparent color',
+          ),
           value: fillOutlined,
           onChanged: (bool value) {
             setState(() {
@@ -356,8 +328,10 @@ class _HomePageState extends State<HomePage> {
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text('Only applies to FigmaSquircle and '
-                  'Figma SmoothCorner (Figma claims 0.6 = iOS shape)'),
+              const Text(
+                'Only applies to FigmaSquircle and '
+                'Figma SmoothCorner (Figma claims 0.6 = iOS shape)',
+              ),
               Slider(
                 min: 0,
                 max: 1,
@@ -377,14 +351,10 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  'SMOOTHNESS',
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text('SMOOTHNESS', style: theme.textTheme.bodySmall),
                 Text(
                   smoothness.toStringAsFixed(2),
-                  style: theme.textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),

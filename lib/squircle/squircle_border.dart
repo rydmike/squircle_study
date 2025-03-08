@@ -87,10 +87,7 @@ class SquircleBorder extends OutlinedBorder {
   /// Creates a continuous cornered rectangle border.
   ///
   /// The [cornerRadius] argument must not be null.
-  const SquircleBorder({
-    super.side,
-    this.borderRadius = BorderRadius.zero,
-  });
+  const SquircleBorder({super.side, this.borderRadius = BorderRadius.zero});
 
   /// The radius for each corner.
   ///
@@ -112,10 +109,7 @@ class SquircleBorder extends OutlinedBorder {
 
   @override
   ShapeBorder scale(double t) {
-    return SquircleBorder(
-      side: side.scale(t),
-      borderRadius: borderRadius * t,
-    );
+    return SquircleBorder(side: side.scale(t), borderRadius: borderRadius * t);
   }
 
   @override
@@ -123,8 +117,7 @@ class SquircleBorder extends OutlinedBorder {
     if (a is SquircleBorder) {
       return SquircleBorder(
         side: BorderSide.lerp(a.side, side, t),
-        borderRadius:
-            BorderRadiusGeometry.lerp(a.borderRadius, borderRadius, t)!,
+        borderRadius: BorderRadiusGeometry.lerp(a.borderRadius, borderRadius, t)!,
       );
     }
     return super.lerpFrom(a, t);
@@ -135,8 +128,7 @@ class SquircleBorder extends OutlinedBorder {
     if (b is SquircleBorder) {
       return SquircleBorder(
         side: BorderSide.lerp(side, b.side, t),
-        borderRadius:
-            BorderRadiusGeometry.lerp(borderRadius, b.borderRadius, t)!,
+        borderRadius: BorderRadiusGeometry.lerp(borderRadius, b.borderRadius, t)!,
       );
     }
     return super.lerpTo(b, t);
@@ -158,28 +150,20 @@ class SquircleBorder extends OutlinedBorder {
     //
     // If the rounded rect is elliptical we only use the shorter radius,
     // this version does not handle elliptical shapes.
-    final double tlRadiusX =
-        math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusX));
-    final double tlRadiusY =
-        math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusY));
+    final double tlRadiusX = math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusX));
+    final double tlRadiusY = math.max(0.0, _clampToShortest(rrect, rrect.tlRadiusY));
     final double tlRadius = math.min(tlRadiusX, tlRadiusY);
     //
-    final double trRadiusX =
-        math.max(0.0, _clampToShortest(rrect, rrect.trRadiusX));
-    final double trRadiusY =
-        math.max(0.0, _clampToShortest(rrect, rrect.trRadiusY));
+    final double trRadiusX = math.max(0.0, _clampToShortest(rrect, rrect.trRadiusX));
+    final double trRadiusY = math.max(0.0, _clampToShortest(rrect, rrect.trRadiusY));
     final double trRadius = math.min(trRadiusX, trRadiusY);
     //
-    final double blRadiusX =
-        math.max(0.0, _clampToShortest(rrect, rrect.blRadiusX));
-    final double blRadiusY =
-        math.max(0.0, _clampToShortest(rrect, rrect.blRadiusY));
+    final double blRadiusX = math.max(0.0, _clampToShortest(rrect, rrect.blRadiusX));
+    final double blRadiusY = math.max(0.0, _clampToShortest(rrect, rrect.blRadiusY));
     final double blRadius = math.min(blRadiusX, blRadiusY);
     //
-    final double brRadiusX =
-        math.max(0.0, _clampToShortest(rrect, rrect.brRadiusX));
-    final double brRadiusY =
-        math.max(0.0, _clampToShortest(rrect, rrect.brRadiusY));
+    final double brRadiusX = math.max(0.0, _clampToShortest(rrect, rrect.brRadiusX));
+    final double brRadiusY = math.max(0.0, _clampToShortest(rrect, rrect.brRadiusY));
     final double brRadius = math.min(brRadiusX, brRadiusY);
 
     final double minSideLength = math.min(rrect.width, rrect.height);
@@ -223,37 +207,109 @@ class SquircleBorder extends OutlinedBorder {
       return Path()
         ..moveTo(leftX(1.52866483), topY(0.0))
         ..lineTo(rightX(1.52866471), topY(0.0))
-        ..cubicTo(rightX(1.08849323), topY(0.0), rightX(0.86840689), topY(0.0),
-            rightX(0.66993427), topY(0.06549600))
+        ..cubicTo(
+          rightX(1.08849323),
+          topY(0.0),
+          rightX(0.86840689),
+          topY(0.0),
+          rightX(0.66993427),
+          topY(0.06549600),
+        )
         ..lineTo(rightX(0.63149399), topY(0.07491100))
-        ..cubicTo(rightX(0.37282392), topY(0.16905899), rightX(0.16906013),
-            topY(0.37282401), rightX(0.07491176), topY(0.63149399))
-        ..cubicTo(rightX(0), topY(0.86840701), rightX(0.0), topY(1.08849299),
-            rightX(0.0), topY(1.52866483))
+        ..cubicTo(
+          rightX(0.37282392),
+          topY(0.16905899),
+          rightX(0.16906013),
+          topY(0.37282401),
+          rightX(0.07491176),
+          topY(0.63149399),
+        )
+        ..cubicTo(
+          rightX(0),
+          topY(0.86840701),
+          rightX(0.0),
+          topY(1.08849299),
+          rightX(0.0),
+          topY(1.52866483),
+        )
         ..lineTo(rightX(0.0), bottomY(1.52866471))
-        ..cubicTo(rightX(0.0), bottomY(1.08849323), rightX(0.0),
-            bottomY(0.86840689), rightX(0.06549600), bottomY(0.66993427))
+        ..cubicTo(
+          rightX(0.0),
+          bottomY(1.08849323),
+          rightX(0.0),
+          bottomY(0.86840689),
+          rightX(0.06549600),
+          bottomY(0.66993427),
+        )
         ..lineTo(rightX(0.07491100), bottomY(0.63149399))
-        ..cubicTo(rightX(0.16905899), bottomY(0.37282392), rightX(0.37282401),
-            bottomY(0.16906013), rightX(0.63149399), bottomY(0.07491176))
-        ..cubicTo(rightX(0.86840701), bottomY(0), rightX(1.08849299),
-            bottomY(0.0), rightX(1.52866483), bottomY(0.0))
+        ..cubicTo(
+          rightX(0.16905899),
+          bottomY(0.37282392),
+          rightX(0.37282401),
+          bottomY(0.16906013),
+          rightX(0.63149399),
+          bottomY(0.07491176),
+        )
+        ..cubicTo(
+          rightX(0.86840701),
+          bottomY(0),
+          rightX(1.08849299),
+          bottomY(0.0),
+          rightX(1.52866483),
+          bottomY(0.0),
+        )
         ..lineTo(leftX(1.52866483), bottomY(0.0))
-        ..cubicTo(leftX(1.08849323), bottomY(0.0), leftX(0.86840689),
-            bottomY(0.0), leftX(0.66993427), bottomY(0.06549600))
+        ..cubicTo(
+          leftX(1.08849323),
+          bottomY(0.0),
+          leftX(0.86840689),
+          bottomY(0.0),
+          leftX(0.66993427),
+          bottomY(0.06549600),
+        )
         ..lineTo(leftX(0.63149399), bottomY(0.07491100))
-        ..cubicTo(leftX(0.37282392), bottomY(0.16905899), leftX(0.16906013),
-            bottomY(0.37282401), leftX(0.07491176), bottomY(0.63149399))
-        ..cubicTo(leftX(0), bottomY(0.86840701), leftX(0.0),
-            bottomY(1.08849299), leftX(0.0), bottomY(1.52866483))
+        ..cubicTo(
+          leftX(0.37282392),
+          bottomY(0.16905899),
+          leftX(0.16906013),
+          bottomY(0.37282401),
+          leftX(0.07491176),
+          bottomY(0.63149399),
+        )
+        ..cubicTo(
+          leftX(0),
+          bottomY(0.86840701),
+          leftX(0.0),
+          bottomY(1.08849299),
+          leftX(0.0),
+          bottomY(1.52866483),
+        )
         ..lineTo(leftX(0.0), topY(1.52866471))
-        ..cubicTo(leftX(0.0), topY(1.08849323), leftX(0.0), topY(0.86840689),
-            leftX(0.06549600), topY(0.66993427))
+        ..cubicTo(
+          leftX(0.0),
+          topY(1.08849323),
+          leftX(0.0),
+          topY(0.86840689),
+          leftX(0.06549600),
+          topY(0.66993427),
+        )
         ..lineTo(leftX(0.07491100), topY(0.63149399))
-        ..cubicTo(leftX(0.16905899), topY(0.37282392), leftX(0.37282401),
-            topY(0.16906013), leftX(0.63149399), topY(0.07491176))
-        ..cubicTo(leftX(0.86840701), topY(0), leftX(1.08849299), topY(0.0),
-            leftX(1.52866483), topY(0.0))
+        ..cubicTo(
+          leftX(0.16905899),
+          topY(0.37282392),
+          leftX(0.37282401),
+          topY(0.16906013),
+          leftX(0.63149399),
+          topY(0.07491176),
+        )
+        ..cubicTo(
+          leftX(0.86840701),
+          topY(0),
+          leftX(1.08849299),
+          topY(0.0),
+          leftX(1.52866483),
+          topY(0.0),
+        )
         ..close();
     }
 
@@ -262,17 +318,13 @@ class SquircleBorder extends OutlinedBorder {
     // borer radius is clamped.
     const double maxStadiumRatio = 0.65;
 
-    limitedRadius =
-        math.min(largestRadius, minSideLength / 2 * maxStadiumRatio);
+    limitedRadius = math.min(largestRadius, minSideLength / 2 * maxStadiumRatio);
     return bezierRoundedRect();
   }
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return _getPath(borderRadius
-        .resolve(textDirection)
-        .toRRect(rect)
-        .deflate(side.strokeInset));
+    return _getPath(borderRadius.resolve(textDirection).toRRect(rect).deflate(side.strokeInset));
   }
 
   @override
@@ -290,8 +342,7 @@ class SquircleBorder extends OutlinedBorder {
         break;
       case BorderStyle.solid:
         if (side.width != 0.0) {
-          final RRect borderRect =
-              borderRadius.resolve(textDirection).toRRect(rect);
+          final RRect borderRect = borderRadius.resolve(textDirection).toRRect(rect);
           final RRect adjustedRect = borderRect.inflate(side.strokeOffset / 2);
           final Path path = _getPath(adjustedRect);
           canvas.drawPath(path, side.toPaint());
@@ -300,22 +351,14 @@ class SquircleBorder extends OutlinedBorder {
   }
 
   @override
-  SquircleBorder copyWith({
-    BorderSide? side,
-    BorderRadiusGeometry? borderRadius,
-  }) {
-    return SquircleBorder(
-      side: side ?? this.side,
-      borderRadius: borderRadius ?? this.borderRadius,
-    );
+  SquircleBorder copyWith({BorderSide? side, BorderRadiusGeometry? borderRadius}) {
+    return SquircleBorder(side: side ?? this.side, borderRadius: borderRadius ?? this.borderRadius);
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (runtimeType != other.runtimeType) return false;
-    return other is SquircleBorder &&
-        other.side == side &&
-        other.borderRadius == borderRadius;
+    return other is SquircleBorder && other.side == side && other.borderRadius == borderRadius;
   }
 
   @override

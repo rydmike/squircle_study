@@ -33,31 +33,33 @@ class ColorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MediaQueryData media = MediaQuery.of(context);
-    final bool isPhone = media.size.width < AppData.phoneWidthBreakpoint ||
+    final bool isPhone =
+        media.size.width < AppData.phoneWidthBreakpoint ||
         media.size.height < AppData.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
-    final Size effectiveSize =
-        size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
+    final Size effectiveSize = size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
 
     return SizedBox(
       width: effectiveSize.width,
       height: effectiveSize.height,
       child: Tooltip(
         waitDuration: const Duration(milliseconds: 700),
-        message: color != textColor
-            ? 'Color #${color.hexCode}.'
-                '\nTap box to copy RGB value to Clipboard.'
-            : '',
+        message:
+            color != textColor
+                ? 'Color #${color.hexCode}.'
+                    '\nTap box to copy RGB value to Clipboard.'
+                : '',
         child: Card(
           margin: EdgeInsets.zero,
           clipBehavior: Clip.antiAlias,
           color: color,
           child: InkWell(
-            onTap: color != textColor
-                ? () {
-                    unawaited(copyColorToClipboard(context, color));
-                  }
-                : null,
+            onTap:
+                color != textColor
+                    ? () {
+                      unawaited(copyColorToClipboard(context, color));
+                    }
+                    : null,
             child: Center(
               child: Text(
                 label,

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:flex_seed_scheme/flex_seed_scheme.dart';
 import 'package:flutter/material.dart';
 
 /// Extensions on [Color] to brighten, lighten, darken and blend colors and
@@ -18,10 +19,10 @@ extension FlexColorExtensions on Color {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
-      alpha,
-      math.max(0, math.min(255, red - (255 * -(amount / 100)).round())),
-      math.max(0, math.min(255, green - (255 * -(amount / 100)).round())),
-      math.max(0, math.min(255, blue - (255 * -(amount / 100)).round())),
+      alpha8bit,
+      math.max(0, math.min(255, red8bit - (255 * -(amount / 100)).round())),
+      math.max(0, math.min(255, green8bit - (255 * -(amount / 100)).round())),
+      math.max(0, math.min(255, blue8bit - (255 * -(amount / 100)).round())),
     );
     return color;
   }
@@ -33,12 +34,11 @@ extension FlexColorExtensions on Color {
     if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
     // lighten black color up along the grey scale from black.
-    final HSLColor hsl = this == const Color(0xFF000000)
-        ? HSLColor.fromColor(this).withSaturation(0)
-        : HSLColor.fromColor(this);
-    return hsl
-        .withLightness(math.min(1, math.max(0, hsl.lightness + amount / 100)))
-        .toColor();
+    final HSLColor hsl =
+        this == const Color(0xFF000000)
+            ? HSLColor.fromColor(this).withSaturation(0)
+            : HSLColor.fromColor(this);
+    return hsl.withLightness(math.min(1, math.max(0, hsl.lightness + amount / 100))).toColor();
   }
 
   /// Darkens the color with the given integer percentage amount.
@@ -47,20 +47,17 @@ extension FlexColorExtensions on Color {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
-    return hsl
-        .withLightness(math.min(1, math.max(0, hsl.lightness - amount / 100)))
-        .toColor();
+    return hsl.withLightness(math.min(1, math.max(0, hsl.lightness - amount / 100))).toColor();
   }
 
   /// Return uppercase Flutter style hex code string of the color.
   String get hexCode {
-    return value.toRadixString(16).toUpperCase().padLeft(8, '0');
+    return value32bit.toRadixString(16).toUpperCase().padLeft(8, '0');
   }
 
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    // ignore: lines_longer_than_80_chars
-    return '#${value.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
+    return '#${value32bit.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }

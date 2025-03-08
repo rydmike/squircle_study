@@ -5,23 +5,17 @@ import 'package:flutter/material.dart';
 // Can be found here:
 // https://gist.github.com/slightfoot/e35e8d5877371417e9803143e2501b0a
 class SimonSquircleBorder extends ShapeBorder {
+  const SimonSquircleBorder({this.radius = 5.0, this.side = BorderSide.none});
+
   final double radius;
   final BorderSide side;
-
-  const SimonSquircleBorder({
-    this.radius = 5.0,
-    this.side = BorderSide.none,
-  });
 
   @override
   EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
 
   @override
   ShapeBorder scale(double t) {
-    return SimonSquircleBorder(
-      side: side.scale(t),
-      radius: radius * t,
-    );
+    return SimonSquircleBorder(side: side.scale(t), radius: radius * t);
   }
 
   @override
@@ -53,8 +47,10 @@ class SimonSquircleBorder extends ShapeBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        final Path path = getOuterPath(rect.deflate(side.width / 2.0),
-            textDirection: textDirection);
+        final Path path = getOuterPath(
+          rect.deflate(side.width / 2.0),
+          textDirection: textDirection,
+        );
         canvas.drawPath(path, side.toPaint());
     }
   }
@@ -82,11 +78,9 @@ class SimonSquircleBorder extends ShapeBorder {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     if (runtimeType != other.runtimeType) return false;
-    return other is SimonSquircleBorder &&
-        other.side == side &&
-        other.radius == radius;
+    return other is SimonSquircleBorder && other.side == side && other.radius == radius;
   }
 
   @override

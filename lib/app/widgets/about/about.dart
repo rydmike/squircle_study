@@ -39,8 +39,7 @@ void showAppAboutDialog(BuildContext context) {
     applicationName: AppData.title(context),
     applicationVersion: AppData.version,
     applicationIcon: const CircleAvatar(child: Text(AppData.shortAppName)),
-    applicationLegalese:
-        '${AppData.copyright}\n${AppData.author}\n${AppData.license}',
+    applicationLegalese: '${AppData.copyright}\n${AppData.author}\n${AppData.license}',
     children: <Widget>[
       Padding(
         padding: const EdgeInsets.only(top: 24),
@@ -49,13 +48,15 @@ void showAppAboutDialog(BuildContext context) {
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This ${AppData.title(context)} application is used to '
+                text:
+                    'This ${AppData.title(context)} application is used to '
                     'compare different Squircle implementations in '
                     'Flutter.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${AppData.flutterVersion}.\n'
+                text:
+                    'Built with Flutter ${AppData.flutterVersion}.\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '
                     'h:${height.toStringAsFixed(0)})\n',
               ),

@@ -34,16 +34,17 @@ class ShapeBorderPopupMenu extends StatelessWidget {
 
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
 
     final bool enabled = onChanged != null;
-    final String tileLabel =
-        '${type.type} (${type.shortName} from ${type.from})';
+    final String tileLabel = '${type.type} (${type.shortName} from ${type.from})';
     final String styleDescribe = type.describe;
-    final IconThemeData selectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.onPrimary.withAlpha(0xE5));
-    final IconThemeData unSelectedIconTheme =
-        theme.iconTheme.copyWith(color: scheme.primary);
+    final IconThemeData selectedIconTheme = theme.iconTheme.copyWith(
+      color: scheme.onPrimary.withAlpha(0xE5),
+    );
+    final IconThemeData unSelectedIconTheme = theme.iconTheme.copyWith(color: scheme.primary);
 
     return PopupMenuButton<ShapeBorders>(
       initialValue: type,
@@ -53,43 +54,42 @@ class ShapeBorderPopupMenu extends StatelessWidget {
         onChanged?.call(selected);
       },
       enabled: enabled,
-      itemBuilder: (BuildContext context) => <PopupMenuItem<ShapeBorders>>[
-        for (int i = 0; i < ShapeBorders.values.length; i++)
-          PopupMenuItem<ShapeBorders>(
-            value: ShapeBorders.values[i],
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: type == ShapeBorders.values[i]
-                  ? IconTheme(
-                      data: selectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: scheme.primary,
-                        borderColor: Colors.transparent,
-                        child: _TooltipIcon(index: i),
-                      ),
-                    )
-                  : IconTheme(
-                      data: unSelectedIconTheme,
-                      child: ColorSchemeBox(
-                        backgroundColor: Colors.transparent,
-                        borderColor: scheme.primary,
-                        child: _TooltipIcon(index: i),
-                      ),
-                    ),
-              title: Text(ShapeBorders.values[i].type, style: txtStyle),
-            ),
-          )
-      ],
+      itemBuilder:
+          (BuildContext context) => <PopupMenuItem<ShapeBorders>>[
+            for (int i = 0; i < ShapeBorders.values.length; i++)
+              PopupMenuItem<ShapeBorders>(
+                value: ShapeBorders.values[i],
+                child: ListTile(
+                  dense: true,
+                  contentPadding: EdgeInsets.zero,
+                  leading:
+                      type == ShapeBorders.values[i]
+                          ? IconTheme(
+                            data: selectedIconTheme,
+                            child: ColorSchemeBox(
+                              backgroundColor: scheme.primary,
+                              borderColor: Colors.transparent,
+                              child: _TooltipIcon(index: i),
+                            ),
+                          )
+                          : IconTheme(
+                            data: unSelectedIconTheme,
+                            child: ColorSchemeBox(
+                              backgroundColor: Colors.transparent,
+                              borderColor: scheme.primary,
+                              child: _TooltipIcon(index: i),
+                            ),
+                          ),
+                  title: Text(ShapeBorders.values[i].type, style: txtStyle),
+                ),
+              ),
+          ],
       child: ListTileReveal(
         enabled: enabled,
         contentPadding: contentPadding,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            if (title != null) title!,
-            Text(tileLabel),
-          ],
+          children: <Widget>[if (title != null) title!, Text(tileLabel)],
         ),
         subtitleDense: true,
         subtitle: Column(
@@ -101,19 +101,9 @@ class ShapeBorderPopupMenu extends StatelessWidget {
             RichText(
               text: TextSpan(
                 children: <TextSpan>[
-                  TextSpan(
-                    style: spanTextStyle,
-                    text: 'See ',
-                  ),
-                  LinkTextSpan(
-                    style: linkStyle,
-                    uri: Uri.parse(type.url),
-                    text: 'here',
-                  ),
-                  TextSpan(
-                    style: spanTextStyle,
-                    text: ' for more information.',
-                  ),
+                  TextSpan(style: spanTextStyle, text: 'See '),
+                  LinkTextSpan(style: linkStyle, uri: Uri.parse(type.url), text: 'here'),
+                  TextSpan(style: spanTextStyle, text: ' for more information.'),
                 ],
               ),
             ),
@@ -143,9 +133,6 @@ class _TooltipIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final String message = ShapeBorders.values[index].type;
     final IconData icon = ShapeBorders.values[index].icon;
-    return Tooltip(
-      message: message,
-      child: Icon(icon),
-    );
+    return Tooltip(message: message, child: Icon(icon));
   }
 }

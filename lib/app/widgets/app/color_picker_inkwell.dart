@@ -104,14 +104,11 @@ class ColorPickerInkWellDialog extends StatelessWidget {
   );
 
   // Custom colors
-  static final Map<ColorSwatch<Object>, String> _customSwatches =
-      <ColorSwatch<Object>, String>{
+  static final Map<ColorSwatch<Object>, String> _customSwatches = <ColorSwatch<Object>, String>{
     ColorTools.createPrimarySwatch(guideNewPrimary): 'Guide Purple',
-    ColorTools.createPrimarySwatch(guideNewPrimaryVariant):
-        'Guide Purple Variant',
+    ColorTools.createPrimarySwatch(guideNewPrimaryVariant): 'Guide Purple Variant',
     ColorTools.createAccentSwatch(guideNewSecondary): 'Guide Teal',
-    ColorTools.createAccentSwatch(guideNewSecondaryVariant):
-        'Guide Teal Variant',
+    ColorTools.createAccentSwatch(guideNewSecondaryVariant): 'Guide Teal Variant',
     ColorTools.createPrimarySwatch(guideNewError): 'Guide Error',
     ColorTools.createPrimarySwatch(guideNewErrorDark): 'Guide Error Dark',
     ColorTools.createPrimarySwatch(blueBlues): 'Blue blues',
@@ -138,10 +135,7 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       color: color,
       onColorChanged: onChanged,
       crossAxisAlignment: CrossAxisAlignment.center,
-      padding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 16,
-      ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       enableShadesSelection: true,
       enableTonalPalette: true,
       width: 35,
@@ -176,10 +170,8 @@ class ColorPickerInkWellDialog extends StatelessWidget {
       onRecentColorsChanged: onRecentColorsChanged,
       title: Text('Select Color', style: theme.textTheme.titleLarge),
       subheading: Text('Select color shade', style: theme.textTheme.bodyLarge),
-      wheelSubheading: Text('Selected color and its shades',
-          style: theme.textTheme.bodyLarge),
-      recentColorsSubheading:
-          Text('Recent colors', style: theme.textTheme.bodyLarge),
+      wheelSubheading: Text('Selected color and its shades', style: theme.textTheme.bodyLarge),
+      recentColorsSubheading: Text('Recent colors', style: theme.textTheme.bodyLarge),
       selectedPickerTypeColor: theme.colorScheme.primary,
       showMaterialName: true,
       showColorName: true,
@@ -207,25 +199,21 @@ class ColorPickerInkWellDialog extends StatelessWidget {
         onHover?.call(value);
       },
       hoverColor: Colors.transparent,
-      onTap: enabled
-          ? () async {
-              // ignore: use_build_context_synchronously
-              if (await colorPicker.showPickerDialog(
-                context,
-                insetPadding: const EdgeInsets.all(16),
-                barrierColor: Colors.black.withOpacity(0.05),
-                constraints: const BoxConstraints(
-                  minHeight: 570,
-                  minWidth: 450,
-                  maxWidth: 450,
-                ),
-              )) {
-                wasCancelled(false);
-              } else {
-                wasCancelled(true);
+      onTap:
+          enabled
+              ? () async {
+                if (await colorPicker.showPickerDialog(
+                  context,
+                  insetPadding: const EdgeInsets.all(16),
+                  barrierColor: Colors.black.withValues(alpha: 0.05),
+                  constraints: const BoxConstraints(minHeight: 570, minWidth: 450, maxWidth: 450),
+                )) {
+                  wasCancelled(false);
+                } else {
+                  wasCancelled(true);
+                }
               }
-            }
-          : null,
+              : null,
       child: child,
     );
   }

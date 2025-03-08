@@ -39,10 +39,7 @@ class SquircleDemo extends StatefulWidget {
 
 class _SquircleDemoState extends State<SquircleDemo> {
   ThemeMode themeMode = ThemeMode.light;
-  ThemeSettings settings = const ThemeSettings(
-    useMaterial3: true,
-    customSetting: false,
-  );
+  ThemeSettings settings = const ThemeSettings(useMaterial3: true, customSetting: false);
 
   @override
   Widget build(BuildContext context) {
@@ -59,21 +56,19 @@ class _SquircleDemoState extends State<SquircleDemo> {
           actions: <Widget>[
             const AboutIconButton(),
             IconButton(
-              icon: settings.useMaterial3
-                  ? const Icon(Icons.filter_3)
-                  : const Icon(Icons.filter_2),
+              icon: settings.useMaterial3 ? const Icon(Icons.filter_3) : const Icon(Icons.filter_2),
               onPressed: () {
                 setState(() {
-                  settings =
-                      settings.copyWith(useMaterial3: !settings.useMaterial3);
+                  settings = settings.copyWith(useMaterial3: !settings.useMaterial3);
                 });
               },
               tooltip: 'Switch to Material ${settings.useMaterial3 ? 2 : 3}',
             ),
             IconButton(
-              icon: themeMode == ThemeMode.dark
-                  ? const Icon(Icons.wb_sunny_outlined)
-                  : const Icon(Icons.wb_sunny),
+              icon:
+                  themeMode == ThemeMode.dark
+                      ? const Icon(Icons.wb_sunny_outlined)
+                      : const Icon(Icons.wb_sunny),
               onPressed: () {
                 setState(() {
                   if (themeMode == ThemeMode.light) {

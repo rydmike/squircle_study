@@ -35,48 +35,34 @@ class ShowColorSchemeColors extends StatelessWidget {
     ShapeBorder? border = theme.cardTheme.shape;
     // If we had one, copy in a border side to it.
     if (border is RoundedRectangleBorder) {
-      border = border.copyWith(
-        side: BorderSide(
-          color: colorScheme.outlineVariant,
-          width: 1,
-        ),
-      );
+      border = border.copyWith(side: BorderSide(color: colorScheme.outlineVariant, width: 1));
       // If
     } else {
       // If border was null, make one matching Card default, but with border
       // side, if it was not null, we leave it as it was.
       border ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: BorderSide(
-          color: colorScheme.outlineVariant,
-          width: 1,
-        ),
+        side: BorderSide(color: colorScheme.outlineVariant, width: 1),
       );
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains its ambient themed border radius.
     return Theme(
       data: Theme.of(context).copyWith(
-        cardTheme: CardTheme.of(context).copyWith(
-          elevation: 0,
-          surfaceTintColor: Colors.transparent,
-          shape: border,
-        ),
+        cardTheme: CardTheme.of(
+          context,
+        ).copyWith(elevation: 0, surfaceTintColor: Colors.transparent, shape: border),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8),
-            child: Text(
-              'ColorScheme Colors',
-              style: theme.textTheme.titleMedium,
-            ),
+            child: Text('ColorScheme Colors', style: theme.textTheme.titleMedium),
           ),
           Wrap(
             alignment: WrapAlignment.start,
@@ -144,11 +130,7 @@ class ShowColorSchemeColors extends StatelessWidget {
                 color: colorScheme.onTertiaryContainer,
                 textColor: colorScheme.tertiaryContainer,
               ),
-              ColorCard(
-                label: 'Error',
-                color: colorScheme.error,
-                textColor: colorScheme.onError,
-              ),
+              ColorCard(label: 'Error', color: colorScheme.error, textColor: colorScheme.onError),
               ColorCard(
                 label: 'on\nError',
                 color: colorScheme.onError,
@@ -165,16 +147,6 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.errorContainer,
               ),
               ColorCard(
-                label: 'Background',
-                color: colorScheme.background,
-                textColor: colorScheme.onBackground,
-              ),
-              ColorCard(
-                label: 'on\nBackground',
-                color: colorScheme.onBackground,
-                textColor: colorScheme.background,
-              ),
-              ColorCard(
                 label: 'Surface',
                 color: colorScheme.surface,
                 textColor: colorScheme.onSurface,
@@ -185,24 +157,19 @@ class ShowColorSchemeColors extends StatelessWidget {
                 textColor: colorScheme.surface,
               ),
               ColorCard(
-                label: 'Surface\nVariant',
-                color: colorScheme.surfaceVariant,
-                textColor: colorScheme.onSurfaceVariant,
-              ),
-              ColorCard(
                 label: 'onSurface\nVariant',
                 color: colorScheme.onSurfaceVariant,
-                textColor: colorScheme.surfaceVariant,
+                textColor: colorScheme.surface,
               ),
               ColorCard(
                 label: 'Outline',
                 color: colorScheme.outline,
-                textColor: colorScheme.background,
+                textColor: colorScheme.surface,
               ),
               ColorCard(
                 label: 'Outline\nVariant',
                 color: colorScheme.outlineVariant,
-                textColor: colorScheme.onBackground,
+                textColor: colorScheme.onSurface,
               ),
               ColorCard(
                 label: 'Shadow',

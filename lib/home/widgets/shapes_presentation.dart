@@ -43,8 +43,7 @@ class ShapesPresentation extends StatelessWidget {
           ),
           _DrawShapeBorder(
             label: 'CupertinoSquircleBorder\ncupertino_rounded_corners',
-            shape: ShapeBorders.cupertinoCorners
-                .shape(radius: math.min(radius, 150)),
+            shape: ShapeBorders.cupertinoCorners.shape(radius: math.min(radius, 150)),
           ),
           _DrawShapeBorder(
             label: 'SuperEllipseShape\nsuperellipse_shape',
@@ -73,11 +72,7 @@ class ShapesPresentation extends StatelessWidget {
 }
 
 class _DrawShapeBorder extends StatelessWidget {
-  const _DrawShapeBorder({
-    super.key,
-    required this.label,
-    required this.shape,
-  });
+  const _DrawShapeBorder({required this.label, required this.shape});
 
   final String label;
   final ShapeBorder shape;
