@@ -5,7 +5,9 @@ All notable changes to this squircle study and repo are recorded here.
 
 ### 1.4.0 - April 8, 2025
 
-* Added Flutter shape `RoundedSuperellipseBorder` that is available on master channel `3.31.0-1.0.pre.445,` nad later. This is new shape that implements the iOS super ellipse shape. 
+* Added Flutter shape `RoundedSuperellipseBorder` to the comparison that is available on master channel `3.31.0-1.0.pre.445,` and later. This is a new shape that implements the iOS super ellipse shape. 
+* Updated the readme and findings to include the new shape.
+* Reversed to order of the changelog entries, so that the latest version is on top.
 
 ### 1.3.2 - March 8, 2025
 
