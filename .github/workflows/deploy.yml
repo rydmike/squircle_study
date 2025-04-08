@@ -34,7 +34,7 @@ jobs:
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
+          channel: 'master'
       - name: "Show Dart SDK version"
         run: dart --version
       - name: "Show Flutter SDK version"
