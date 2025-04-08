@@ -22,9 +22,8 @@ on:
     branches: [none]
     paths-ignore:
       - "**.md"
-  release:
-    branches: [none]
-    types: [publish]
+  release:    
+    types: [published]
 
 jobs:
   flutter_tests:
