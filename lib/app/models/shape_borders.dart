@@ -21,6 +21,14 @@ enum ShapeBorders {
         'outline provided by Flutter.',
     icon: Icons.circle,
   ),
+  roundedSuperellipseBorder(
+    type: 'RoundedSuperellipse',
+    shortName: 'RoundedSuperellipseBorder',
+    from: 'Flutter SDK MASTER',
+    url: 'https://main-api.flutter.dev/flutter/painting/RoundedSuperellipseBorder-class.html',
+    describe: 'New super ellipse shape in Flutter.',
+    icon: Icons.vignette_rounded,
+  ),
   continuous(
     type: 'Continuous',
     shortName: 'ContinuousRectangleBorder',
@@ -162,6 +170,14 @@ enum ShapeBorders {
     switch (this) {
       case ShapeBorders.circular:
         return RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(radius)),
+          side:
+              lineWidth > 0
+                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+                  : BorderSide.none,
+        );
+      case ShapeBorders.roundedSuperellipseBorder:
+        return RoundedSuperellipseBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
           side:
               lineWidth > 0

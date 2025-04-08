@@ -17,51 +17,55 @@ class ShapesPresentation extends StatelessWidget {
         spacing: 8,
         runSpacing: 8,
         children: <Widget>[
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'Circular\nFlutter SDK',
             shape: ShapeBorders.circular.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
+            label: 'RoundedSuperEllipse\nFlutter SDK\nNEW in MASTER',
+            shape: ShapeBorders.roundedSuperellipseBorder.shape(radius: radius),
+          ),
+          DrawShapeBorder(
             label: 'ContinuousRectangle\nFlutter SDK',
             shape: ShapeBorders.continuous.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'ContinuousRectangle\nFlutter SDK r=r*2.3529',
             shape: ShapeBorders.continuousSquircle.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'SquircleBorder\nRejected PR',
             shape: ShapeBorders.squircleBorder.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'Figma Squircle\nfigma_squircle',
             shape: ShapeBorders.figmaSquircle.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'SmoothCorner\nsmooth_corner',
             shape: ShapeBorders.smoothCorner.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'CupertinoSquircleBorder\ncupertino_rounded_corners',
             shape: ShapeBorders.cupertinoCorners.shape(radius: math.min(radius, 150)),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'SuperEllipseShape\nsuperellipse_shape',
             shape: ShapeBorders.superEllipse.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'StadiumBorder\nFlutter SDK',
             shape: ShapeBorders.stadium.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'SquircleStadiumBorder\nRejected PR',
             shape: ShapeBorders.squircleStadiumBorder.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'SimonSquircleBorder\nslightfoot gist',
             shape: ShapeBorders.simonSquircle.shape(radius: radius),
           ),
-          _DrawShapeBorder(
+          DrawShapeBorder(
             label: 'BeveledRectangleBorder\nFlutter SDK',
             shape: ShapeBorders.beveled.shape(radius: radius),
           ),
@@ -71,14 +75,14 @@ class ShapesPresentation extends StatelessWidget {
   }
 }
 
-class _DrawShapeBorder extends StatelessWidget {
-  const _DrawShapeBorder({required this.label, required this.shape});
+class DrawShapeBorder extends StatelessWidget {
+  const DrawShapeBorder({super.key, required this.label, required this.shape});
 
   final String label;
   final ShapeBorder shape;
 
-  static const double height = 120;
-  static const double width = 210;
+  static const double height = 160;
+  static const double width = 280;
 
   @override
   Widget build(BuildContext context) {

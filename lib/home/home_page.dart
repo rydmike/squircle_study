@@ -60,6 +60,14 @@ class _HomePageState extends State<HomePage> {
             'Flutter implementations of squircle borders.\n',
           ),
         ),
+        ListTile(
+          dense: true,
+          title: Text(
+            'Radius ${radius.toStringAsFixed(0)} used on all shapes. '
+            'Width: ${DrawShapeBorder.width.toStringAsFixed(0)} '
+            'Height: ${DrawShapeBorder.height.toStringAsFixed(0)} ',
+          ),
+        ),
         // Present the different shapes studied.
         ShapesPresentation(radius: radius),
         //

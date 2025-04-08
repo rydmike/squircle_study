@@ -20,14 +20,14 @@ abstract final class AppData {
   // Version of the WEB build, usually same as package, but it also has a
   // build numbers.
   static const String versionMajor = '1';
-  static const String versionMinor = '3';
-  static const String versionPatch = '2';
+  static const String versionMinor = '4';
+  static const String versionPatch = '0';
   static const String versionBuild = '01';
   static const String version =
       '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
   static const String packageVersion = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.29.1 (canvaskit)';
+  static const String flutterVersion = '3.31.0-1.0.pre.445 (canvaskit)';
   static const String copyright = '© 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'MIT License';
