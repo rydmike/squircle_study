@@ -241,7 +241,7 @@ Below we revert the filled and outline shape selections to take another view at 
 
 We can also check that the **RoundedSuperellipseBorder** does not break down at higher border radius. It handles any aspect ratio of the shape correctly and transitions smoothly via a circle shape, something that the **SquircleStadiumBorder** does not do.
 
-<img src="https://raw.githubusercontent.com/rydmike/squircle_study/master/assets/superellipse_demo.mov" alt="superellipse_demo"/>
+https://github.com/user-attachments/assets/c6a83758-1d0d-48e2-8784-8f3a000b1b49
 
 ### Findings
 The **RoundedSuperellipseBorder** provides a new Flutter built-in approach to achieving the desired squircle shape, ensuring that all visual and functional aspects align with current iOS shape curvature standards.
