@@ -36,7 +36,7 @@ The `RoundedSuperellipseBorder` is designed to provide a more accurate represent
 
 In this study we can observe that this new shape, thew `RoundedSuperellipseBorder` works correctly when the radius gets closer to the stadium radius for the shape, which is short side/2. As shown here, the **FigmaSquircle** shape changes to approach a circular border when the border radius exceeds 0.5x of the shape's stadium radius. And the **SquircleBorder** stops changing shape when the radius exceeds 0.65x of the shape's stadium radius. The new **RoundedSuperellipseBorder** is the only known shape to handle this correctly. It does not break down at all. It can be used for any shape aspect ratio and radius up to the shape's stadium radius and beyond it too, without any issues.
 
-In previous versions of the study, only the **SquircleStadiumBorder** shape could handle drawing a continuous Stadium (pill) shape. All other shapes failed totally at this. As shown the new  **RoundedSuperellipseBorder** excells at this too.
+In previous versions of the study, only the **SquircleStadiumBorder** shape could handle drawing a continuous Stadium (pill) shape. All other shapes failed totally at this. As shown the new  **RoundedSuperellipseBorder** excels at this too.
 
 The **SquircleStadiumBorder** can actually only handle this well when the long/short side aspect ratio is > 1.4. Smaller than that, it starts showing edge artifacts. At ratio 1.26 it stops trying, it no longer uses the shortest side and locks it to whatever value it has at ratio 1.26, to keep a shape that can have stadium continuous curvature. As we are getting closer to AR 1, it should become a circle and not a squircle stadium shape, but the paint algo cannot handle that transition, so it just stops. 
 
@@ -356,7 +356,7 @@ This is a @rydmike code revival of the PR with some minor modifications. Changes
 * Outline border stroke align correct: **YES** (in @rydmike version)
 * Shape lerp animates correctly: **YES** (in @rydmike version)
 * Shape can break down: **YES**
-    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Thus, it is on purpose limited to 0.65x of the shape's stadium radius (shorter side/2) in this version, since it breaks down after that. One solution might be to switch to a circular border radius like **Figma Squricle** and **Smooth Corner** both do at higher relative border radius.
+    * The `SquircleBorder` border has poor behavior with higher border radius, it cannot become a stadium, it stops changing shape at higher relative border radius. Thus, it is on purpose limited to 0.65x of the shape's stadium radius (shorter side/2) in this version, since it breaks down after that. One solution might be to switch to a circular border radius like **Figma Squircle** and **Smooth Corner** both do at higher relative border radius.
 
 ### Findings
 

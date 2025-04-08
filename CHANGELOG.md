@@ -12,14 +12,14 @@ All notable changes to this squircle study and repo are recorded here.
 ### 1.3.2 - March 8, 2025
 
 * Updated the app to use Flutter 3.29.1
-* Updated all deps and to new figma_squricle package version 0.6.3.
+* Updated all deps and to new figma_squircle package version 0.6.3.
 * Added info about new coming Flutter [RoundSuperEllipse](https://github.com/rydmike/squircle_study?tab=readme-ov-file#flutter-squircle-status-march-8-2025) shape.
 
 ### 1.3.0 - August 12, 2023
 
 * Add about box
 * Refactor app and rename classes.
-* Releases a web build of the Squricle Study app https://rydmike.com/squircle/latest
+* Releases a web build of the Squircle Study app https://rydmike.com/squircle/latest
 
 ### 1.2.1 - August 12, 2023
 
