@@ -16,6 +16,8 @@ Use the new `RoundedSuperellipseBorder` shape in Flutter SDK. It is the only **s
 
 The new `RoundedSuperellipseBorder` is available in `Channel master, 3.31.0-1.0.pre.445` and later. When it lands in Flutter stable, **stop using any other squircle** shape you have used before and migrate to it. It is also the only shape that has GPU implementation support in Flutter SDK so it should not introduce any significant performance degradation when used.
 
+While the shape is available in current **master** channel version of the Flutter SDK (`3.31.0-1.0.pre.445`) and later. The new `RoundedSuperellipseBorder` shape does not seem to paint correctly on WEB JS builds, it only works on VM builds at this stage. On web builds it still just draws a circular rounded rectangle, using **RoundedRectangleBorder**. Hopefully this will be addressed soon.
+
 ## History
 
 For years and years, there was no rounded rectangle in **Flutter** that would be **verified** to be a good match for the rounded rectangle shape created e.g., in Swift-UI with `RoundedRectangle(cornerRadius: myRadius, style: .continuous)` that would also be without issues in Flutter. This type of rounded rectangle with continuous curvature is also known as a **super ellipse** shape or a **squircle**.
