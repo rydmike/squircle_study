@@ -65,10 +65,9 @@ class _SquircleDemoState extends State<SquircleDemo> {
               tooltip: 'Switch to Material ${settings.useMaterial3 ? 2 : 3}',
             ),
             IconButton(
-              icon:
-                  themeMode == ThemeMode.dark
-                      ? const Icon(Icons.wb_sunny_outlined)
-                      : const Icon(Icons.wb_sunny),
+              icon: themeMode == ThemeMode.dark
+                  ? const Icon(Icons.wb_sunny_outlined)
+                  : const Icon(Icons.wb_sunny),
               onPressed: () {
                 setState(() {
                   if (themeMode == ThemeMode.light) {

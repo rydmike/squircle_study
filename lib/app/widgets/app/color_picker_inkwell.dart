@@ -199,21 +199,20 @@ class ColorPickerInkWellDialog extends StatelessWidget {
         onHover?.call(value);
       },
       hoverColor: Colors.transparent,
-      onTap:
-          enabled
-              ? () async {
-                if (await colorPicker.showPickerDialog(
-                  context,
-                  insetPadding: const EdgeInsets.all(16),
-                  barrierColor: Colors.black.withValues(alpha: 0.05),
-                  constraints: const BoxConstraints(minHeight: 570, minWidth: 450, maxWidth: 450),
-                )) {
-                  wasCancelled(false);
-                } else {
-                  wasCancelled(true);
-                }
+      onTap: enabled
+          ? () async {
+              if (await colorPicker.showPickerDialog(
+                context,
+                insetPadding: const EdgeInsets.all(16),
+                barrierColor: Colors.black.withValues(alpha: 0.05),
+                constraints: const BoxConstraints(minHeight: 570, minWidth: 450, maxWidth: 450),
+              )) {
+                wasCancelled(false);
+              } else {
+                wasCancelled(true);
               }
-              : null,
+            }
+          : null,
       child: child,
     );
   }

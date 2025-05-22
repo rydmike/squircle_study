@@ -24,9 +24,10 @@
 # RydMike        v2.3.0     : https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
 include: all_lint_rules.yaml
 
-# This project uses 80 char line length.
+# This project uses 100 char line length and preserves trailing commas.
 formatter:
   page_width: 100
+  trailing_commas: preserve
 
 analyzer:
   exclude:

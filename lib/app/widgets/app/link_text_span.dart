@@ -16,10 +16,9 @@ class LinkTextSpan extends TextSpan {
   // stateful widget that then hands the recognizer to the TextSpan.
   LinkTextSpan({super.style, required Uri uri, required String super.text})
     : super(
-        recognizer:
-            TapGestureRecognizer()
-              ..onTap = () {
-                launchUrl(uri);
-              },
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            launchUrl(uri);
+          },
       );
 }

@@ -31,12 +31,11 @@ abstract final class AppData {
 
   // Check if this is a Web-WASM build, Web-JS build or native VM build.
   static const bool isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
-  static const String buildType =
-      isRunningWithWasm
-          ? ', WasmGC'
-          : kIsWeb
-          ? ', JS'
-          : ', native VM';
+  static const String buildType = isRunningWithWasm
+      ? ', WasmGC'
+      : kIsWeb
+      ? ', JS'
+      : ', native VM';
 
   static const String packageVersion = '$versionMajor.$versionMinor.$versionPatch';
   static const String flutterVersionNum = FlutterVersion.version ?? '';

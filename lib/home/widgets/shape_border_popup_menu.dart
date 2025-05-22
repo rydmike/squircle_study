@@ -54,36 +54,34 @@ class ShapeBorderPopupMenu extends StatelessWidget {
         onChanged?.call(selected);
       },
       enabled: enabled,
-      itemBuilder:
-          (BuildContext context) => <PopupMenuItem<ShapeBorders>>[
-            for (int i = 0; i < ShapeBorders.values.length; i++)
-              PopupMenuItem<ShapeBorders>(
-                value: ShapeBorders.values[i],
-                child: ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  leading:
-                      type == ShapeBorders.values[i]
-                          ? IconTheme(
-                            data: selectedIconTheme,
-                            child: ColorSchemeBox(
-                              backgroundColor: scheme.primary,
-                              borderColor: Colors.transparent,
-                              child: _TooltipIcon(index: i),
-                            ),
-                          )
-                          : IconTheme(
-                            data: unSelectedIconTheme,
-                            child: ColorSchemeBox(
-                              backgroundColor: Colors.transparent,
-                              borderColor: scheme.primary,
-                              child: _TooltipIcon(index: i),
-                            ),
-                          ),
-                  title: Text(ShapeBorders.values[i].type, style: txtStyle),
-                ),
-              ),
-          ],
+      itemBuilder: (BuildContext context) => <PopupMenuItem<ShapeBorders>>[
+        for (int i = 0; i < ShapeBorders.values.length; i++)
+          PopupMenuItem<ShapeBorders>(
+            value: ShapeBorders.values[i],
+            child: ListTile(
+              dense: true,
+              contentPadding: EdgeInsets.zero,
+              leading: type == ShapeBorders.values[i]
+                  ? IconTheme(
+                      data: selectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: scheme.primary,
+                        borderColor: Colors.transparent,
+                        child: _TooltipIcon(index: i),
+                      ),
+                    )
+                  : IconTheme(
+                      data: unSelectedIconTheme,
+                      child: ColorSchemeBox(
+                        backgroundColor: Colors.transparent,
+                        borderColor: scheme.primary,
+                        child: _TooltipIcon(index: i),
+                      ),
+                    ),
+              title: Text(ShapeBorders.values[i].type, style: txtStyle),
+            ),
+          ),
+      ],
       child: ListTileReveal(
         enabled: enabled,
         contentPadding: contentPadding,

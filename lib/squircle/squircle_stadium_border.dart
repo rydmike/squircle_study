@@ -128,20 +128,18 @@ class SquircleStadiumBorder extends ShapeBorder {
     final double rectWidth = rectangle.width;
     final double rectHeight = rectangle.height;
     final bool widthLessThanHeight = rectWidth < rectHeight;
-    final double width =
-        widthLessThanHeight
-            ? rectWidth.clamp(
-              0.0,
-              maxEdgeLengthAspectRatio * (rectHeight + actualSideWidth) - actualSideWidth,
-            )
-            : rectWidth;
-    final double height =
-        widthLessThanHeight
-            ? rectHeight
-            : rectHeight.clamp(
-              0.0,
-              maxEdgeLengthAspectRatio * (rectWidth + actualSideWidth) - actualSideWidth,
-            );
+    final double width = widthLessThanHeight
+        ? rectWidth.clamp(
+            0.0,
+            maxEdgeLengthAspectRatio * (rectHeight + actualSideWidth) - actualSideWidth,
+          )
+        : rectWidth;
+    final double height = widthLessThanHeight
+        ? rectHeight
+        : rectHeight.clamp(
+            0.0,
+            maxEdgeLengthAspectRatio * (rectWidth + actualSideWidth) - actualSideWidth,
+          );
 
     final double centerX = rectangle.center.dx;
     final double centerY = rectangle.center.dy;

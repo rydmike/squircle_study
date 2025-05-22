@@ -30,10 +30,9 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
                 child: Text(
                   '#${color.hexCode}',
                   style: TextStyle(
-                    color:
-                        ThemeData.estimateBrightnessForColor(color) == Brightness.light
-                            ? Colors.black
-                            : Colors.white,
+                    color: ThemeData.estimateBrightnessForColor(color) == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
                   ),
                 ),
               ),

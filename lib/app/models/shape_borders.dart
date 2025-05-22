@@ -171,105 +171,92 @@ enum ShapeBorders {
       case ShapeBorders.circular:
         return RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.roundedSuperellipseBorder:
         return RoundedSuperellipseBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.continuous:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.continuousSquircle:
         return ContinuousRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius * 2.3529)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.squircleBorder:
         return SquircleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.figmaSquircle:
         return SmoothRectangleBorder(
           borderRadius: SmoothBorderRadius(cornerRadius: radius, cornerSmoothing: smoothness),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.smoothCorner:
         return smooth.SmoothRectangleBorder(
           smoothness: smoothness,
           borderRadius: BorderRadius.circular(radius),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.cupertinoCorners:
         return cuper.SquircleBorder(
           radius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.superEllipse:
         return SuperellipseShape(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.stadium:
         return StadiumBorder(
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.squircleStadiumBorder:
         return SquircleStadiumBorder(
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.simonSquircle:
         return SimonSquircleBorder(
           radius: radius,
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
       case ShapeBorders.beveled:
         return BeveledRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
-          side:
-              lineWidth > 0
-                  ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
-                  : BorderSide.none,
+          side: lineWidth > 0
+              ? BorderSide(width: lineWidth, color: lineColor, strokeAlign: strokeAlign)
+              : BorderSide.none,
         );
     }
   }

@@ -152,14 +152,13 @@ class _ListTileRevealState extends State<ListTileReveal> {
           transitionBuilder: (Widget child, Animation<double> animation) {
             return SizeTransition(sizeFactor: animation, child: child);
           },
-          child:
-              (_isOpen && widget.subtitle != null && widget.enabled)
-                  ? ListTile(
-                    dense: (widget.dense ?? false) || (widget.subtitleDense ?? false),
-                    subtitle: widget.subtitle,
-                    onTap: widget.enabled ? _handleTap : null,
-                  )
-                  : const SizedBox.shrink(),
+          child: (_isOpen && widget.subtitle != null && widget.enabled)
+              ? ListTile(
+                  dense: (widget.dense ?? false) || (widget.subtitleDense ?? false),
+                  subtitle: widget.subtitle,
+                  onTap: widget.enabled ? _handleTap : null,
+                )
+              : const SizedBox.shrink(),
         ),
       ],
     );
