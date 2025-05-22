@@ -24,9 +24,9 @@ enum ShapeBorders {
   roundedSuperellipseBorder(
     type: 'RoundedSuperellipse',
     shortName: 'RoundedSuperellipseBorder',
-    from: 'Flutter SDK MASTER',
-    url: 'https://main-api.flutter.dev/flutter/painting/RoundedSuperellipseBorder-class.html',
-    describe: 'New super ellipse shape in Flutter.',
+    from: 'Flutter SDK',
+    url: 'https://api.flutter.dev/flutter/painting/RoundedSuperellipseBorder-class.html',
+    describe: 'Superellipse shape in Flutter 3.32.0 and later.',
     icon: Icons.vignette_rounded,
   ),
   continuous(
