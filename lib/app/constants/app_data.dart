@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// App static functions and constants used in the example applications.
 abstract final class AppData {
@@ -21,13 +23,25 @@ abstract final class AppData {
   // build numbers.
   static const String versionMajor = '1';
   static const String versionMinor = '4';
-  static const String versionPatch = '0';
+  static const String versionPatch = '1';
   static const String versionBuild = '01';
   static const String version =
       '$versionMajor.$versionMinor.$versionPatch '
       'Build-$versionBuild';
+
+  // Check if this is a Web-WASM build, Web-JS build or native VM build.
+  static const bool isRunningWithWasm = bool.fromEnvironment('dart.tool.dart2wasm');
+  static const String buildType =
+      isRunningWithWasm
+          ? ', WasmGC'
+          : kIsWeb
+          ? ', JS'
+          : ', native VM';
+
   static const String packageVersion = '$versionMajor.$versionMinor.$versionPatch';
-  static const String flutterVersion = '3.31.0-1.0.pre.445 (canvaskit)';
+  static const String flutterVersionNum = FlutterVersion.version ?? '';
+  static const String flutterChannel = FlutterVersion.channel ?? '';
+  static const String flutterVersion = '$flutterChannel $flutterVersionNum (canvaskit$buildType)';
   static const String copyright = '© 2025';
   static const String author = 'Mike Rydstrom';
   static const String license = 'MIT License';

@@ -1,9 +1,10 @@
 {
-  "dart.flutterSdkPath": ".fvm/versions/master",
+  "dart.flutterSdkPath": ".fvm/versions/stable",
   "cSpell.words": [
     "cuper",
     "dmnemec",
     "Lightfoot",
+    "nonobvious",
     "roundedsuper",
     "roundedsuperoutlined",
     "slightfoot",
