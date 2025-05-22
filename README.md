@@ -14,7 +14,9 @@ A web version of the latest Squircle Study companion app can be found here https
 
 Use the new `RoundedSuperellipseBorder` shape in Flutter SDK. It is the only **super ellipse** shape that matches the one used in iOS on UI elements. It is also the only known shape that can handle all edge cases correctly and supports all Flutter `ShapeBorder` features correctly.
 
-The new `RoundedSuperellipseBorder` landed in **Flutter 3.32.0 stable**. Now that it has landed in Flutter stable, please do **not** using other Flutter 3rd party squircle shape you may have used before. Consider migrating to RoundedSuperellipseBorder` as soon as possible. It is the only shape that has GPU implementation support in Flutter SDK, so it should not introduce any significant performance degradation when used. Plus it is the most accurate and functionally sound implementation of the iOS squircle shape in the Flutter world.
+The `RoundedSuperellipseBorder` landed in **Flutter 3.32.0 stable**, you can find the Squircles mentioned in the Google I/O livestream here https://www.youtube.com/live/-IThZH0rStY?t=6752s, where this study and its findings were mentioned, by referencing my X/Tweet thread https://x.com/RydMike/status/1909592718696644961 about it. 
+
+Now that it has landed in Flutter stable, please do **not** using other Flutter 3rd party squircle shape you may have used before. Consider migrating to RoundedSuperellipseBorder` as soon as possible. It is the only shape that has GPU implementation support in Flutter SDK, so it should not introduce any significant performance degradation when used. Plus it is the most accurate and functionally sound implementation of the iOS squircle shape in the Flutter world.
 
 The new `RoundedSuperellipseBorder` shape still has a limitation, it does not work on WEB, it only support VM builds at this stage. On web builds it just draws a circular rounded rectangle, using **RoundedRectangleBorder**, nothing will break but your wont be getting a squircle shape . Hopefully this will be addressed later.
 
