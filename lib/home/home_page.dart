@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   double strokeAlign = -1; // -1=Inside, 0=Center, 1=Outside
   bool clipMaterial = false;
   bool fillOutlined = true;
+  bool showIosSquircle = false;
 
   ShapeBorders filledShape = ShapeBorders.circular;
   ShapeBorders outlinedShape = ShapeBorders.squircleBorder;
@@ -32,13 +33,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    // TODO(rydmike): Consider adding color selection to UI of compared shapes.
-    //  Prep for this feature made by adding FlexColorPicker.
-
     // Colors for the compared shapes and lines.
     final Color bottomShapeColor = theme.colorScheme.primaryContainer;
     final Color bottomOnShapeColor = theme.colorScheme.onPrimaryContainer;
-    final Color lineColor = theme.colorScheme.onSurface;
+    final Color lineColor = showIosSquircle
+        ? theme.colorScheme.surface
+        : theme.colorScheme.onSurface;
     // Optional translucent fill on the shape that has the outlined border.
     final Color topShapeFillColor = theme.colorScheme.tertiary.withValues(alpha: 0.15);
 
@@ -190,6 +190,18 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         //
+        // Toggle iOS 27 icon squircle reference image
+        //
+        SwitchListTile(
+          title: const Text('Show iOS 26 Icon Squircle Reference'),
+          value: showIosSquircle,
+          onChanged: (bool value) {
+            setState(() {
+              showIosSquircle = value;
+            });
+          },
+        ),
+        //
         // Draw the selected two shapes on top of each other in a stack.
         //
         Padding(
@@ -197,34 +209,47 @@ class _HomePageState extends State<HomePage> {
           child: Stack(
             alignment: Alignment.topCenter,
             children: <Widget>[
-              Material(
-                clipBehavior: Clip.hardEdge,
-                color: bottomShapeColor,
-                shape: filledShape.shape(radius: radius, smoothness: smoothness),
-                child: SizedBox(height: heightBig, width: widthBig),
-              ),
-              Material(
-                clipBehavior: clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
-                color: fillOutlined ? topShapeFillColor : Colors.transparent,
-                shape: outlinedShape.shape(
-                  radius: radius,
-                  lineWidth: lineWidth,
-                  lineColor: lineColor,
-                  smoothness: smoothness,
-                  strokeAlign: strokeAlign,
-                ),
-                child: SizedBox(
+              if (showIosSquircle)
+                SizedBox(
                   height: heightBig,
                   width: widthBig,
-                  child: Center(
-                    child: Text(
-                      'FILLED: ${filledShape.type}\n\n'
-                      'OUTLINED: ${outlinedShape.type}',
-                      style: TextStyle(color: bottomOnShapeColor),
+                  child: const Image(
+                    image: AssetImage('images/ios26iconsquircle.png'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              if (filledShape != ShapeBorders.none)
+                Material(
+                  clipBehavior: Clip.hardEdge,
+                  color: bottomShapeColor,
+                  shape: filledShape.shape(radius: radius, smoothness: smoothness),
+                  child: SizedBox(height: heightBig, width: widthBig),
+                ),
+              if (outlinedShape != ShapeBorders.none)
+                Material(
+                  clipBehavior: clipMaterial ? Clip.antiAliasWithSaveLayer : Clip.none,
+                  color: fillOutlined ? topShapeFillColor : Colors.transparent,
+                  shape: outlinedShape.shape(
+                    radius: radius,
+                    lineWidth: lineWidth,
+                    lineColor: lineColor,
+                    smoothness: smoothness,
+                    strokeAlign: strokeAlign,
+                  ),
+                  child: SizedBox(
+                    height: heightBig,
+                    width: widthBig,
+                    child: Center(
+                      child: Text(
+                        'FILLED: ${filledShape.type}\n\n'
+                        'OUTLINED: ${outlinedShape.type}',
+                        style: TextStyle(
+                          color: showIosSquircle ? theme.colorScheme.surface : bottomOnShapeColor,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
           ),
         ),

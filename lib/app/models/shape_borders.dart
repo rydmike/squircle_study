@@ -11,6 +11,14 @@ import '../../squircle/squircle_stadium_border.dart';
 /// An enhanced enum that can describe used [ShapeBorder] and return different
 /// shapes based on enum value.
 enum ShapeBorders {
+  none(
+    type: 'None',
+    shortName: 'No selection',
+    from: 'None',
+    url: 'https://api.flutter.dev/flutter/painting/ShapeBorder-class.html',
+    describe: 'No shape border, used for testing purposes.',
+    icon: Icons.do_disturb_alt_outlined,
+  ),
   circular(
     type: 'Circular',
     shortName: 'RoundedRectangleBorder',
@@ -168,6 +176,7 @@ enum ShapeBorders {
     double smoothness = 0.6,
   }) {
     switch (this) {
+      case ShapeBorders.none:
       case ShapeBorders.circular:
         return RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(radius)),
