@@ -23,7 +23,7 @@ abstract final class AppData {
   // build numbers.
   static const String versionMajor = '1';
   static const String versionMinor = '4';
-  static const String versionPatch = '1';
+  static const String versionPatch = '2';
   static const String versionBuild = '01';
   static const String version =
       '$versionMajor.$versionMinor.$versionPatch '
