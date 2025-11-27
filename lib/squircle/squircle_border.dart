@@ -6,8 +6,6 @@ import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
-// ignore_for_file: comment_references
-
 /// A rectangle border with continuous corners.
 ///
 /// The source code for this Squircle implementation is from this never merged
@@ -79,14 +77,14 @@ import 'package:flutter/rendering.dart';
 ///
 /// * [RoundedRectangleBorder], which is a rectangle whose corners are
 ///   precisely quarter circles.
-/// * [SquircleStadiumBorder], which is a stadium whose two edges have a
+/// * `SquircleStadiumBorder`, which is a stadium whose two edges have a
 ///   continuous transition into its two 180º curves.
 /// * [StadiumBorder], which is a rectangle with semi-circles on two parallel
 ///   edges.
 class SquircleBorder extends OutlinedBorder {
   /// Creates a continuous cornered rectangle border.
   ///
-  /// The [cornerRadius] argument must not be null.
+  /// The [borderRadius] argument must not be null.
   const SquircleBorder({super.side, this.borderRadius = BorderRadius.zero});
 
   /// The radius for each corner.

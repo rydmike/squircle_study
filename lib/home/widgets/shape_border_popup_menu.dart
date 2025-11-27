@@ -87,7 +87,10 @@ class ShapeBorderPopupMenu extends StatelessWidget {
         contentPadding: contentPadding,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[if (title != null) title!, Text(tileLabel)],
+          children: <Widget>[
+            ?title,
+            Text(tileLabel),
+          ],
         ),
         subtitleDense: true,
         subtitle: Column(
