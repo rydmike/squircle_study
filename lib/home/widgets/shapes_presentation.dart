@@ -22,7 +22,7 @@ class ShapesPresentation extends StatelessWidget {
             shape: ShapeBorders.circular.shape(radius: radius),
           ),
           DrawShapeBorder(
-            label: 'RoundedSuperEllipse\nFlutter SDK\nNEW in MASTER',
+            label: 'RoundedSuperEllipse\nFlutter SDK\nNEW in Flutter 3.32.0',
             shape: ShapeBorders.roundedSuperellipseBorder.shape(radius: radius),
           ),
           DrawShapeBorder(

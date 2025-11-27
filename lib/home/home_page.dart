@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   bool fillOutlined = true;
 
   ShapeBorders filledShape = ShapeBorders.circular;
-  ShapeBorders outlinedShape = ShapeBorders.squircleBorder;
+  ShapeBorders outlinedShape = ShapeBorders.roundedSuperellipseBorder;
 
   @override
   Widget build(BuildContext context) {

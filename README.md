@@ -8,7 +8,7 @@ See [CHANGELOG](https://github.com/rydmike/squircle_study/blob/master/CHANGELOG.
 
 To run and build this demo you must use Flutter `Channel stable, 3.32.0` or later.
 
-A web version of the latest Squircle Study companion app can be found here https://rydmike.com/squircle/latest. Please note that the Flutter SDK `RoundedSuperellipseBorder` does not yet support WEB. If used on WEB it draws ordinary circular rounded corners instead.
+A web version of the latest Squircle Study companion app can be found here https://rydmike.com/squircle/latest. At original release in version 3.32.0 of Flutter SDK the `RoundedSuperellipseBorder` did not support WEB. In the latest build of linked web demo with Flutter 3.38.3 stable, it works on WEB too.
 
 ## TLDR
 

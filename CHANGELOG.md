@@ -2,9 +2,15 @@
 
 All notable changes to this squircle study and repo are recorded here.
 
+### 1.4.2 - May 22, 2025
+
+* Bump Flutter to stable 3.38.3, the squircle (RoundedSuperellipseBorder) now works on web.
+* Changed so that the default comparison shape is now the Flutter `RoundedSuperellipseBorder`.
+
 ### 1.4.1 - May 22, 2025
 
 * Bump Flutter to stable 3.32.0 and mention that the squircle is now available in the stable channel.
+* THe Flutter Squircle does not work on WEB builds!
  
 ### 1.4.0 - April 8, 2025
 
