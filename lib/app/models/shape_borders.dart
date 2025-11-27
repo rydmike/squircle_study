@@ -141,7 +141,8 @@ enum ShapeBorders {
     url: 'https://api.flutter.dev/flutter/painting/BeveledRectangleBorder-class.html',
     describe: 'A rectangular border with flattened or "beveled" corners.',
     icon: Icons.hexagon_rounded,
-  );
+  )
+  ;
 
   const ShapeBorders({
     required this.type,
